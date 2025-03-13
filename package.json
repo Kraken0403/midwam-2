@@ -8,7 +8,7 @@
     },
     "scripts": {
         "dev": "copy .env.local .env && nuxt",
-        "build": "copy .env.local .env && nuxt build",
+        "build": "cp .env.local .env && nuxt build",
         "build:staging": "copy .env.staging .env && nuxt build -c nuxt.config.staging.js",
         "build:production": "copy .env.production .env && nuxt build -c nuxt.config.production.js",
         "build:production-tmp": "copy .env.production-tmp .env && nuxt build -c nuxt.config.production.js",
@@ -46,6 +46,7 @@
         "@nuxtjs/style-resources": "^1.0.0",
         "@nuxtjs/stylelint-module": "^4.0.0",
         "babel-eslint": "^10.1.0",
+        "cross-env": "^7.0.3",
         "eslint": "^7.7.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-plugin-nuxt": "^1.0.0",

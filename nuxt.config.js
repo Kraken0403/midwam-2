@@ -15,7 +15,7 @@ export default {
      ** Nuxt target
      ** See https://nuxtjs.org/api/configuration-target
      */
-    // target: 'server',
+    // target: 'server', change to this when actually deploying
     target: 'static',
     /*
      ** Headers of the page

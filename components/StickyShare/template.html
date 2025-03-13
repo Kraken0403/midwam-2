@@ -1,0 +1,25 @@
+<div class="socials" ref="socials">
+
+    <div class="socials-title">
+        {{ $t('global.misc.share') }}
+    </div>
+
+    <ul class="socials-list">
+        <li class="socials-list-item">
+            <a v-bind:href="shareLinks.twitter" target="_blank" rel="noopener" class="button">
+                <Twitter />
+            </a>
+        </li>
+        <li class="socials-list-item">
+            <a v-bind:href="shareLinks.facebook" target="_blank" rel="noopener" class="button">
+                <Facebook />
+            </a>
+        </li>
+        <li class="socials-list-item">
+            <a v-bind:href="shareLinks.linkedin" target="_blank" rel="noopener" class="button">
+                <LinkedIn />
+            </a>
+        </li>
+    </ul>
+
+</div>

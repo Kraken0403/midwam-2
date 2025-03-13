@@ -1,0 +1,51 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Line -->
+        <div class="line"></div>
+
+        <!-- Moving image -->
+        <MovingImage ref="movingImage" />
+
+        <div class="images-container" ref="imagesContainer">
+            <div
+                class="image-container"
+                ref="imageContainer"
+                v-for="(item, index) in data"
+            >
+                <img ref="image" :src="item.image.sizes['1920x0'].url" :alt="item.image.alt">
+            </div>
+        </div>
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- More projects -->
+                <ul class="more-projects">
+                    <li
+                        v-for="(item, index) in data"
+                        ref="item"
+                        v-bind:data-index="index"
+                        @mouseenter="mouseenterHandler"
+                        @mouseleave="mouseleaveHandler"
+                    >
+                        <ButtonPortfolio v-bind:link="`experiences/${item.slug}`">{{ item.title }}</ButtonPortfolio>
+                    </li>
+                </ul>
+
+                <!-- See all work -->
+                <ButtonArrow ref="button" to="/experiences">{{ $t('global.misc.see-experiences')}}</ButtonArrow>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

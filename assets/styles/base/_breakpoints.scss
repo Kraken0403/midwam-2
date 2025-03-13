@@ -1,0 +1,24 @@
+// Define breakpoints as variables (instead of a map)
+$breakpoint-small: 0px;
+$breakpoint-medium: 500px;
+$breakpoint-large: 850px;
+
+// Mixin for responsive media queries
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == 'small' {
+        @media (min-width: #{$breakpoint-small}) {
+            @content;
+        }
+    } @else if $breakpoint == 'medium' {
+        @media (min-width: #{$breakpoint-medium}) {
+            @content;
+        }
+    } @else if $breakpoint == 'large' {
+        @media (min-width: #{$breakpoint-large}) {
+            @content;
+        }
+    } @else {
+        @warn "Unknown breakpoint: #{$breakpoint}.";
+    }
+}
+

@@ -1,0 +1,10 @@
+
+.body {
+    ::v-deep p {
+        opacity: 0;
+    }
+
+    ::v-deep .lines {
+        will-change: transform;
+    }
+}

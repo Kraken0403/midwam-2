@@ -1,0 +1,34 @@
+
+.button {
+    display: inline-block;
+
+    height: rem(32px);
+
+    padding: 0 rem(15px);
+
+    font-family: $font-tertiary;
+    font-size: 12px;
+    line-height: rem(32px);
+    letter-spacing: 0.1em;
+    color: $color-white;
+    text-decoration: none;
+
+    transition: opacity 0.3s $power2-out;
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+    @include respond-to('large') {
+        height: rem-l(32px);
+
+        padding: 0 rem-l(15px);
+
+        font-size: 12px;
+        line-height: rem-l(36px);
+    }
+
+    @media (min-width: $viewport-width-large) {
+        font-size: rem-l(12px);
+    }
+}

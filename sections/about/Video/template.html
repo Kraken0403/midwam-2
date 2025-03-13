@@ -1,0 +1,55 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Video Container -->
+    <!-- <div class="video-container" ref="videoContainer"> -->
+
+        <!-- Video player -->
+        <!-- <VideoPlayer v-if="data.vimeo_id" v-bind:data="data" ref="videoPlayer" />
+        <VideoPlayerAbout v-else v-bind:data="data" ref="videoPlayer" /> -->
+
+        <!-- <VideoPlayer v-bind:data="data" ref="videoPlayer" /> -->
+
+    <!-- </div> -->
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Heading -->
+                <Heading tag="h2" class="heading-b heading" :data="data.title" isCustomTriggered="true" ref="heading" />
+
+                <!-- Video -->
+                <div class="video" ref="video">
+
+                    <!-- Cover image -->
+                    <img
+                        v-if="coverImage"
+                        v-bind:src="coverImage"
+                        class="video__image"
+                    >
+
+                    <!-- Button start -->
+                    <ButtonStart
+                        class="video__button-play"
+                        ref="buttonPlay"
+                        @click.native="clickButtonPlayHandler"
+                        v-bind:content="$t('global.misc.play')"
+                        v-bind:width="100"
+                        v-bind:radius="50"
+                    />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

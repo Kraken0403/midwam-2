@@ -1,0 +1,82 @@
+@use "sass:math";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:color";
+
+//  Colors
+$color-white: #ffffff;
+$color-black: #000000;
+$color-off-white: #ddd3c8;
+$color-orange: #f69f33;
+$color-violet: #7875ff;
+$color-background: #0d0b0e;
+$color-gold: #f5af57;
+
+
+
+ // Fonts
+$font-primary: 'Formula Condensed', sans-serif;
+$font-secondary: 'Rajdhani', sans-serif;
+$font-tertiary: 'Akkurat Pro', sans-serif;
+$font-arabic: 'Tajawal', sans-serif;
+
+ // Misc
+$padding-mobile: 10%;
+
+ // Font sizes
+$font-size-small: 1vw;
+$font-size-medium: 0.55vw;
+$font-size-large: 1vw;
+
+ // Fluid type
+$viewport-width-small: 375px;
+$viewport-width-medium: 768px;
+$viewport-width-large: 1600px;
+
+ // Max width
+$max-width-medium: 600px;
+$max-width-large: 2000px;
+
+ // Breakpoints
+ $breakpoints: (
+    'small': (min-width: 0px),
+    'medium': (min-width: 500px),
+    'large': (min-width: 850px),
+);
+
+
+
+ // Easings
+$power1-in: cubic-bezier(0.12, 0, 0.39, 0);
+$power2-in: cubic-bezier(0.32, 0, 0.67, 0);
+$power3-in: cubic-bezier(0.64, 0, 0.78, 0);
+
+$power1-out: cubic-bezier(0.61, 1, 0.88, 1);
+$power2-out: cubic-bezier(0.33, 1, 0.68, 1);
+$power3-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+$power1-in-out: cubic-bezier(0.37, 0, 0.63, 1);
+$power2-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+$power3-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+
+:root {
+    --font-size-small: #{$font-size-small};
+    --font-size-medium: #{$font-size-medium};
+    --font-size-large: #{$font-size-large};
+
+    --viewport-width-small: #{$viewport-width-small};
+    --viewport-width-large: #{$viewport-width-large};
+}
+
+
+:export {
+    maxWithLarge: $max-width-large;
+    fontSizeSmall: $font-size-small;
+    fontSizeMedium: $font-size-medium;
+    fontSizeLarge: $font-size-large;
+    viewportWidthSmall: $viewport-width-small;
+    viewportWidthMedium: $viewport-width-medium;
+    viewportWidthLarge: $viewport-width-large;
+}
+
+

@@ -1,0 +1,87 @@
+
+.section {
+    display: flex;
+
+    align-items: flex-end;
+
+    @include respond-to('large') {
+        align-items: center;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: rem(20px);
+
+    @include respond-to('large') {
+        flex-direction: row;
+
+        margin-top: rem-l(75px);
+        padding-bottom: 0;
+    }
+
+    .column {
+        &.left {
+            width: 100%;
+
+            margin-bottom: rem(15px);
+
+            padding: 0 $padding-mobile;
+
+            @include respond-to('medium') {
+                width: 80%;
+            }
+
+            @include respond-to('large') {
+                width: 25%;
+
+                margin-top: 0;
+                margin-bottom: 0;
+                margin-left: 21%;
+
+                padding: 0;
+
+                .ar & {
+                    order: 2;
+                }
+            }
+        }
+
+        &.right {
+            padding: 0 $padding-mobile;
+
+            @include respond-to('large') {
+                width: 25%;
+
+                margin-left: 12.5%;
+
+                padding: 0;
+                padding-top: rem-l(9px);
+            }
+        }
+    }
+}
+
+.heading {
+    font-weight: 300;
+    font-size: rem(35px);
+    line-height: 1.1em;
+    letter-spacing: 0.05em;
+
+    @include respond-to('large') {
+        font-weight: 300;
+        font-size: rem-l(120px);
+        line-height: 1.205em;
+        letter-spacing: 0.07em;
+    }
+
+    span {
+        display: block;
+    }
+
+    .ar & {
+        letter-spacing: inherit;
+    }
+}

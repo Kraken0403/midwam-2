@@ -1,0 +1,49 @@
+<section class="section">
+
+    <div class="section__content">
+
+        <div class="content" ref="background">
+
+            <div class="row">
+
+                <div class="column" ref="container">
+
+                    <MovingImage ref="movingImage" />
+
+                    <div class="images-container" ref="imagesContainer">
+                        <div
+                            class="image-container"
+                            ref="imageContainer"
+                            v-for="(item, index) in data"
+                        >
+                            <img ref="image" :src="item.image.sizes['1920x0'].url" :alt="item.image.alt">
+                        </div>
+                    </div>
+
+                    <ul class="list" ref="list">
+                        <li
+                            v-for="(item, index) in data"
+                            class="list-item is-active"
+                            ref="item"
+                            :data-index="index"
+                            :data-link="`experiences/${item.slug}`"
+                            @mouseenter="mouseenterHandler"
+                            @mouseleave="mouseleaveHandler"
+                            @click="projectClickHandler"
+                        >
+                            <svg ref="arrow" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.4666 0.334124L14.4666 3.72823C14.4666 3.92098 14.5429 4.10535 14.6765 4.23525L24.3013 13.4077L0.80519 13.4077C0.637336 13.4077 0.500001 13.5586 0.500001 13.7429L0.500001 16.2571C0.500001 16.4414 0.637336 16.5923 0.80519 16.5923L24.3013 16.5923L14.6765 25.7648C14.5429 25.8905 14.4666 26.0748 14.4666 26.2718L14.4666 29.6659C14.4666 29.9508 14.7756 30.1059 14.9702 29.9173L29.562 16.0099C29.694 15.8841 29.7999 15.7287 29.8725 15.5541C29.9451 15.3795 29.9826 15.1898 29.9826 14.9979C29.9826 14.806 29.9451 14.6163 29.8725 14.4417C29.7999 14.2671 29.694 14.1117 29.562 13.986L14.9702 0.0827109C14.7718 -0.10585 14.4666 0.0491874 14.4666 0.334124Z" fill="#f5af57"/>
+                            </svg>
+                            <nuxt-link :to="`experiences/${item.slug}`">{{ item.title }}</nuxt-link>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

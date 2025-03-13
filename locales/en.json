@@ -1,0 +1,52 @@
+{
+    "global": {
+        "languages": {
+            "english": "Eng",
+            "arabic": "عربى"
+        },
+        "navigation": {
+            "home": "Home",
+            "about": "About",
+            "work": "Experiences",
+            "news": "News",
+            "contact": "Contact"
+        },
+        "cursor": {
+            "click-hold": "Click & Hold"
+        },
+        "misc": {
+            "load-more": "Load more",
+            "back": "Back",
+            "list-view": "List view",
+            "share": "Share",
+            "play": "Play",
+            "close": "Close",
+            "see-experiences": "See some of our experiences"
+        }
+    },
+    "preloader": {
+        "enter": "Enter",
+        "cookie-message": {
+            "label": "By entering the site, you agree to our use of cookies. For more info check our {0}.",
+            "link": "Privacy Policy"
+        }
+    },
+    "news": {
+        "see-more": "See more news"
+    },
+    "error": {
+        "title": "We can't find the page you are looking for.",
+        "cta": "Discover Our Work"
+    },
+    "footer": {
+        "legal": {
+            "copyright": "© Copyright Midwam",
+            "privacy-policy": "Privacy policy",
+            "terms-of-use": "Terms of use"
+        },
+        "creator": {
+            "label": "Website by {0}.",
+            "link": "Immersive Garden"
+        }
+    }
+}

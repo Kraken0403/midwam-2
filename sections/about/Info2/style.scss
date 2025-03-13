@@ -1,0 +1,43 @@
+
+.section {
+    display: flex;
+
+    align-items: flex-end;
+
+    @include respond-to('large') {
+        align-items: center;
+    }
+
+    .ar & {
+        direction: rtl;
+    }
+}
+
+.section__content {
+    padding-bottom: rem(50px);
+
+    @include respond-to('large') {
+        padding-bottom: 0;
+    }
+}
+
+.row-body {
+    .column {
+        width: 100%;
+
+        padding-right: $padding-mobile;
+        padding-left: $padding-mobile;
+
+        @include respond-to('large') {
+            width: 26%;
+
+            margin-left: 52%;
+
+            padding: 0;
+
+            .ar & {
+                margin-right: 52%;
+            }
+        }
+    }
+}

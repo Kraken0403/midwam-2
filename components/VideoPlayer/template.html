@@ -1,0 +1,79 @@
+<div class="video-player">
+
+    <!-- Video -->
+    <video
+        ref="video"
+        playsinline
+        draggable="false"
+        @click="clickVideoHandler"
+        @canplay="canplayHandler"
+        @ended="endedHandler"
+    >
+        <source ref="source" :src="data.vimeo_url" type="video/mp4">
+    </video>
+
+    <!-- Play Button -->
+    <button class="button play-button" @click="clickButtonPlayHandler">
+
+        <!-- Icon play -->
+        <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon" ref="iconPlay">
+            <path d="M0.5 13.4786L10.6562 6.97864L0.5 0.478638V13.4786Z" fill="#E6E6E6"/>
+        </svg>
+
+        <!-- Icon pause -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.73 19.22" class="icon-pause" ref="iconPause">
+            <rect class="cls-1" x="10.08" width="5.65" height="19.22" fill="#E6E6E6" />
+            <rect class="cls-1" width="5.65" height="19.22" fill="#E6E6E6" />
+        </svg>
+
+    </button>
+
+    <!-- Fullscreen Button -->
+    <button class="button fullscreen-button" @click="clickFullscreenButtonHandler" ref="fullscreen-button">
+        <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.625 8.60364H0V13.4786H4.875V11.8536H1.625V8.60364ZM0 5.35364H1.625V2.10364H4.875V0.478638H0V5.35364ZM11.375 11.8536H8.125V13.4786H13V8.60364H11.375V11.8536ZM8.125 0.478638V2.10364H11.375V5.35364H13V0.478638H8.125Z" fill="#E5E5E5"/>
+        </svg>
+    </button>
+
+    <!-- Mute Button -->
+    <button class="button mute-button" @click="clickMuteButtonHandler" ref="mute-button">
+
+        <!-- Icon unmuted -->
+        <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-unmuted" ref="iconUnmuted">
+            <path d="M0.857422 4.75515V9.20213H3.82207L7.52789 12.9079V1.04933L3.82207 4.75515H0.857422ZM10.8631 6.97864C10.8631 5.66678 10.1071 4.54021 9.01021 3.99175V9.95811C10.1071 9.41706 10.8631 8.2905 10.8631 6.97864ZM9.01021 0.478638V2.00543C11.1522 2.64283 12.716 4.62915 12.716 6.97864C12.716 9.32812 11.1522 11.3144 9.01021 11.9518V13.4786C11.9823 12.8042 14.1984 10.1508 14.1984 6.97864C14.1984 3.80646 11.9823 1.1531 9.01021 0.478638Z" fill="#E6E6E6"/>
+        </svg>
+
+        <!-- Icon muted -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.67 11.86" class="icon-muted" ref="iconMuted">
+            <path class="cls-1" d="M0,4.28V8.72H3l3.71,3.71V.57L3,4.28Z" transform="translate(0 -0.57)" fill="#E6E6E6" />
+        </svg>
+
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" ref="overlay"></div>
+
+    <!-- Video Cover -->
+    <div class="cover-container" @click="clickCoverHandler" ref="cover">
+        <ResponsiveImage class="cover" v-bind:sizes="data.cover_image.sizes" v-bind:alt="data.cover_image.alt" />
+        <div class="cover-overlay"></div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-container" ref="progressContainer" @click="clickProgressHandler">
+        <div class="progress-background">
+            <div class="progress" ref="progress"></div>
+        </div>
+    </div>
+
+    <!-- Play Button -->
+    <ButtonStart
+        class="button-start"
+        ref="button"
+        @click.native="clickButtonHandler"
+        v-bind:content="$t('global.misc.play')"
+        v-bind:width="140"
+        v-bind:radius="70"
+    />
+
+</div>

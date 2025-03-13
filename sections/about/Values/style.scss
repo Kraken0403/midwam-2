@@ -1,0 +1,156 @@
+
+.section {
+    opacity: 0;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    @include respond-to('large') {
+        align-items: center;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: rem(20px);
+
+    @include respond-to('large') {
+        flex-direction: row;
+
+        margin-top: rem-l(75px);
+        padding-bottom: 0;
+    }
+
+    .column {
+        //  background: red;
+
+        &.left {
+            width: 100%;
+
+            margin-bottom: rem(20px);
+
+            padding: 0 $padding-mobile;
+
+            @include respond-to('medium') {
+                width: 80%;
+            }
+
+            @include respond-to('large') {
+                width: 35%;
+
+                margin-top: 0;
+                margin-bottom: 0;
+                margin-left: 13%;
+
+                padding: 0;
+
+                .ar & {
+                    order: 2;
+
+                    margin-left: 4%;
+                }
+            }
+        }
+
+        &.right {
+            padding: 0 $padding-mobile;
+
+            @include respond-to('large') {
+                width: 35%;
+
+                margin-left: 4%;
+
+                padding: 0;
+
+                .ar & {
+                    margin-left: 13%;
+                }
+            }
+        }
+    }
+}
+
+.heading {
+    font-weight: 300;
+    font-size: rem(35px);
+    line-height: 1.1em;
+    letter-spacing: 0.05em;
+
+    @include respond-to('large') {
+        font-weight: 250;
+        font-size: rem-l(90px);
+        line-height: 1.205em;
+        letter-spacing: 0.07em;
+    }
+
+    span {
+        display: block;
+    }
+
+    .ar & {
+        letter-spacing: inherit;
+    }
+}
+
+.values {
+    display: flex;
+    flex-direction: column;
+
+    flex-wrap: wrap;
+
+    width: 83%;
+    height: 100%;
+
+    .ar & {
+        margin-left: 17%;
+
+        text-align: right;
+    }
+
+    @include respond-to('large') {
+        flex-direction: row;
+
+        justify-content: space-between;
+
+        width: auto;
+
+        .ar & {
+            margin-left: 0;
+        }
+    }
+
+    > li {
+        display: block;
+
+        width: 100%;
+
+        @include respond-to('large') {
+            width: calc(50% - #{rem-l(50px)});
+        }
+    }
+}
+
+.value {
+    display: block;
+
+    padding-top: rem(10px);
+    padding-bottom: rem(10px);
+
+    font-family: $font-tertiary;
+    font-weight: 300;
+    font-size: rem(15px);
+    line-height: 1.5em;
+    color: $color-white;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+    @include respond-to('large') {
+        padding-top: rem-l(49px);
+        padding-bottom: rem(0);
+
+        font-size: rem-l(20px);
+    }
+}

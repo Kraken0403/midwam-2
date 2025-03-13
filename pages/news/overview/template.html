@@ -1,0 +1,14 @@
+<!-- Page -->
+<div class="page">
+
+    <!-- Smooth scroll -->
+    <SmoothScroll ref="smoothScroll">
+
+        <!-- Sections -->
+        <SectionHeader class="section-header" ref="header" v-bind:data="data" />
+        <SectionNews class="section-news" ref="news" v-bind:categories="categories" v-bind:items="items" v-bind:category="category" v-bind:pagination="pagination" />
+        <SectionFooter class="section-footer" />
+
+    </SmoothScroll>
+
+</div>

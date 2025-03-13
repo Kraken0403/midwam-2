@@ -1,0 +1,5 @@
+<ul class="navigation-dots">
+    <li v-for="(item, index) in data" v-bind:key="index" ref="items">
+        <div class="dot" v-bind:class="{ active: activeIndex === index }"></div>
+    </li>
+</ul>

@@ -1,0 +1,31 @@
+
+.preloader {
+    z-index: 100;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    background-color: $color-background;
+}
+
+.cookies-message {
+    position: absolute;
+    right: 0;
+    bottom: rem(30px);
+    left: 0;
+
+    width: 80%;
+
+    margin: auto;
+
+    text-align: center;
+
+    @include respond-to('large') {
+        bottom: rem-l(30px);
+    }
+}

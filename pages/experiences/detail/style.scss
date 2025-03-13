@@ -1,0 +1,12 @@
+
+.section {
+    margin-bottom: rem(70px);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(180px);
+    }
+}

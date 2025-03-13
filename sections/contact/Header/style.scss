@@ -1,0 +1,293 @@
+
+.section {
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+    height: 100vh;
+}
+
+a {
+    transition: opacity 0.3s $power2-out;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.background {
+    opacity: 0;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 50%;
+
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+
+.section__content {
+    opacity: 0;
+
+    @include respond-to('large') {
+        padding-top: rem-l(150px);
+    }
+}
+
+.row-title {
+    margin-bottom: rem(42px);
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(60px);
+    }
+
+    .column {
+        width: 58%;
+
+        margin-left: 13%;
+
+        .ar & {
+            margin-left: 30%;
+        }
+
+        @include respond-to('medium') {
+            width: 40%;
+        }
+
+        @include respond-to('large') {
+            width: 35%;
+
+            margin-left: 9.5%;
+        }
+    }
+}
+
+.heading {
+    font-size: rem(60px);
+    line-height: 1.04em;
+    letter-spacing: 0.05em;
+
+    @include respond-to('large') {
+        font-size: rem-l(140px);
+        letter-spacing: 0.07em;
+    }
+}
+
+.row-line {
+    display: none;
+
+    @include respond-to('large') {
+        display: block;
+
+        margin-bottom: rem-l(85px);
+    }
+
+    .column {
+        width: 88%;
+
+        margin-left: 5.5%;
+    }
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.row-address {
+    @include respond-to('large') {
+        display: flex;
+    }
+
+    .ar & {
+        direction: rtl;
+    }
+
+    .column {
+        &.left {
+            width: 70%;
+
+            margin-bottom: rem(25px);
+            margin-left: 13%;
+
+            .ar & {
+                margin-right: 13%;
+                margin-left: 0;
+            }
+
+            @include respond-to('large') {
+                width: 15%;
+
+                margin-bottom: 0;
+                margin-left: 43%;
+
+                .ar & {
+                    margin-right: 7%;
+                    margin-left: 3%;
+                }
+            }
+        }
+
+        &.center {
+            width: 70%;
+
+            margin-bottom: rem(25px);
+            margin-left: 13%;
+
+            .ar & {
+                margin-right: 13%;
+                margin-left: 0;
+            }
+
+            @include respond-to('large') {
+                width: 15%;
+
+                margin-bottom: 0;
+                margin-left: 3%;
+
+                .ar & {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &.right {
+            width: 70%;
+
+            margin-left: 13%;
+
+            .ar & {
+                margin-right: 13%;
+                margin-left: 0;
+            }
+
+            @include respond-to('large') {
+                width: 15%;
+
+                margin-left: 3%;
+
+                .ar & {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+.address-title {
+    display: block;
+
+    margin-bottom: rem(11px);
+
+    font-family: $font-tertiary;
+
+    font-size: rem(15px);
+    color: $color-white;
+
+    .ar & {
+        text-align: right;
+    }
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(25px);
+
+        font-size: rem-l(24px);
+    }
+}
+
+.email,
+.phone {
+    opacity: 0;
+}
+
+.phone {
+    direction: ltr;
+}
+
+.body {
+    opacity: 0.8;
+}
+
+.address-secondary {
+    @include respond-to('large') {
+        padding-top: rem-l(45px);
+    }
+
+    a {
+        display: inline-block;
+
+        font-weight: normal;
+        color: $color-white;
+        text-transform: none;
+        text-decoration: none;
+    }
+}
+
+.button-visit {
+    opacity: 0;
+
+    display: flex;
+
+    position: absolute;
+    bottom: 0;
+    left: 13%;
+
+    align-items: flex-start;
+
+    height: rem(60px);
+
+    background: red;
+
+    @include respond-to('large') {
+        left: 10.5%;
+
+        height: rem-l(130px);
+    }
+}
+
+.button-visit__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: rem(150px);
+
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem(13px);
+    letter-spacing: 0.06em;
+    color: rgba($color-orange, 0.8);
+
+    text-align: left;
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        width: rem-l(150px);
+
+        font-size: rem-l(13px);
+    }
+}
+
+.button-visit__line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 1px;
+    height: rem(30px);
+
+    background-color: rgba(#f47f1c, 0.3);
+
+    @include respond-to('large') {
+        height: rem-l(90px);
+    }
+}

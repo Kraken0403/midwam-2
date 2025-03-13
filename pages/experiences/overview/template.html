@@ -1,0 +1,35 @@
+<!-- Page -->
+<div class="page">
+
+    <!-- Sections -->
+    <SectionProjectSlider :class="`${projectSliderState} ${lang}`" ref="slider" v-if="isReady" :data="activeProjects" :state="projectSliderState" />
+    <SectionProjectList :class="projectListState" ref="list" v-if="isReady" :data="activeProjects" :state="projectListState" />
+
+    <!-- categories -->
+    <div class="nav">
+
+        <form>
+
+            <div class="input-container">
+                <input ref="resetCheckbox" :disabled="!allowCategoryChange" type="radio" id="category" name="category" value="null" checked @input="categoryClickHandler">
+                <label for="category">All</label>
+            </div>
+
+            <div v-for="(item, index) in categories" class="input-container">
+                <input ref="checkbox" :disabled="!allowCategoryChange" type="radio" id="1234" :id="`category_${index}`" name="category" :value="item.id" @input="categoryClickHandler" >
+                <label :for="`category_${index}`">{{ item.title }}</label>
+            </div>
+
+        </form>
+
+        <button ref="buttonList" :class="`${displayMode === 'slider' ? 'is-active' : ''} toggle-display-button`" @click="toggleDisplayClickHandler">
+            {{ $t('global.misc.list-view') }}
+        </button>
+
+        <button ref="buttonSlider" :class="`${displayMode === 'slider' ? '' : 'is-active'} toggle-display-button`" @click="toggleDisplayClickHandler">
+            {{ $t('global.misc.back') }}
+        </button>
+
+    </div>
+
+</div>

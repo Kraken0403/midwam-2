@@ -1,0 +1,67 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Moving Images -->
+        <MovingImage ref="movingImage" />
+
+        <div class="images-container" ref="imagesContainer">
+            <div
+                class="image-container"
+                ref="imageContainer"
+                v-for="(item, index) in data.highlighted"
+            >
+                <img ref="image" :src="item.image.sizes['1920x0'].url" :alt="item.image.alt">
+            </div>
+        </div>
+
+        <!-- Row title -->
+        <div class="row row-title">
+
+            <!-- Column left -->
+            <div class="column left">
+
+                <!-- Heading -->
+                <Heading tag="h2" class="heading-b heading" v-bind:data="data.title" :preserveLineBreak="true" />
+
+            </div>
+
+            <!-- Column right -->
+            <div class="column right"></div>
+
+        </div>
+
+        <!-- Row list -->
+        <div class="row row-items">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Items -->
+                <ul class="items">
+                    <li
+                        v-for="(item, index) in data.highlighted"
+                        v-bind:data-index="index"
+                        ref="item"
+                        @click="projectClickHandler"
+                        @mouseenter="mouseenterHandler"
+                        @mouseleave="mouseleaveHandler"
+                    >
+                        <ButtonPortfolio v-bind:link="`experiences/${item.slug}`" class="button-portfolio">{{ item.title }}</ButtonPortfolio>
+                    </li>
+                </ul>
+
+                <!-- Button see all work -->
+                <div class="button-wrapper" @click="allProjectsClickHanlder">
+                    <ButtonArrow to="experiences">{{ data.link }}</ButtonArrow>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

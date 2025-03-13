@@ -1,0 +1,29 @@
+
+.section {
+    opacity: 0;
+}
+
+.row {
+    position: relative;
+
+    width: 100%;
+
+    .column {
+        @include respond-to('large') {
+            width: 78%;
+
+            margin-left: 11%;
+        }
+    }
+}
+
+.video-container {
+    overflow: hidden;
+
+     // ::v-deep img {
+     //     top: -10%;
+     //     left: -10%;
+
+     //     width: 120%;
+     // }
+}

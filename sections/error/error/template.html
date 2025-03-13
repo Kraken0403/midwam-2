@@ -1,0 +1,33 @@
+<section class="section">
+
+    <div class="section__content">
+
+        <div class="row">
+
+            <div class="col">
+
+                <Heading class="heading heading-b" tag="h1" :data="$t('error.title')" />
+
+                <div class="error" v-if="environment === 'development'">
+                    dev: <br>
+                    <span>
+                        {{ error.statusCode }}
+                    </span>
+                    <span>
+                        {{ error.message }}
+                    </span>
+                </div>
+
+                <div class="button-wrapper" ref="button">
+
+                    <ButtonArrow to="experiences">{{ $t('error.cta') }}</ButtonArrow>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

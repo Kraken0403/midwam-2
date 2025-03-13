@@ -1,0 +1,21 @@
+<!-- Scroll control -->
+<ScrollControl ref="scrollControl">
+
+    <!-- Page -->
+    <div class="page">
+
+        <!-- Sections -->
+        <SectionHeader v-bind:data="header" class="section-header" ref="header" scroll-type="step"></SectionHeader>
+        <SectionDesign v-bind:data="section_1" class="section-design" scroll-type="step"></SectionDesign>
+        <SectionEmotion v-bind:data="section_2" class="section-emotion" scroll-type="step"></SectionEmotion>
+        <SectionReality v-bind:data="section_3" class="section-reality" scroll-type="step"></SectionReality>
+        <SectionKnowledge v-bind:data="section_4" class="section-knowledge" scroll-type="step"></SectionKnowledge>
+        <SectionDimension v-bind:data="section_5" class="section-dimension" scroll-type="step"></SectionDimension>
+        <SectionImmersion v-bind:data="section_6" class="section-immersion" scroll-type="step"></SectionImmersion>
+        <SectionPortfolio v-bind:data="portfolio" class="section-portfolio" scroll-type="free"></SectionPortfolio>
+        <SectionNews v-bind:data="news.items" class="section-news" scroll-type="free"></SectionNews>
+        <SectionFooter class="section-footer" scroll-type="free"></SectionFooter>
+
+    </div>
+
+</ScrollControl>

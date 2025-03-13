@@ -1,0 +1,14 @@
+
+.section {
+    margin-bottom: rem(55px);
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(160px);
+    }
+}
+
+.section-share {
+    @include respond-to('large') {
+        display: none;
+    }
+}

@@ -1,0 +1,26 @@
+<div class="layout">
+
+    <!-- Webgl background -->
+    <WebglBackground ref="webglBackground" />
+
+    <!-- Navigation -->
+    <TheNavigation ref="theNavigation" />
+
+    <!-- Nuxt view -->
+    <nuxt />
+
+    <!-- Button mute -->
+    <!-- <ButtonMute ref="buttonMute" /> -->
+
+    <!-- Video Overlay -->
+    <TheVideoOverlay ref="theVideoOverlay" />
+
+    <!-- Preloader -->
+    <Preloader ref="preloader" />
+
+    <!-- Cursor -->
+    <client-only>
+        <CustomCursor v-if="!isTouch" ref="customCursor" />
+    </client-only>
+
+</div>

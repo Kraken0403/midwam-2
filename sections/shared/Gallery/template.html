@@ -1,0 +1,24 @@
+<!-- Section -->
+<section v-bind:class="`section ${lang}`">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <Heading class="heading heading-a" tag="h3" :data="data.title" />
+
+                <!-- Carousel -->
+                <Carousel ref="carousel" v-bind:data="data.gallery" v-bind:component="slideComponent" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

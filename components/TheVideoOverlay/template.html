@@ -1,0 +1,21 @@
+<div class="video-overlay">
+
+    <div class="row">
+
+        <div class="col">
+
+            <button class="close-button" @click="closeClickHandler">
+                {{ $t('global.misc.close') }}
+            </button>
+
+            <div class="video-wrapper">
+
+                <VideoPlayer ref="videoPlayer" :data="data" v-if="data" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

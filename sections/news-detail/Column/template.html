@@ -1,0 +1,23 @@
+<!-- Section -->
+<section v-bind:class="`section`">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <Heading v-if="data.title && data.title != ''" tag="h2" ref="heading" class="heading-a heading" v-bind:data="data.title" />
+
+                <Body v-bind:data="data.description" large="true" v-bind:trigger-on-scroll="true" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,142 @@
+
+.section {
+    opacity: 0;
+}
+
+.top {
+    display: flex;
+    position: relative;
+
+    align-items: center;
+
+    height: 100vh;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+     // border: solid 1px red;
+
+    .image {
+        top: 0;
+        left: -5%;
+
+        width: 110%;
+        height: 110%;
+    }
+}
+
+
+.row-title {
+    position: relative;
+
+    width: 100%;
+
+    .column {
+        width: 80%;
+
+        margin: 0 auto;
+
+        text-align: center;
+
+        @include respond-to('large') {
+            width: rem-l(900px);
+        }
+    }
+}
+
+.heading {
+    font-size: rem(59px);
+    line-height: 1.03em;
+
+    -webkit-text-rendering: optimizeSpeed;
+    text-rendering: optimizeSpeed;
+
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+
+    @include respond-to('large') {
+        font-size: rem-l(150px);
+        line-height: 0.92em;
+        letter-spacing: 0.03em;
+    }
+
+    .ar & {
+        letter-spacing: inherit;
+    }
+}
+
+.line {
+    position: absolute;
+    right: 0;
+    bottom: rem(-40px);
+    left: 0;
+
+    width: 1px;
+    height: rem(120px);
+
+    margin: 0 auto;
+
+    background-color: #f69f33;
+
+    @include respond-to('large') {
+        bottom: rem-l(-50px);
+
+        height: rem-l(190px);
+    }
+}
+
+.row-intro {
+    width: 100%;
+
+    .column {
+        padding: 0 $padding-mobile;
+
+        @include respond-to('large') {
+            width: 30%;
+
+            margin-left: 54%;
+            padding: 0;
+
+            .ar & {
+                margin-left: 16%;
+            }
+        }
+    }
+}
+
+.intro {
+    margin-top: rem(100px);
+
+    @include respond-to('large') {
+        margin-top: rem-l(-50px);
+    }
+}
+
+.intro__title {
+    opacity: 0;
+
+    margin-bottom: rem(30px);
+
+    font-family: $font-tertiary;
+    font-weight: bold;
+    font-size: rem(25px);
+    line-height: 1.2em;
+    color: $color-white;
+
+    .ar & {
+        direction: rtl;
+    }
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(115px);
+
+        font-size: rem-l(40px);
+    }
+}

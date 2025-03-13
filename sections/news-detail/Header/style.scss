@@ -1,0 +1,135 @@
+
+.section {
+    opacity: 0;
+
+    width: 100%;
+
+    &.ar {
+        direction: rtl;
+    }
+}
+
+.section__content {
+    padding-top: rem(130px);
+
+    @include respond-to('large') {
+        padding-top: rem-l(216px);
+    }
+}
+
+.column {
+    width: 100% - 13% * 2;
+
+    margin: auto;
+
+    @include respond-to('large') {
+        width: 58%;
+
+        margin-left: 20%;
+
+        .ar & {
+            margin-right: 20%;
+            margin-left: 0;
+        }
+    }
+}
+
+.button-arrow {
+    margin-bottom: rem(65px);
+    margin-left: rem(30px);
+
+    font-size: rem(20px);
+
+    .ar & {
+        margin-right: rem(30px);
+    }
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(130px);
+        margin-left: 0;
+
+        font-size: rem-l(20px);
+
+        .ar & {
+            margin-right: 0;
+        }
+    }
+}
+
+.category {
+    margin-bottom: rem(20px);
+
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem(17px);
+    line-height: 73%;
+    color: $color-violet;
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(40px);
+
+        font-size: rem-l(20px);
+    }
+}
+
+.heading {
+    margin-bottom: rem(50px);
+
+    font-size: rem(38px);
+    line-height: 104%;
+    line-height: 103.5%;
+    letter-spacing: 0.05em;
+
+    @include respond-to('large') {
+         // width: rem-l(900px);
+
+        margin-bottom: 0;
+
+        font-size: rem-l(70px);
+        line-height: 130%;
+    }
+}
+
+.date {
+    display: none;
+
+    margin-top: rem-l(20px);
+    margin-bottom: rem-l(115px);
+
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem-l(15px);
+    line-height: 73%;
+    color: color.adjust($color-white, $alpha: -0.3);
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        display: block;
+    }
+}
+
+.image-container {
+    position: relative;
+
+    width: 100% - $padding-mobile * 2;
+
+    overflow: hidden;
+
+    margin: auto;
+
+    @include respond-to('large') {
+        width: calc(100% - #{$padding-mobile} * 2);
+    }
+
+    ::v-deep img {
+        top: auto;
+        bottom: 0;
+        left: -10%;
+
+        width: 120%;
+        height: 120%;
+
+        margin: auto;
+    }
+}

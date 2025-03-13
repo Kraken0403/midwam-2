@@ -1,0 +1,100 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content" ref="content">
+
+        <!-- Line -->
+        <div class="line"></div>
+
+        <!-- Row navigation -->
+        <div class="row row-navigation">
+
+            <!-- Column left -->
+            <div class="column left">
+
+                <!-- Logo -->
+                <nuxt-link :to="localePath('/')" class="button-logo">
+                    <Logo />
+                </nuxt-link>
+
+                <!-- Main -->
+                <ul class="navigation-main">
+                    <li>
+                        <nuxt-link :to="localePath('about')" class="button button-primary">{{ $t('global.navigation.about') }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link :to="localePath('experiences')" class="button button-primary">{{ $t('global.navigation.work') }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link :to="localePath('news')" class="button button-primary">{{ $t('global.navigation.news') }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link :to="localePath('contact')" class="button button-primary">{{ $t('global.navigation.contact') }}</nuxt-link>
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Column right -->
+            <div class="column right">
+
+                <!-- Social -->
+                <ul class="navigation-social">
+                    <li>
+                        <a @click="socialsClickHandler"  data-social-name="instagram" href="https://www.instagram.com/midwam/" target="_blank" rel="noopener" class="button button-social">
+                            <Instagram />
+                        </a>
+                    </li>
+                    <li>
+                        <a @click="socialsClickHandler"  data-social-name="twitter" href="https://twitter.com/midwam" target="_blank" rel="noopener" class="button button-social">
+                            <Twitter />
+                        </a>
+                    </li>
+                    <li>
+                        <a @click="socialsClickHandler"  data-social-name="linkedin" href="https://www.linkedin.com/company/midwam-edutainment" target="_blank" rel="noopener" class="button button-social">
+                            <LinkedIn />
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- Row legal -->
+        <div class="row row-legal">
+
+            <!-- Column left -->
+            <div class="column left">
+
+                <!-- Legal -->
+                <ul class="navigation-legal">
+                    <li>
+                        {{ $t('footer.legal.copyright') }} {{ $store.state.copyright }}
+                    </li>
+                    <li>
+                        <nuxt-link :to="localePath('privacy-policy')" class="button button-secondary">{{ $t('footer.legal.privacy-policy') }}</nuxt-link>
+                    </li>
+                    <li>
+                        <nuxt-link :to="localePath('terms-of-use')" class="button button-secondary">{{ $t('footer.legal.terms-of-use') }}</nuxt-link>
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Column right -->
+            <div class="column right">
+
+                <!-- Creator -->
+                <i18n path="footer.creator.label" tag="div" class="creator">
+                    <a href="https://immersive-g.com/" target="_blank" rel="noopener" class="button button-secondary" @click="clickIGHanlder">{{ $t('footer.creator.link') }}</a>
+                </i18n>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

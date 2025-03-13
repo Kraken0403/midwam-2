@@ -1,0 +1,46 @@
+
+.container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100px;
+    height: 100px;
+
+    margin: auto;
+}
+
+.circles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.svg {
+    opacity: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100px;
+    height: 100px;
+
+    overflow: visible;
+
+    transform: rotate(-90deg);
+
+    circle {
+        opacity: 1;
+
+        fill: transparent;
+        stroke-width: 2;
+
+        stroke-dasharray: 3.1415926536 * 50 * 2;
+    }
+}

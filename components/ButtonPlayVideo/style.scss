@@ -1,0 +1,64 @@
+
+.button-play-video {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100px;
+    height: 100px;
+
+    margin: auto;
+
+    appearance: none;
+
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem(7px);
+    line-height: 95%;
+    letter-spacing: 0.16em;
+    color: $color-black;
+    text-align: center;
+    text-transform: uppercase;
+
+    // background-color: $color-white;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+
+    cursor: pointer;
+
+    @include respond-to('large') {
+        width: 100px;
+        height: 100px;
+
+        font-size: rem-l(15px);
+        color: $color-white;
+
+        //  background-color: $color-orange;
+    }
+}
+
+.svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    overflow: visible;
+
+    margin: auto;
+}
+
+.circle {
+    fill: transparent;
+
+    stroke-width: 2px;
+    stroke: $color-orange;
+
+    transform-origin: center;
+}

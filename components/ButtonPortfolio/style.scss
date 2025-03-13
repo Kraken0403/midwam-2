@@ -1,0 +1,37 @@
+
+.button {
+    position: relative;
+
+    font-family: $font-primary;
+    font-weight: 300;
+    font-size: rem(35px);
+    letter-spacing: 0.05em;
+    color: transparent;
+    text-transform: uppercase;
+
+    -webkit-text-stroke: 1px rgba($color-gold, 0.4);
+
+    @include respond-to('medium') {
+        font-size: rem-l(100px);
+    }
+
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+        color: $color-gold;
+    }
+
+    .ar & {
+        opacity: 0.5;
+
+        color: $color-gold;
+
+        -webkit-text-stroke: 0px;
+
+        transition: opacity 0.3s ease-in-out;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

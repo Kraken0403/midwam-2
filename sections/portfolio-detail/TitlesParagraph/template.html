@@ -1,0 +1,37 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column left -->
+            <div class="column left">
+
+                <!-- Titles -->
+                <ul class="titles" v-if="data.title_1 || data.title_2" ref="list">
+                    <li v-if="data.title_1" ref="item1">
+                        <h3 class="heading-b title">{{ data.title_1 }}</h3>
+                    </li>
+                    <li v-if="data.title_2" ref="item2">
+                        <h3 class="heading-b title">{{ data.title_2 }}</h3>
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Column right -->
+            <div class="column right">
+
+                <!-- Body -->
+                <Body v-bind:data="data.description" large="true" v-bind:trigger-on-scroll="true" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

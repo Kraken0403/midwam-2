@@ -1,0 +1,16 @@
+
+@function strip-unit($value) {
+    @return math.div($value, $value * 0 + 1);
+}
+
+@function grid($columns, $total: $colums-amount) {
+    @return math.div($columns, $total) * 100%;
+}
+
+@function rem($value) {
+    @return #{math.div(strip-unit($value), math.div(strip-unit($viewport-width-small), 100))}rem;
+}
+
+@function rem-l($value) {
+    @return #{math.div(strip-unit($value), math.div(strip-unit($viewport-width-large), 100))}rem;
+}

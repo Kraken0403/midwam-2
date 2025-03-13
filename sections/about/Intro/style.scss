@@ -1,0 +1,48 @@
+
+.section {
+    display: flex;
+
+    align-items: flex-end;
+
+    @include respond-to('large') {
+        align-items: center;
+    }
+}
+
+.section__content {
+    padding-bottom: rem(50px);
+
+    @include respond-to('large') {
+        margin-top: rem-l(75px);
+        padding-bottom: 0;
+    }
+}
+
+.row-body {
+    .ar & {
+        direction: rtl;
+    }
+
+    .column {
+        padding-right: $padding-mobile;
+        padding-left: $padding-mobile;
+
+        @include respond-to('large') {
+            width: 26%;
+
+            margin-left: 59%;
+
+            padding: 0;
+        }
+
+        .ar & {
+            @include respond-to('large') {
+                margin-right: 52%;
+            }
+        }
+    }
+}
+
+.body {
+    color: rgba($color-white, 0.8);
+}

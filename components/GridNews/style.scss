@@ -1,0 +1,39 @@
+
+.grid-news {
+    .ar & {
+        direction: rtl;
+    }
+}
+
+.list {
+    display: grid;
+
+    grid-template-columns: repeat(1, 1fr);
+
+    @include respond-to('large') {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: rem-l(40px);
+    }
+
+    &.highlight {
+        .list-item {
+            @include respond-to('large') {
+                &:first-child {
+                    grid-column: 1/3;
+
+                    ::v-deep .title {
+                        font-size: rem-l(60px);
+                        line-height: 130%;
+                        letter-spacing: 0.07em;
+                    }
+                }
+            }
+        }
+    }
+
+    &.related {
+        @include respond-to('large') {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}

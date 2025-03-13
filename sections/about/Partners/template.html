@@ -1,0 +1,42 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row title -->
+        <div class="row row-title">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Heading -->
+                <Heading tag="h1" class="heading" :data="data.title" isCustomTriggered="true" ref="heading" />
+
+            </div>
+
+        </div>
+
+        <!-- Row logos -->
+        <div class="row row-logos">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Logos -->
+                <ul class="logos">
+                    <li v-for="(item, index) in data.logos" :key="index" ref="item">
+                        <a :href="item.link" target="_blank" class="button-logo" v-if="item.link">
+                            <img :src="item.logo" class="logo">
+                        </a>
+                        <img :src="item.logo" class="logo" v-if="!item.link">
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

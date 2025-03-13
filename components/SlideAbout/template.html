@@ -1,0 +1,25 @@
+<!-- Slide -->
+<div class="slide">
+
+    <!-- Title -->
+    <h3 class="title" ref="title">{{ data.title }}</h3>
+
+    <!-- Content container -->
+    <div class="content">
+
+        <!-- Description -->
+        <div ref="description" class="description">{{ data.description }}</div>
+
+        <!-- Buttons -->
+        <ul class="buttons" ref="buttons">
+            <li v-if="data.action_label_1" @click="clickVideoHandler">
+                <ButtonPlay v-bind:to="data.action_link_1">{{ data.action_label_1 }}</ButtonPlay>
+            </li>
+            <li v-if="data.action_label_2">
+                <ButtonArrow v-bind:to="{ path: '/experiences', query: { category: data.action_link_2 }}">{{ data.action_label_2 }}</ButtonArrow>
+            </li>
+        </ul>
+
+    </div>
+
+</div>

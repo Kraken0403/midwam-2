@@ -1,0 +1,45 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column left -->
+            <div class="column left">
+
+                <!-- Heading -->
+                <h1 class="heading">
+                    <span v-for="line in title">{{ line }}</span>
+                </h1>
+
+            </div>
+
+            <!-- Column right -->
+            <div class="column right">
+
+                <!-- Values -->
+                <ul class="values">
+                    <li v-if="data.block_1">
+                        <span class="value">{{ data.block_1 }}</span>
+                    </li>
+                    <li v-if="data.block_2">
+                        <span class="value">{{ data.block_2 }}</span>
+                    </li>
+                    <li v-if="data.block_3">
+                        <span class="value">{{ data.block_3 }}</span>
+                    </li>
+                    <li v-if="data.block_4">
+                        <span class="value">{{ data.block_4 }}</span>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

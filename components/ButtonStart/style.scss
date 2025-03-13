@@ -1,0 +1,88 @@
+
+.button-start {
+    opacity: 0;
+    visibility: hidden;
+
+    display: flex;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 180px;
+    height: 180px;
+
+    margin: auto;
+
+    &:hover {
+        .circle {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.svg-container {
+    position: absolute;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    margin: auto;
+}
+
+.svg {
+    opacity: 0;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    overflow: visible;
+
+    margin: auto;
+}
+
+.circle {
+    fill: transparent;
+
+    stroke-width: 2px;
+    stroke: $color-orange;
+
+    transform-origin: center;
+
+    transition: transform 0.5s ease-in-out;
+}
+
+.label {
+    opacity: 0;
+
+    margin-left: rem(4px);
+
+    font-family: $font-primary;
+    font-size: rem(12px);
+    line-height: rem(12px);
+    letter-spacing: 0.4em;
+    color: $color-orange;
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        margin-top: rem-l(1px);
+        margin-left: rem-l(7px);
+
+        font-size: rem-l(14px);
+        line-height: rem-l(14px);
+    }
+}

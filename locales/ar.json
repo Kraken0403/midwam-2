@@ -1,0 +1,52 @@
+{
+    "global": {
+        "languages": {
+            "english": "Eng",
+            "arabic": "عربى"
+        },
+        "navigation": {
+            "home": "الصفحة الرئيسية",
+            "about": "عالمنا",
+            "work": "تجاربنا",
+            "news": "جديدنا",
+            "contact": "ادخل عالم مداوم"
+        },
+        "cursor": {
+            "click-hold": "انقر باستمرار"
+        },
+        "misc": {
+            "load-more": "تحميل المزيد",
+            "back": "الرجوع",
+            "list-view": "عرض القائمة",
+            "share": "شارك",
+            "play": "تشغيل",
+            "close": "إغلاق",
+            "see-experiences": "إكتشف تجاربنا"
+        }
+    },
+    "preloader": {
+        "enter": "دخول",
+        "cookie-message": {
+            "label": "بدخولك إلى الموقع ، فإنك توافق على استخدامنا لملفات تعريف الارتباط. لمزيد من المعلومات راجع موقعنا {0}.",
+            "link": "سياسة الخصوصية"
+        }
+    },
+    "news": {
+        "see-more": "المزيد من أخبارنا"
+    },
+    "error": {
+        "title": "لا يمكننا العثور على الصفحة التي تبحث عنها.",
+        "cta": "اكتشف أعمالنا"
+    },
+    "footer": {
+        "legal": {
+            "copyright": "© Copyright Midwam",
+            "privacy-policy": "سياسة الخصوصية",
+            "terms-of-use": "شروط الاستخدام"
+        },
+        "creator": {
+            "label": "الموقع بواسطة {0}.",
+            "link": "Immersive Garden"
+        }
+    }
+}

@@ -1,0 +1,60 @@
+
+.section {
+    opacity: 0;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    &.ar {
+        direction: rtl;
+    }
+}
+
+.row {
+    position: relative;
+
+    width: 100%;
+    overflow: hidden;
+
+    padding: $padding-mobile;
+
+    @include respond-to('large') {
+        overflow: visible;
+
+        padding: 0;
+    }
+
+    .column {
+        @include respond-to('large') {
+            width: 78%;
+
+            margin-left: 11%;
+
+            .ar & {
+                margin-right: 11%;
+            }
+        }
+    }
+}
+
+.heading {
+    font-size: rem(15px);
+    line-height: 100%;
+    line-height: 100%;
+    letter-spacing: 0.06em;
+
+    @include respond-to('large') {
+        font-size: rem-l(40px);
+    }
+}
+
+.carousel {
+    position: relative;
+
+    width: 100%;
+
+    &.ar {
+        direction: rtl;
+    }
+}

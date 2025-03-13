@@ -1,0 +1,15 @@
+<div class="circles-loader">
+
+    <div class="container" ref="container">
+
+        <div v-for="(item, i) in 3" class="circles-container" ref="circlesContainer" v-bind:style="`transform: scale(${settings.scales[i]}`">
+
+            <svg v-for="(item, j) in 3" class="svg" v-bind:ref="`svg_${i}`" v-bind:width="width" v-bind:height="width">
+                <circle ref="circle" v-bind:cx="radius" v-bind:cy="radius" v-bind:r="radius" v-bind:style="`stroke: ${settings.colors[j]}`" />
+            </svg>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row title -->
+        <div class="row row-title">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Heading -->
+                <Heading tag="h2" ref="heading" isCustomTriggered="false" class="heading-b heading" :data="data.title" :preserve-line-break="true" />
+
+                <!-- Navigation dots -->
+                <!-- <NavigationDots v-bind:data="landscapes" ref="navigationDots" /> -->
+
+            </div>
+
+        </div>
+
+        <!-- Row body -->
+        <div class="row row-body">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Body -->
+                <Body ref="body" class="body" v-bind:data="data.description" v-bind:trigger-on-scroll="false" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

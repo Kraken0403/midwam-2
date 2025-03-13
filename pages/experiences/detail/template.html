@@ -1,0 +1,20 @@
+<!-- Page -->
+<div class="page">
+
+    <!-- Smooth scroll -->
+    <SmoothScroll ref="smoothScroll">
+
+        <!-- Sections -->
+        <SectionHeader v-bind:data="header" ref="header"></SectionHeader>
+        <component
+            v-for="(section, index) in sections"
+            v-bind:key="index"
+            v-bind:is="section.component"
+            v-bind:data="section.data"
+        ></component>
+        <SectionMoreProjects v-bind:data="related"></SectionMoreProjects>
+        <SectionFooter></SectionFooter>
+
+    </SmoothScroll>
+
+</div>

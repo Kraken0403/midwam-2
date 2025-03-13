@@ -1,0 +1,54 @@
+
+.button {
+    opacity: 0;
+
+    display: none;
+
+    position: fixed;
+    bottom: rem(50px);
+    left: rem(55px);
+
+    width: rem(40px);
+    height: rem(40px);
+
+    @include respond-to('large') {
+        bottom: rem-l(45px);
+        left: rem-l(80px);
+
+        width: rem-l(40px);
+        height: rem-l(40px);
+    }
+}
+
+.icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 8px;
+
+    margin: auto;
+
+    font-size: 0;
+
+    > li {
+        display: inline-block;
+
+        width: 2px;
+        height: 100%;
+
+        margin-right: 3px;
+
+        vertical-align: bottom;
+
+        background: $color-white;
+
+        transform-origin: left bottom;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

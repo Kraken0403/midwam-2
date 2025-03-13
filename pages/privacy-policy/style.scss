@@ -1,0 +1,12 @@
+
+.page {
+    opacity: 0;
+}
+
+.section-legal {
+    margin-bottom: rem(105px);
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(290px);
+    }
+}

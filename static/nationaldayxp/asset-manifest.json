@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "./static/css/main.1ad85293.chunk.css",
+    "main.js": "./static/js/main.e45dc9e6.chunk.js",
+    "main.js.map": "./static/js/main.e45dc9e6.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.0660989e.js",
+    "runtime-main.js.map": "./static/js/runtime-main.0660989e.js.map",
+    "static/js/2.ed1e9385.chunk.js": "./static/js/2.ed1e9385.chunk.js",
+    "static/js/2.ed1e9385.chunk.js.map": "./static/js/2.ed1e9385.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.aedc91ba1c8749546f1c7062c8e6c2ca.js": "./precache-manifest.aedc91ba1c8749546f1c7062c8e6c2ca.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.1ad85293.chunk.css.map": "./static/css/main.1ad85293.chunk.css.map",
+    "static/js/2.ed1e9385.chunk.js.LICENSE.txt": "./static/js/2.ed1e9385.chunk.js.LICENSE.txt",
+    "static/media/index.css": "./static/media/AcuminVariableConcept.f96253aa.otf",
+    "static/media/index.scss": "./static/media/FormulaCondensed-Ultralight.e359c5b1.otf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0660989e.js",
+    "static/js/2.ed1e9385.chunk.js",
+    "static/css/main.1ad85293.chunk.css",
+    "static/js/main.e45dc9e6.chunk.js"
+  ]
+}

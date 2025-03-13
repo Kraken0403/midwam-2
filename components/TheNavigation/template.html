@@ -1,0 +1,33 @@
+<div class="navigation">
+
+    <!-- Main -->
+    <ul class="main" ref="main">
+        <li>
+            <nuxt-link :to="localePath('about')" class="button-main">{{ $t('global.navigation.about') }}</nuxt-link>
+        </li>
+        <li>
+            <nuxt-link :to="localePath('experiences')" class="button-main">{{ $t('global.navigation.work') }}</nuxt-link>
+        </li>
+        <li>
+            <nuxt-link :to="localePath('news')" class="button-main">{{ $t('global.navigation.news') }}</nuxt-link>
+        </li>
+        <li>
+            <nuxt-link :to="localePath('contact')" class="button-main">{{ $t('global.navigation.contact') }}</nuxt-link>
+        </li>
+    </ul>
+
+    <!-- Menu Mobile -->
+    <MenuMobile class="menu-mobile" ref="menuMobile" />
+
+    <!-- Logo -->
+    <nuxt-link :to="localePath('/')" class="button-logo" ref="logo" @click.native="logoClickHandler">
+        <Logo />
+    </nuxt-link>
+
+    <!-- Language switcher -->
+    <LanguageSwitcher class="button-language-switcher" ref="langSwitcher" />
+
+    <!-- Button hambuger (mobile) -->
+    <ButtonHamburger class="button-hamburger" ref="buttonHamburger" />
+
+</div>

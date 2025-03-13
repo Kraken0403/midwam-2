@@ -1,0 +1,77 @@
+
+$color-line-orange: #DD5E20;
+$color-line-red: #4C09FF;
+$color-line-blue: #FFC369;
+
+.button {
+    position: relative;
+
+    padding-bottom: rem(6px);
+
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem(12px);
+    letter-spacing: 0.2em;
+    color: $color-white;
+    text-transform: uppercase;
+
+    transition: color 0.8s ease-in-out;
+
+    will-change: transform;
+
+    @include respond-to('large') {
+        padding-bottom: rem-l(8px);
+
+        font-size: rem-l(12px);
+    }
+
+    .underline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 0;
+
+        border: 1px solid rgba($color-white, 0.75);
+        content: '';
+    }
+
+    .underline {
+        transform: scaleX(1);
+
+        transform-origin: right top;
+    }
+
+    span {
+        display: block;
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 0;
+
+        transform: scaleX(0);
+        transform-origin: left top;
+
+        &:nth-child(1) {
+            border: 1px solid $color-line-blue;
+        }
+
+        &:nth-child(2) {
+            border: 1px solid $color-line-red;
+        }
+
+        &:nth-child(3) {
+            border: 1px solid $color-line-orange;
+        }
+    }
+
+    &.hover {
+        color: $color-line-orange;
+    }
+
+    .ar & {}
+}

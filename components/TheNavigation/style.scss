@@ -1,0 +1,233 @@
+
+.navigation {
+    z-index: 100;
+
+    opacity: 0;
+
+    position: fixed;
+
+    top: rem(25px);
+    right: rem(0px);
+    left: 0;
+
+    height: rem(50px);
+
+    .ar & {
+        direction: rtl;
+    }
+
+    @include respond-to('large') {
+        top: rem-l(65px);
+        right: rem-l(0px);
+
+        height: rem-l(50px);
+    }
+}
+
+.button-logo {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: rem(37px);
+
+   height: 1.5rem;
+
+    margin: auto 0;
+
+    fill: $color-white;
+
+    .ar & {
+        right: rem(37px);
+        left: auto;
+    }
+
+    @include respond-to('large') {
+        left: rem-l(95px);
+
+        height: 17px;
+
+        .ar & {
+            right: rem-l(95px);
+            left: auto;
+        }
+    }
+
+    @media (min-width: $viewport-width-large) {
+        height: rem-l(17px);
+    }
+
+    svg {
+        height: 100%;
+    }
+}
+
+.main {
+    display: none;
+
+    position: absolute;
+    top: 0;
+    right: rem(260px);
+    bottom: 0;
+
+    height: rem(32px);
+
+    margin: auto 0;
+
+    font-size: 0;
+
+    .ar & {
+        right: auto;
+        left: rem(260px);
+    }
+
+    @include respond-to('large') {
+        display: block;
+
+        right: rem-l(260px);
+
+        height: 32px;
+
+        .ar & {
+            right: auto;
+            left: rem-l(260px);
+        }
+    }
+
+    @media (min-width: $viewport-width-large) {
+        height: rem-l(32px);
+    }
+
+    > li {
+        display: inline-block;
+
+        height: 100%;
+
+        margin-left: 8px;
+
+        // font-size: rem-l(12px);
+
+        @media (min-width: $viewport-width-large) {
+            margin-left: rem-l(8px);
+        }
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+.button-main {
+    display: block;
+    position: relative;
+
+    height: 100%;
+
+    padding: 0 rem(10px);
+
+    font-family: $font-tertiary;
+//   font-size: rem(12px);
+    font-size: 12px;
+    line-height: rem(32px);
+    letter-spacing: 0.1em;
+    color: $color-off-white;
+    text-decoration: none;
+
+    &:before {
+        content: '';
+
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 0px;
+
+        margin: auto;
+
+        border-top: solid 1px $color-orange;
+
+        transform: scaleX(0);
+        transform-origin: left bottom;
+
+        transition: transform 0.3s ease-in-out;
+
+        @include respond-to('large') {
+            width: calc(100% - #{rem-l(20px)});
+        }
+
+        .ar & {
+            transform-origin: right bottom;
+        }
+    }
+
+    &.nuxt-link-active,
+    &:hover {
+        &:before {
+            transform: scaleX(1);
+        }
+    }
+
+    @include respond-to('large') {
+        padding: 0 10px;
+
+        font-size: 12px;
+        line-height: 36px;
+    }
+
+    @media (min-width: $viewport-width-large) {
+        padding: 0 rem-l(10px);
+
+        font-size: rem-l(12px);
+        line-height: rem-l(36px);
+    }
+
+    .ar & {
+        font-family: $font-arabic;
+        font-weight: 500;
+    }
+}
+
+.button-language-switcher {
+    position: absolute;
+    top: 0;
+    right: rem(70px);
+    bottom: 0;
+
+    margin: auto 0;
+
+    .ar & {
+        right: auto;
+        left: rem(70px);
+    }
+
+    @include respond-to('large') {
+        right: rem-l(102px);
+
+        .ar & {
+            right: auto;
+            left: rem-l(102px);
+        }
+    }
+}
+
+.button-hamburger {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    right: rem(23px);
+    bottom: 0;
+
+    margin: auto 0;
+
+    .ar & {
+        right: auto;
+        left: rem(23px);
+    }
+
+    @include respond-to('large') {
+        display: none;
+    }
+}

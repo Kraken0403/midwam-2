@@ -1,0 +1,41 @@
+<!-- Section -->
+<section v-bind:class="`section`">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <div class="socials-title">
+                    Share
+                </div>
+
+                <ul class="socials-list">
+                    <li class="socials-list-item">
+                        <a v-bind:href="shareLinks.twitter" target="_blank" rel="noopener">
+                            <Twitter />
+                        </a>
+                    </li>
+                    <li class="socials-list-item">
+                        <a v-bind:href="shareLinks.facebook" target="_blank" rel="noopener">
+                            <Facebook />
+                        </a>
+                    </li>
+                    <li class="socials-list-item">
+                        <a v-bind:href="shareLinks.linkedin" target="_blank" rel="noopener">
+                            <LinkedIn />
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

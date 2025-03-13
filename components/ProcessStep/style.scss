@@ -1,0 +1,89 @@
+
+.process-step {
+    position: relative;
+}
+
+.number {
+    display: inline-block;
+
+    margin-right: rem(10px);
+
+    font-family: $font-primary;
+    font-weight: 300;
+    font-size: rem(25px);
+    color: $color-white;
+    text-transform: uppercase;
+
+    .ar & {
+        direction: rtl;
+
+        font-family: $font-arabic;
+    }
+
+    @include respond-to('large') {
+        display: inline-block;
+        position: absolute;
+
+        top: rem-l(5px);
+        left: rem-l(-55px);
+
+        margin-right: 0;
+
+        font-family: $font-primary;
+        font-size: rem-l(30px);
+
+        .ar & {
+            right: rem-l(-55px);
+        }
+    }
+}
+
+.heading {
+    display: inline-block;
+
+    margin-bottom: rem(7px);
+
+    font-weight: 300;
+    font-size: rem(25px);
+    line-height: 1.1em;
+    letter-spacing: 0.05em;
+
+    .ar & {
+        direction: rtl;
+
+        letter-spacing: inherit;
+    }
+
+    @include respond-to('large') {
+        width: 100%;
+
+        margin-bottom: rem-l(50px);
+
+        font-size: rem-l(60px);
+        letter-spacing: 0.07em;
+    }
+}
+
+.body {
+    color: rgba($color-white, 0.8);
+
+    ::v-deep p {
+        margin-bottom: rem(20px);
+
+        @include respond-to('large') {
+            margin-bottom: rem-l(50px);
+        }
+    }
+
+    ::v-deep strong,
+    b {
+        font-family: $font-secondary;
+        font-weight: 600;
+        color: rgba($color-white, 1);
+        text-transform: uppercase;
+
+        @include respond-to('large') {
+            font-size: rem-l(20px);
+        }
+    }
+}

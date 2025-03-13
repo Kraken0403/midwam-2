@@ -1,0 +1,19 @@
+<nuxt-link v-bind:to="`${localePath('/')}/news/${data.slug}`" v-bind:class="`button ${lang}`">
+    <img
+        class="image-background"
+        v-bind:src="src"
+        v-bind:srcset="srcset"
+        v-bind:alt="data.image.alt"
+    >
+    <div class="line"></div>
+    <div class="content">
+        <span v-if="data.categories[0]" class="category">{{data.categories[0].title}}</span>
+        <span class="title">{{ data.title }}</span>
+        <span class="date">{{ date }}</span>
+        <div class="icon">
+            <IconTop />
+            <!-- <IconRight /> -->
+        </div>
+    </div>
+    <div class="line-bottom"></div>
+</nuxt-link>

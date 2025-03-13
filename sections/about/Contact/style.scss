@@ -1,0 +1,128 @@
+
+.section {
+    display: flex;
+
+    align-items: flex-end;
+
+    @include respond-to('large') {
+        align-items: center;
+    }
+}
+
+.section__content {
+    padding-bottom: rem(50px);
+
+    @include respond-to('large') {
+        margin-top: rem-l(75px);
+        padding-bottom: 0;
+    }
+}
+
+.row {
+    .line {
+        opacity: 0.3;
+
+        position: absolute;
+
+        top: 0;
+        right: 0;
+        left: 0;
+
+        width: calc(100% - #{$padding-mobile * 2});
+        height: 0;
+
+        margin: auto;
+
+        border-top: solid 1px color.adjust($color-white, $alpha: -0.7);
+
+        @include respond-to('large') {
+            width: 75%;
+        }
+    }
+
+    .column {
+        width: 100%;
+
+        padding: 0 $padding-mobile;
+
+        .ar & {
+            text-align: right;
+        }
+
+        @include respond-to('medium') {
+            width: 67%;
+        }
+
+        @include respond-to('large') {
+            width: 45%;
+
+            margin-left: 44%;
+
+            padding: 0;
+
+            font-weight: normal;
+
+            .ar & {
+                margin-left: 7%;
+            }
+        }
+    }
+}
+
+.heading {
+    opacity: 1;
+
+    margin-bottom: rem(35px);
+
+    font-size: rem(50px);
+    line-height: 1.05em;
+    letter-spacing: 0.07em;
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(30px);
+
+        font-size: rem-l(140px);
+        line-height: 1.05em;
+        letter-spacing: 0.07em;
+    }
+
+    .ar & {
+        letter-spacing: inherit;
+    }
+
+    ::v-deep > .gsap-lines,
+    ::v-deep > .line {
+        &:nth-child(1) {
+            color: #b87726;
+        }
+
+        &:nth-child(2) {
+            color: #f5af57;
+        }
+
+        &:nth-child(3) {
+            color: #fbc684;
+        }
+
+        &:nth-child(4) {
+            color: #f6cd9a;
+        }
+    }
+}
+
+.button {
+    opacity: 0;
+
+    font-size: rem(15px);
+
+    @include respond-to('large') {
+        font-size: rem-l(25px);
+    }
+
+    .arrow {
+        path {
+            opacity: 1;
+            fill: $color-orange;
+        }
+    }
+}

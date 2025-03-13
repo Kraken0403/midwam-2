@@ -1,0 +1,30 @@
+
+.section {
+    width: 100%;
+}
+
+.column {
+    width: calc(100% - #{$padding-mobile} * 2);
+
+    margin: auto;
+
+    @include respond-to('large') {
+        width: calc(100% - #{$padding-mobile} * 6);
+    }
+}
+
+.heading {
+    margin-bottom: rem-l(140px);
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(60px);
+
+        font-size: rem-l(30px);
+    }
+}
+
+.body {
+    @include respond-to('large') {
+        font-size: rem-l(20px);
+    }
+}

@@ -1,0 +1,101 @@
+
+.carousel {
+    width: 100%;
+}
+
+.arrows-container {
+    visibility: hidden;
+
+    position: relative;
+
+    width: 100%;
+    height: 1px;
+
+    margin-bottom: rem-l(120px);
+
+    @include respond-to('large') {
+        visibility: visible;
+    }
+}
+
+.button-arrow {
+    opacity: 1;
+
+    position: absolute;
+    top: 0;
+
+    width: rem-l(16px);
+
+    background: none;
+    border: none;
+    outline: none;
+
+    transition: opacity 0.3s ease-in-out;
+
+    cursor: pointer;
+
+    &.left {
+        right: rem-l(5px);
+
+        transform: scaleX(-1);
+    }
+
+    &.right {
+        left: calc(100% + #{rem-l(5px)});
+    }
+
+    &:disabled {
+        opacity: 0.4;
+    }
+
+    .ar & {
+        &.left {
+            right: auto;
+            left: rem-l(5px);
+
+            transform: scaleX(1);
+        }
+
+        &.right {
+            right: calc(100% + #{rem-l(15px)});
+            left: auto;
+
+            transform: scaleX(-1);
+        }
+    }
+}
+
+.arrow {
+    width: rem-l(16px);
+    height: auto;
+}
+
+.list {
+    font-size: 0;
+    white-space: nowrap;
+
+    will-change: transform;
+
+    transform: translateX(30%);
+
+    &.ar {
+        direction: rtl;
+
+        transform: translateX(-30%);
+    }
+}
+
+.item {
+    display: inline-block;
+
+    width: 100%;
+
+    padding-right: rem(20px);
+
+    vertical-align: top;
+    white-space: normal;
+
+    @include respond-to('medium') {
+        padding-right: rem-l(70px);
+    }
+}

@@ -1,0 +1,45 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row heading -->
+        <div class="row row-heading">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Heading -->
+                <Heading tag="h2" class="heading-b heading" :data="data.title" />
+
+            </div>
+
+        </div>
+
+        <!-- Row body -->
+        <div class="row row-body">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Body -->
+                <div class="body" v-html="data.description"></div>
+
+                <!-- Button request -->
+                <ButtonUnderlined ref="button" class="button-cta" :link="data.call_to_action_link">{{ data.call_to_action_label }}</ButtonUnderlined>
+
+            </div>
+
+        </div>
+
+        <!-- Carousel -->
+        <!--
+        <div class="carousel" ref="carousel">
+            <img src="~/assets/images/contact/contact-visit2.png" alt="">
+        </div>
+        -->
+
+    </div>
+
+</section>

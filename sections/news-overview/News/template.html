@@ -1,0 +1,39 @@
+<!-- Section -->
+<section v-bind:class="`section ${lang}`">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Filters -->
+        <form class="filters" v-if="categories.length > 1">
+
+            <div class="input-container" ref="inputContainer1">
+                <input ref="resetCheckbox" type="radio" id="category" name="category" value="null" checked @input="categoryClickHandler">
+                <label for="category">All</label>
+            </div>
+
+            <div v-for="(item, index) in categories" class="input-container" ref="inputContainer">
+                <input ref="checkbox" type="radio" id="1234" :id="`category__${index}`" name="category" v-bind:value="item.id" v-bind:data-slug="item.slug" @input="categoryClickHandler">
+                <label :for="`category__${index}`">{{ item.title }}</label>
+            </div>
+
+
+        </form>
+
+        <div class="row">
+
+            <div class="column">
+
+                <!-- Grid News -->
+                <GridNews ref="grid" v-bind:items="activeItems" v-bind:highlight="true" />
+
+            </div>
+
+        </div>
+
+        <button class="button" ref="button" @click="loadMoreClickHanlder">
+            {{ $t('global.misc.load-more') }}
+        </button>
+    </div>
+
+</section>

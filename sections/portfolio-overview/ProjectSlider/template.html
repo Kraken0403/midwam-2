@@ -1,0 +1,52 @@
+<section class="section">
+
+    <div class="section__content">
+
+        <div class="content">
+
+            <div class="row">
+
+                <ul class="list" ref="list">
+
+                    <li
+                        v-for="(item, index) in data"
+                        class="list-item"
+                        ref="item"
+                        :data-index="index"
+                        :data-link="`experiences/${item.slug}`"
+                        @click="projectClickHandler"
+                    >
+                        <div
+                            class="hover-container"
+                            @mouseenter="mouseenterHandler"
+                            @mouseleave="mouseleaveHandler"
+                            :data-index="index"
+                            ref="hoverContainer"
+                        >
+                            <nuxt-link
+                                v-bind:to="`experiences/${item.slug}`"
+                                v-bind:class="allowHover ? 'is-hover-allowed' : ''"
+                                ref="title"
+                            >
+                                {{ item.title }}
+                            </nuxt-link>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <button ref="buttonLeft" class="button-arrow button-arrow--left" @click="clickPreviousHandler">
+                    <Arrow class="arrow" />
+                </button>
+
+                <button ref="buttonRight" class="button-arrow button-arrow--right" @click="clickNextHandler">
+                    <Arrow class="arrow" />
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,42 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row title -->
+        <div class="row row-title">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Heading -->
+                <Heading tag="h1" class="heading" :data="data.title" isCustomTriggered="true" ref="heading" />
+
+            </div>
+
+        </div>
+
+        <!-- Row items -->
+        <div class="row row-items" ref="items">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Items -->
+                <ul class="items">
+                    <li v-for="item in data.block">
+                        <div class="item">
+                            <span class="item__title">{{ item.title }}</span>
+                            <div class="item__description" v-html="item.description"></div>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

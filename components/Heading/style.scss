@@ -1,0 +1,16 @@
+
+.heading {
+    opacity: 0;
+
+    ::v-deep .chars {
+        opacity: 0;
+
+        display: inline !important;
+    }
+
+    ::v-deep .gsap-lines {
+        .ar & {
+            opacity: 0;
+        }
+    }
+}

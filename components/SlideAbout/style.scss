@@ -1,0 +1,96 @@
+
+.slide {
+    @include respond-to('large') {
+        padding: 0 rem-l(70px);
+    }
+}
+
+.title {
+    margin-bottom: rem(30px);
+
+    font-family: $font-primary;
+    font-weight: 300;
+    font-size: rem(40px);
+    line-height: 1.03em;
+    letter-spacing: 0.05em;
+    color: $color-white;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1px $color-white;
+
+    .ar & {
+        -webkit-text-stroke: 0px;
+    }
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(40px);
+
+        font-size: rem-l(110px);
+        letter-spacing: 0.07em;
+    }
+}
+
+.description {
+    opacity: 0.8;
+
+    width: rem(200px);
+
+    margin-bottom: rem(30px);
+
+    font-family: $font-tertiary;
+    font-weight: 300;
+    font-size: rem(15px);
+    line-height: 1.5em;
+    color: $color-white;
+
+    .ar & {
+        text-align: right;
+    }
+
+    @include respond-to('large') {
+        width: rem-l(430px);
+
+        margin-bottom: rem-l(70px);
+
+        font-size: rem-l(20px);
+    }
+}
+
+.buttons {
+    li {
+        display: inline-block;
+
+        margin-right: rem(20px);
+
+        .ar & {
+            margin-right: 0;
+            margin-left: rem(20px);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        @include respond-to('large') {
+            margin-right: rem-l(40px);
+
+            .ar & {
+                margin-left: rem-l(40px);
+            }
+        }
+    }
+}
+
+.button {
+    width: rem(200px);
+
+    font-family: $font-secondary;
+    font-size: rem(15px);
+    color: $color-white;
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        width: auto;
+
+        font-size: rem-l(15px);
+    }
+}

@@ -1,0 +1,169 @@
+
+.section {
+    opacity: 0;
+
+    pointer-events: none;
+
+    &.is-active {
+        opacity: 1;
+
+        pointer-events: all;
+    }
+}
+
+.content {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background-color: $color-background;
+
+    * {
+        user-select: none;
+    }
+}
+
+.row {
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    mask-image: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 1) 40%,
+        rgba(0, 0, 0, 1) 60%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+}
+
+.column {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 63vh;
+    height: calc(#{rem(120px)} * 4);
+
+    margin: auto;
+
+    @include respond-to('large') {
+        height: calc(#{rem-l(150px)} * 4);
+    }
+}
+
+.list {
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 $padding-mobile;
+
+    text-align: center;
+    flex-direction: column;
+
+    will-change: transform;
+}
+
+.list-item {
+    display: inline-block;
+
+    margin-bottom: rem(50px);
+
+    cursor: pointer;
+
+    user-select: none;
+
+    will-change: transform;
+
+    @include respond-to('large') {
+        margin-bottom: 0;
+    }
+
+    a {
+        opacity: 0.4;
+
+        width: 100%;
+
+        font-family: $font-primary;
+        font-weight: 300;
+        font-size: rem(50px);
+         // line-height: rem(120px);
+        letter-spacing: 0.05em;
+        color: transparent;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        transition: 0.5s ease-in-out;
+
+        pointer-events: none;
+        transition-property: opacity, color;
+
+        -webkit-text-stroke: 1px rgba($color-gold, 0.4);
+
+        .ar & {
+            color: $color-gold;
+
+            -webkit-text-stroke: 0px;
+        }
+
+        @include respond-to('large') {
+            margin-bottom: 0;
+
+            font-size: rem-l(70px);
+            line-height: rem-l(126px);
+        }
+    }
+
+    svg {
+        opacity: 0;
+
+        position: absolute;
+        bottom: 43%;
+        left: 120%;
+
+        width: rem-l(30px);
+        height: rem-l(30px);
+
+        margin: auto;
+
+        transform: translateX(-20px);
+
+        transition: 0.3s ease-in-out;
+
+        pointer-events: none;
+        transition-property: opacity, transform;
+    }
+
+    &.is-active {
+        a {
+            opacity: 1;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                a {
+                    color: $color-gold;
+                }
+
+                svg {
+                    opacity: 1;
+
+                    transform: translateX(0);
+                }
+            }
+        }
+    }
+}
+
+.images-container {
+    display: none;
+}

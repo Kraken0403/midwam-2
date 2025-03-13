@@ -1,0 +1,23 @@
+<!-- Page -->
+<div class="page">
+
+    <StickyShare ref="stickyShare" v-bind:data="data" />
+
+    <!-- Smooth scroll -->
+    <SmoothScroll ref="smoothScroll">
+
+        <!-- Sections -->
+        <SectionHeader class="section-header" ref="header" v-bind:data="data"></SectionHeader>
+        <component
+            v-for="(section, index) in sections"
+            v-bind:key="index"
+            v-bind:is="section.component"
+            v-bind:data="section.data"
+        ></component>
+        <SectionShare class="section-share"></SectionShare>
+        <SectionNews class="section-news" v-bind:data="related"></SectionNews>
+        <SectionFooter class="section-footer"></SectionFooter>
+
+    </SmoothScroll>
+
+</div>

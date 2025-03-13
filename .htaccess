@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^web\.midwam\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.web\.midwam\.com$
+RewriteRule ^/?$ "https\:\/\/www\.midwam\.com\/en\/" [R=301,L]
+

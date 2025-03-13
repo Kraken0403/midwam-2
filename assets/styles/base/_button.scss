@@ -1,0 +1,22 @@
+
+.button {
+    display: inline-block;
+
+    padding: 0;
+
+    color: black;
+    text-decoration: none;
+
+    background: none;
+    border: 0;
+    outline: none;
+
+    cursor: pointer;
+
+    @media (hover: hover) {
+        &:hover {
+
+        }
+    }
+
+}

@@ -1,0 +1,30 @@
+<div class="cursor">
+    <div v-for="(item, index) in 2" :class="`circle circle--${index + 1}`" ref="circle"></div>
+    <div class="label" ref="dragLabel">
+        {{ $t('global.cursor.click-hold') }}
+    </div>
+    <div class="icons" ref="icons">
+
+        <!-- Icon A -->
+        <IconA class="icon" ref="iconA" />
+
+        <!-- Icon B -->
+        <IconB class="icon" ref="iconB" />
+
+        <!-- Icon C -->
+        <IconC class="icon" ref="iconC" />
+
+        <!-- Icon D -->
+        <IconD class="icon" ref="iconD" />
+
+        <!-- Icon E -->
+        <IconE class="icon" ref="iconE" />
+
+        <!-- Icon F -->
+        <IconF class="icon" ref="iconF" />
+
+        <!-- Icon G -->
+        <IconG class="icon icon-g" ref="iconG" />
+
+    </div>
+</div>

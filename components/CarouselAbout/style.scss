@@ -1,0 +1,51 @@
+
+.carousel {
+    width: 100%;
+}
+
+.list {
+    font-size: 0;
+    white-space: nowrap;
+
+    will-change: transform;
+
+    .ar & {
+        direction: rtl;
+    }
+}
+
+.item {
+    display: inline-block;
+
+    width: 100%;
+
+    padding-right: rem(40px);
+
+    vertical-align: top;
+    white-space: normal;
+
+    .ar & {
+        padding-right: 0;
+        padding-left: rem(40px);
+    }
+
+    @include respond-to('medium') {
+        width: rem(300px);
+
+        padding-right: rem(100px);
+
+        .ar & {
+            padding-left: rem(100px);
+        }
+    }
+
+    @include respond-to('large') {
+        width: rem-l(800px);
+
+        padding-right: rem-l(160px);
+
+        .ar & {
+            padding-left: rem-l(160px);
+        }
+    }
+}

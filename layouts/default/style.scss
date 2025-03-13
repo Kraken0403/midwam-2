@@ -1,0 +1,134 @@
+
+
+html {
+    font-size: $font-size-small;
+
+    @include respond-to('medium') {
+        font-size: $font-size-medium;
+    }
+
+    @include respond-to('large') {
+        font-size: $font-size-large;
+    }
+
+    @media (min-width: $max-width-large) {
+        font-size: calc(math.div($max-width-large, 100));
+    }
+
+    * {
+        @include unselectable;
+    }
+
+    .ar &, .ar, &.ar {
+        * {
+            font-family: $font-arabic !important;
+            letter-spacing: 0 !important;
+        } 
+    }
+}
+
+html,
+body {
+    overflow-x: hidden;
+
+    background: #000000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html.prevent-bounce {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.page {
+    position: relative;
+}
+
+.section {
+    position: relative;
+}
+
+.section__content {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+    @include respond-to('medium') {
+        max-width: rem($max-width-medium);
+    }
+
+    @include respond-to('large') {
+        max-width: $max-width-large;
+    }
+}
+
+body.hide-cursor,
+body.hide-cursor a,
+body.hide-cursor button {
+    cursor: none;
+}
+
+.button-underline {
+    position: relative;
+    padding-bottom: rem(6px);
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem(15px);
+    color: $color-white;
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        padding-bottom: rem-l(6px);
+        font-size: rem-l(15px);
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        border: 1px solid $color-white;
+    }
+
+    &:after {
+        transform: scaleX(1);
+        transform-origin: right top;
+    }
+
+    &:before {
+        transform: scaleX(0);
+        transform-origin: left top;
+    }
+
+    &:hover {
+        &:after {
+            transform: scaleX(0);
+            transition: transform 0.4s $power2-in;
+        }
+
+        &:before {
+            transform: scaleX(1);
+            transition: transform 0.4s $power2-out 0.4s;
+        }
+    }
+}

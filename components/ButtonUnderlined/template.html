@@ -1,0 +1,13 @@
+<div>
+    <nuxt-link v-bind:to="to" :class="`button ${state}`" ref="button" v-if="!isMailto" @mouseenter.native="mouseenterHandler" @mouseleave.native="mouseleaveHandler">
+        <span v-for="item in 3" class="line" ref="line"></span>
+        <span class="underline" ref="underline"></span>
+        <slot />
+    </nuxt-link>
+
+    <a class="button" v-bind:href="link" ref="button" v-if="isMailto" @mouseenter="mouseenterHandler" @mouseleave="mouseleaveHandler">
+        <span v-for="item in 3" class="line" ref="line"></span>
+        <span class="underline" ref="underline"></span>
+        <slot />
+    </a>
+</div>

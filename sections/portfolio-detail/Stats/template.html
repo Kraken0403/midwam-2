@@ -1,0 +1,26 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Stats -->
+                <ul class="stats">
+                    <li v-for="item in data.stats">
+                        <span v-for="text in title(item.label)" class="heading-b stat">{{ text }}</span>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

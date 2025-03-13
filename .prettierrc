@@ -1,0 +1,14 @@
+{
+    "semi": true,
+    "arrowParens": "always",
+    "singleQuote": true,
+    "overrides": [
+        {
+            "files": "*.js",
+            "options": {
+                "printWidth": 200
+            }
+        }
+    ],
+    "endOfLine": "auto"
+}

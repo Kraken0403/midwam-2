@@ -1,0 +1,7 @@
+<div class="carousel">
+    <ul class="list" ref="list" data-links-disabled="false">
+        <li class="item" v-for="(item, index) in data" v-bind:key="index" ref="listItem" @click="clickItemHandler">
+            <SlideAbout v-bind:data="item" ref="item" />
+        </li>
+    </ul>
+</div>

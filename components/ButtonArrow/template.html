@@ -1,0 +1,7 @@
+<nuxt-link v-bind:to="localePath(to)" :class="`button button ${color} ${direction}`">
+    <span class="label">
+        <slot />
+    </span>
+    <Arrow class="arrow arrow--clone" />
+    <Arrow class="arrow" />
+</nuxt-link>

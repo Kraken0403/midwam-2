@@ -1,0 +1,17 @@
+<div class="carousel">
+    <div class="arrows-container">
+        <button class="button-arrow left" ref="buttonPrevious" @click="clickPreviousHanlder">
+            <Arrow class="arrow" />
+        </button>
+        <button class="button-arrow right" ref="buttonNext" @click="clickNextHanlder">
+            <Arrow class="arrow" />
+        </button>
+    </div>
+    <div class="list-container" ref="listContainer">
+        <ul v-bind:class="`list ${lang}`" ref="list" data-links-disabled="false">
+            <li class="item" v-for="(item, index) in data" v-bind:key="index">
+                <component v-bind:is="component" v-bind:data="item" ref="item" />
+            </li>
+        </ul>
+    </div>
+</div>

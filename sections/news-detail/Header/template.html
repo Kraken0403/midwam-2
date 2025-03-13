@@ -1,0 +1,41 @@
+<!-- Section -->
+<section v-bind:class="`section ${lang}`">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row -->
+        <div class="row">
+
+            <!-- Column -->
+            <div class="column">
+
+                <div class="content">
+
+                    <ButtonArrow class="button-arrow" to="news" direction="left" ref="back">
+                        {{ $t('global.misc.back') }}
+                    </ButtonArrow>
+
+                    <div v-if="data.header.category[0]" class="category" ref="category">{{data.header.category[0].title}}</div>
+
+                    <Heading tag="h1" ref="heading" class="heading-b heading" v-bind:isCustomTriggered="true" v-bind:data="data.header.title" />
+
+                    <div class="date" ref="date">{{date}}</div>
+
+                </div>
+
+            </div>
+
+            <!-- Image container -->
+            <div class="image-container" ref="imageContainer">
+
+                <!-- Image -->
+                <ResponsiveImage class="image" v-bind:sizes="data.header.image.sizes" v-bind:alt="data.header.image.alt" ref="image" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,13 @@
+<button class="button button-start" @click="clickHandler" @mouseenter="mouseenterHanlder" @mouseleave="mouseleaveHanlder">
+
+    <div class="svg-container" ref="svgContainer">
+
+        <svg class="svg" ref="svg" v-bind:width="width" v-bind:height="width">
+            <circle class="circle" ref="circle" v-bind:cx="radius" v-bind:cy="radius" v-bind:r="radius" />
+        </svg>
+
+    </div>
+
+    <span class="label" ref="label">{{ content }}</span>
+
+</button>

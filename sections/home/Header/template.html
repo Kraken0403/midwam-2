@@ -1,0 +1,26 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Content -->
+        <div class="content" ref="content">
+
+            <!-- Heading -->
+            <Heading tag="h1" ref="heading" isCustomTriggered="false" class="heading-a heading" :data="data.title" />
+
+            <!-- Subtitle -->
+            <h2 class="subtitle" ref="subtitle">{{ data.subtitle }}</h2>
+
+        </div>
+
+        <!-- Scroll indicator -->
+        <ScrollIndicator class="scroll-indicator" ref="scrollIndicator" v-bind:label="data.scroll_down_label" />
+
+        <!-- Button CTA -->
+        <ButtonBlock class="button-cta" ref="buttonBlock" v-bind:data="data.call_to_action" v-if="data.call_to_action.active" />
+
+    </div>
+
+</section>

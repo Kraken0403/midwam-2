@@ -1,0 +1,155 @@
+
+.section {
+    display: flex;
+
+    align-items: flex-end;
+
+    @include respond-to('large') {
+        align-items: center;
+    }
+}
+
+.section__content {
+    padding-bottom: rem(50px);
+
+    @include respond-to('large') {
+        margin-top: rem-l(75px);
+        padding-bottom: 0;
+    }
+}
+
+.row-title {
+    display: flex;
+
+    margin-bottom: rem(40px);
+
+    @include respond-to('large') {
+        margin-bottom: 0;
+    }
+
+    .column {
+        width: 100%;
+
+        padding: 0 $padding-mobile;
+
+        @include respond-to('medium') {
+            width: 50%;
+        }
+
+        @include respond-to('large') {
+            width: 90%;
+
+            margin-bottom: rem-l(145px);
+            margin-left: 12%;
+
+            padding: 0;
+
+            .ar & {
+                width: 84%;
+
+                margin-left: 4%;
+            }
+        }
+    }
+}
+
+.row-items {
+    opacity: 0;
+
+    display: flex;
+
+    .column {
+        width: 100%;
+
+        padding: 0 $padding-mobile;
+
+        @include respond-to('large') {
+            width: 84%;
+
+            margin-left: 12%;
+
+            padding: 0;
+
+            .ar & {
+                margin-left: 4%;
+            }
+        }
+    }
+}
+
+.heading {
+    font-size: rem(35px);
+    line-height: 1.03em;
+    letter-spacing: 0.05em;
+
+    @include respond-to('large') {
+        font-size: rem-l(140px);
+        letter-spacing: 0.07em;
+    }
+
+    .ar & {
+        letter-spacing: inherit;
+    }
+}
+
+.items {
+    > li {
+        display: inline-block;
+
+        width: 45%;
+
+        margin-right: 5%;
+
+        margin-bottom: rem(30px);
+
+        vertical-align: top;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .ar & {
+            text-align: right;
+        }
+
+        @include respond-to('large') {
+            width: 25%;
+
+            margin-right: 0;
+
+            margin-bottom: 0;
+        }
+    }
+}
+
+.item__title {
+    display: block;
+
+    margin-bottom: rem(10px);
+
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: rem(18px);
+    color: $color-white;
+    text-transform: uppercase;
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(45px);
+
+        font-size: rem-l(25px);
+    }
+}
+
+.item__description {
+    opacity: 0.5;
+
+    font-family: $font-tertiary;
+    font-weight: 300;
+    font-size: rem(13px);
+    line-height: 1.7em;
+    color: $color-white;
+
+    @include respond-to('large') {
+        font-size: rem-l(20px);
+    }
+}

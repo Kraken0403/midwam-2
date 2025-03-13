@@ -1,0 +1,25 @@
+<!-- Scroll control -->
+<ScrollControl ref="scrollControl">
+
+    <!-- Page -->
+    <div class="page">
+
+        <!-- Sections -->
+
+        <SectionHeader v-bind:data="header" class="section-header" ref="header" scroll-type="step"></SectionHeader>
+        <SectionIntro v-bind:data="header" class="section-intro" scroll-type="step"></SectionIntro>
+        <!-- <SectionVideo v-bind:data="video" class="section-video" scroll-type="step"></SectionVideo> -->
+        <SectionInfo v-bind:data="info" class="section-info" scroll-type="step"></SectionInfo>
+        <SectionInfo2 v-bind:data="info" class="section-info-2" scroll-type="step"></SectionInfo2>
+        <SectionCarousel v-bind:data="carousel" class="section-carousel" scroll-type="step"></SectionCarousel>
+        <SectionValues v-bind:data="values" class="section-values" scroll-type="step"></SectionValues>
+        <SectionPartners v-bind:data="partners" class="section-partners" ref="partners" scroll-type="step"></SectionPartners>
+        <SectionProcessPart1 v-bind:data="process" class="section-process-part-1" ref="process-part-1" scroll-type="step"></SectionProcessPart1>
+        <SectionProcessPart2 v-bind:data="process" class="section-process-part-2" ref="process-part-2" scroll-type="step"></SectionProcessPart2>
+        <SectionServices v-bind:data="services" class="section-services" scroll-type="step"></SectionServices>
+        <SectionContact v-bind:data="footer" class="section-contact" scroll-type="step"></SectionContact>
+        <SectionFooter class="section-footer"></SectionFooter>
+
+    </div>
+
+</ScrollControl>

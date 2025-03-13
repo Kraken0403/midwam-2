@@ -1,0 +1,35 @@
+<div>
+
+    <div class="background" ref="background"></div>
+
+    <ul class="list">
+
+        <li ref="listItem1" class="list-item">
+            <nuxt-link v-bind:to="`/${this.$i18n.locale}/about`" class="link" @click.native="linkClickHander">
+                {{ this.$t('global.navigation.about') }}
+            </nuxt-link>
+        </li>
+
+        <li ref="listItem2" class="list-item">
+            <nuxt-link v-bind:to="`/${this.$i18n.locale}/experiences`" class="link" @click.native="linkClickHander">
+                {{ this.$t('global.navigation.work') }}
+            </nuxt-link>
+        </li>
+
+        <!--
+        <li ref="listItem3" class="list-item">
+            <nuxt-link v-bind:to="`/${this.$i18n.locale}/news`" class="link" @click.native="linkClickHander">
+                {{ this.$t('global.navigation.news') }}
+            </nuxt-link>
+        </li>
+        -->
+
+        <li ref="listItem4" class="list-item">
+            <nuxt-link v-bind:to="`/${this.$i18n.locale}/contact`" class="link" @click.native="linkClickHander">
+                {{ this.$t('global.navigation.contact') }}
+            </nuxt-link>
+        </li>
+
+    </ul>
+
+</div>

@@ -8,11 +8,12 @@
     },
     "scripts": {
         "dev": "copy .env.local .env && nuxt",
-        "build": "nuxt generate",
+        "build": "cp .env.local .env && nuxt build",
         "build:staging": "copy .env.staging .env && nuxt build -c nuxt.config.staging.js",
         "build:production": "copy .env.production .env && nuxt build -c nuxt.config.production.js",
         "build:production-tmp": "cp .env.production-tmp .env && nuxt build -c nuxt.config.production.js",
         "start:staging": "cp .env.staging .env && nuxt start --port ${PORT:3001} -c nuxt.config.staging.js",
+        "start": "nuxt start",
         "start:production": "cp .env.production .env && nuxt start -c nuxt.config.production.js",
         "start:production-tmp": "cp .env.production-tmp .env && nuxt start -c nuxt.config.production.js",
         "generate": "nuxt generate",

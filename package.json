@@ -8,7 +8,7 @@
     },
     "scripts": {
         "dev": "copy .env.local .env && nuxt",
-        "build": "copy .env.local .env && nuxt build",
+        "build": "cp .env.local .env && nuxt build",
         "build:staging": "copy .env.staging .env && nuxt build -c nuxt.config.staging.js",
         "build:production": "copy .env.production .env && nuxt build -c nuxt.config.production.js",
         "build:production-tmp": "cp .env.production-tmp .env && nuxt build -c nuxt.config.production.js",

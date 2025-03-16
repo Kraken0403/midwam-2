@@ -91,7 +91,7 @@ export default {
             if (this.$root.webglApp) timeline.add(this.$root.webglApp.showScene('portfolio'), 0);
             timeline.to(this.$el, 1.3, { alpha: 1, ease: 'sine.inOut' }, 0.5);
             timeline.add(this.$root.theNavigation.show(), 1);
-            timeline.add(this.$root.buttonMute.show(), 1.1);
+            // timeline.add(this.$root.buttonMute.show(), 1.1);
             this.isReady = true;
 
             AudioManager.play('background-loop-1', {

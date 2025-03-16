@@ -78,7 +78,8 @@ export default {
         },
 
         enableClickAndHold() {
-            this.isClickAndHoldEnabled = true;
+            // this.isClickAndHoldEnabled = true;
+            this.isClickAndHoldEnabled = false;
 
             if (this.disableTimeline) this.disableTimeline.kill();
             if (this.clickAndHoldTimeline) this.clickAndHoldTimeline.kill();

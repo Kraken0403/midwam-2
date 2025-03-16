@@ -8,7 +8,7 @@ import Pizzicato from 'pizzicato';
 
 // Utils
 import EventDispatcher from '@/utils/EventDispatcher';
-import AudioManager from '@/utils/AudioManager';
+// import AudioManager from '@/utils/AudioManager';
 import resources from '@/resources';
 import Browser from '@/utils/Browser';
 
@@ -90,9 +90,9 @@ export default class ResourceLoader extends EventDispatcher {
             case 'obj':
                 this._loadObj(resource);
                 break;
-            case 'sound':
-                this._loadSound(resource);
-                break;
+            // case 'sound':
+            //     this._loadSound(resource);
+            //     break;
         }
     }
 
@@ -173,14 +173,14 @@ export default class ResourceLoader extends EventDispatcher {
         });
     }
 
-    _loadSound(resource) {
-        resource.state = STATE_LOADING;
-        const sound = new Pizzicato.Sound(this._basePath + resource.path, (error) => {
-            resource.data = sound;
-            resource.state = STATE_LOADED;
-            cache.push(resource);
-            if (!error) AudioManager.add(resource.name, sound);
-            this._checkResourcesStatus();
-        });
-    }
+    // _loadSound(resource) {
+    //     resource.state = STATE_LOADING;
+    //     const sound = new Pizzicato.Sound(this._basePath + resource.path, (error) => {
+    //         resource.data = sound;
+    //         resource.state = STATE_LOADED;
+    //         cache.push(resource);
+    //         if (!error) AudioManager.add(resource.name, sound);
+    //         this._checkResourcesStatus();
+    //     });
+    // }
 }

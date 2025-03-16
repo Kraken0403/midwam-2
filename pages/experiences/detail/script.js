@@ -80,7 +80,7 @@ export default {
             const timeline = new gsap.timeline({ onComplete: done, delay });
             timeline.add(this.$refs.header.transitionIn(), 0);
             timeline.add(this.$root.theNavigation.show(), 1);
-            timeline.add(this.$root.buttonMute.show(), 1.1);
+            // timeline.add(this.$root.buttonMute.show(), 1.1);
             if (this.$root.webglApp) timeline.add(this.$root.webglApp.showScene('empty'), 0);
 
             AudioManager.play('background-loop-1', {

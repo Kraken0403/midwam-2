@@ -68,7 +68,7 @@ export default {
             if (this.$root.webglApp) timeline.add(this.$root.webglApp.showScene('about'), 0);
             timeline.add(this.$refs.header.transitionIn(), 0.5);
             timeline.add(this.$root.theNavigation.show(), 1);
-            timeline.add(this.$root.buttonMute.show(), 1.1);
+            // timeline.add(this.$root.buttonMute.show(), 1.1);
 
             AudioManager.play('background-loop-1', {
                 loop: true,

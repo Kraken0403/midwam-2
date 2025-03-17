@@ -10,7 +10,7 @@ import ButtonHamburger from '@/components/ButtonHamburger';
 import MenuMobile from '@/components/MenuMobile';
 
 // Assets
-import Logo from '@/assets/images/misc/logo.svg?inline';
+import Logo from '@/assets/logo-2.svg?inline';
 
 // Constants
 const TOP_OFFSET = 120;

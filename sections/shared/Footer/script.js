@@ -2,7 +2,8 @@
 import gsap from 'gsap';
 
 // Assets
-import Logo from '@/assets/images/misc/logo.svg?inline';
+import Logo from '@/assets/logo-2.svg?inline';
+
 import Twitter from '@/assets/images/icons/twitter.svg?inline';
 import Medium from '@/assets/images/icons/medium.svg?inline';
 import LinkedIn from '@/assets/images/icons/linkedin.svg?inline';

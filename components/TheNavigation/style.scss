@@ -25,14 +25,14 @@
 }
 
 .button-logo {
-    display: block;
+    display: flex;
     position: absolute;
     top: 0;
     bottom: 0;
     left: rem(37px);
+    align-items: center;
 
-   height: 1.5rem;
-
+//    height: 1.5rem;
     margin: auto 0;
 
     fill: $color-white;
@@ -45,7 +45,7 @@
     @include respond-to('large') {
         left: rem-l(95px);
 
-        height: 17px;
+        height: 100%;
 
         .ar & {
             right: rem-l(95px);
@@ -58,7 +58,8 @@
     }
 
     svg {
-        height: 100%;
+        width: 120px;
+        height: auto;
     }
 }
 

@@ -530,11 +530,11 @@ export default class About extends component(Scene) {
      * Handlers
      */
     _mouseDownHandler() {
-        this.focus();
+        // this.focus();
     }
 
     _mouseUpHandler() {
-        this.unfocus();
+        // this.unfocus();
     }
 
     _scrollHandler(e) {

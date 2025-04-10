@@ -1,6 +1,6 @@
 <div class="cursor">
     <div v-for="(item, index) in 2" :class="`circle circle--${index + 1}`" ref="circle"></div>
-    <div class="label" ref="dragLabel">
+    <div class="label" ref="dragLabel" style="display: none;">
         {{ $t('global.cursor.click-hold') }}
     </div>
     <div class="icons" ref="icons">

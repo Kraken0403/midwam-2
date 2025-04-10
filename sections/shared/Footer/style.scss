@@ -161,12 +161,14 @@
     font-size: rem(20px);
     color: $color-white;
     text-transform: uppercase;
+    
+    transition: opacity 0.3s $power2-out;
+
 
     @include respond-to('large') {
         font-size: rem-l(20px);
     }
 
-    transition: opacity 0.3s $power2-out;
 
     &:hover {
         opacity: 0.5;

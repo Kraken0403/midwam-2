@@ -1,39 +1,23 @@
-// Vendor
+
+import Page from '@/components/Page';
+import SmoothScroll from '@/components/SmoothScroll';
+import SectionHeader from '@/sections/services/Header';
+import ServiceItemSection from '@/sections/services/ServiceItemSection';
+import SectionFooter from '@/sections/shared/Footer';
+
 import gsap from 'gsap';
 
 // Utils
-import AudioManager from '@/utils/AudioManager';
-
-// Components
-import Page from '@/components/Page';
-import SmoothScroll from '@/components/SmoothScroll';
-
-// Plugins
-import axios from '@/plugins/axios';
-
-// Sections
-import SectionHeader from '@/sections/contact/Header';
-import SectionVisit from '@/sections/contact/Visit';
-import ContactFormSection from '@/sections/contact/ContactFormSection';
-import SectionFooter from '@/sections/shared/Footer';
-
+// import AudioManager from '@/utils/AudioManager';
 
 export default {
     extends: Page,
 
     components: {
-        SectionHeader,
-        SectionVisit,
-        SectionFooter,
-        ContactFormSection,
         SmoothScroll,
-    },
-
-    asyncData({ app }) {
-        const locale = app.i18n.locale;
-        return axios.get(`page/contact?lang=${locale}`).then((res) => {
-            return { metadata: res.data.seo, ...res.data.sections };
-        });
+        SectionHeader,
+        SectionFooter,
+        ServiceItemSection
     },
 
     created() {
@@ -49,9 +33,9 @@ export default {
             timeline.add(this.$root.theNavigation.show(), 1);
             // timeline.add(this.$root.buttonMute.show(), 1.1);
 
-            AudioManager.play('background-loop-1', {
-                loop: true,
-            });
+            // AudioManager.play('background-loop-1', {
+            //     loop: true,
+            // });
         },
 
         transitionOut(done) {
@@ -60,4 +44,5 @@ export default {
             timeline.to(this.$el, 0.8, { alpha: 0, ease: 'sine.inOut' }, 0);
         },
     },
+   
 };

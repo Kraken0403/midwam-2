@@ -1,0 +1,90 @@
+.service-item {
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &:hover {
+        transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        .service-item-wrapper {
+            img {
+                transform: scale(1.05) rotate(-2deg);
+                transition: all 0.2s ease;
+            }
+        }
+
+        svg {
+            transform: rotate(45deg);
+            transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+            path {
+                fill: #f5af57;
+            }
+        }
+    }
+    .service-item-wrapper{
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 85vh;
+        // background-image: url('../../assets/images/about/video.png');
+        background-size: cover;
+        background-position: center center;
+        border: 0px;
+        img {
+            transition: all 0.2s ease;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            object-fit: cover;
+            border: 0px;
+            z-index: -1;
+            // opacity: 1!important;
+        }
+    }
+
+    .service-row {
+        width: 100%;
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        padding: rem(5);
+        align-items: end;
+        padding: 3rem;
+    }
+
+    .title h1 {
+        color: #f5af57;
+        display: inline-block;
+        width: 100%;
+        // margin:auto;
+        // padding:5.3333333333rem;
+        font-family: "Formula Condensed", sans-serif;
+        font-weight: 300;
+        font-size: rem(10px);
+        line-height: 100%;
+        letter-spacing: 0.05em;
+        // color: #ffffff;
+        // text-align: center;
+        text-transform: uppercase;
+        vertical-align: top;
+        margin-bottom: 3%;
+    }
+
+    .left-content {
+        width: 40%;
+    }
+
+    .description p {
+        // font-size: 18px;
+        color: #fff;
+        font-family: 'Akkurat Pro', sans-serif;
+        line-height: 1.2;
+        font-weight: 300;
+        font-size: rem(4px);
+        // letter-spacing: 0.2em;
+        color: $color-white;
+
+    }
+}

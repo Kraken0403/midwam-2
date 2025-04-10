@@ -129,7 +129,7 @@ export default class Contact extends component(Scene) {
         const camera = new PerspectiveCamera(30, 1, 0.1, 10000);
         camera.position.x = -20;
         camera.position.z = 1248.11;
-        camera.position.y = 974.39;
+        camera.position.y = 566.39;
         // camera.position.z = 10;
         camera.lookAt(new Vector3(0, 0, 0));
 
@@ -314,11 +314,11 @@ export default class Contact extends component(Scene) {
      * Handlers
      */
     _mouseDownHandler() {
-        this.focus();
+        // this.focus();
     }
 
     _mouseUpHandler() {
-        this.unfocus();
+        // this.unfocus();
     }
 
     _mouseMoveHandler(e) {

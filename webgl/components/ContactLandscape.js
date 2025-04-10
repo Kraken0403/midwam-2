@@ -45,7 +45,7 @@ export default class Landscape extends component(Object3D) {
      */
     _createMaterial() {
         const material = new LineMaterial({
-            linewidth: 1.5, // in pixels
+            linewidth: 0.5, // in pixels
             resolution: new Vector2(0, 0),
             dashed: false,
             worldUnits: false,

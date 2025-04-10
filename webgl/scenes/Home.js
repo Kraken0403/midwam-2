@@ -132,171 +132,171 @@ export default class Home extends component(Scene) {
     }
 
     focus(sectionIndex) {
-        if (this._isCameraAnimation) return;
+        // if (this._isCameraAnimation) return;
 
-        this._currentFocusIndex = sectionIndex;
+        // this._currentFocusIndex = sectionIndex;
 
-        // if (sectionIndex <= 6) {
-        //     if (this._nuxtRoot.customCursor) {
-        //         this._nuxtRoot.customCursor.clickAndHold();
-        //     }
+        // // if (sectionIndex <= 6) {
+        // //     if (this._nuxtRoot.customCursor) {
+        // //         this._nuxtRoot.customCursor.clickAndHold();
+        // //     }
+        // // }
+
+        // if (this._timelineUnfocus) this._timelineUnfocus.kill();
+        // if (this._timelineFocus) this._timelineFocus.kill();
+        // this._timelineFocus = new gsap.timeline({ onComplete: this._timelineFocusCompleteHandler });
+
+        // if (sectionIndex === 0) {
+        //     this._timelineFocus.to(this._reflectiveMaterial, 2, { envMapRotationZSpeed: 0.015 }, 0);
+        //     this._timelineFocus.to(this._reflectiveMaterial, 2, { envMapIntensity: 0.33, ease: 'sine.inOut' }, 0);
+        //     // this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 1 }, 0);
+        //     // this._timelineFocus.to(this._postProcessing.passes.bloomPass, 2, { strength: 1 }, 0);
         // }
 
-        if (this._timelineUnfocus) this._timelineUnfocus.kill();
-        if (this._timelineFocus) this._timelineFocus.kill();
-        this._timelineFocus = new gsap.timeline({ onComplete: this._timelineFocusCompleteHandler });
+        // if (sectionIndex === 1) {
+        //     this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 3.24, ease: 'power1.out' }, 0);
+        //     this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.094, ease: 'power1.inOut' }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.91 }, 0);
+        //     this._timelineFocus.to(this._components.shapes, 1, { opacity: 0 }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.bloomPass, 2, { strength: 1 }, 0);
+        // }
 
-        if (sectionIndex === 0) {
-            this._timelineFocus.to(this._reflectiveMaterial, 2, { envMapRotationZSpeed: 0.015 }, 0);
-            this._timelineFocus.to(this._reflectiveMaterial, 2, { envMapIntensity: 0.33, ease: 'sine.inOut' }, 0);
-            // this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 1 }, 0);
-            // this._timelineFocus.to(this._postProcessing.passes.bloomPass, 2, { strength: 1 }, 0);
-        }
+        // if (sectionIndex === 2) {
+        //     this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 1.4 }, 0);
+        //     this._timelineFocus.to(this._tweenHeartBeat, 0.8, { timeScale: 1.9 }, 0);
+        //     this._timelineFocus.to(this._tweenParams, 0.8, { bloomStrengthIntensity: 1.3 }, 0);
+        //     this._timelineFocus.to(this._renderer, 0.8, { toneMappingExposure: 0.15 }, 0);
 
-        if (sectionIndex === 1) {
-            this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 3.24, ease: 'power1.out' }, 0);
-            this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.094, ease: 'power1.inOut' }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.91 }, 0);
-            this._timelineFocus.to(this._components.shapes, 1, { opacity: 0 }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.bloomPass, 2, { strength: 1 }, 0);
-        }
+        //     this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.025, ease: 'power1.inOut' }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.94 }, 0);
+        // }
 
-        if (sectionIndex === 2) {
-            this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 1.4 }, 0);
-            this._timelineFocus.to(this._tweenHeartBeat, 0.8, { timeScale: 1.9 }, 0);
-            this._timelineFocus.to(this._tweenParams, 0.8, { bloomStrengthIntensity: 1.3 }, 0);
-            this._timelineFocus.to(this._renderer, 0.8, { toneMappingExposure: 0.15 }, 0);
+        // // Legs
+        // if (sectionIndex === 3) {
+        //     this._timelineFocus.to(this._components.spinner, 2, { sparksSpeed: 2 }, 0);
+        //     this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: -1 }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uStrengthMinAmplitude, 2, { value: 0.5 }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uLineOffsetMaxAmplitude, 2, { value: 14.53 }, 0);
 
-            this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.025, ease: 'power1.inOut' }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.94 }, 0);
-        }
+        //     this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.015, ease: 'power1.inOut' }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.93 }, 0);
+        // }
 
-        // Legs
-        if (sectionIndex === 3) {
-            this._timelineFocus.to(this._components.spinner, 2, { sparksSpeed: 2 }, 0);
-            this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: -1 }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uStrengthMinAmplitude, 2, { value: 0.5 }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uLineOffsetMaxAmplitude, 2, { value: 14.53 }, 0);
+        // if (sectionIndex === 4 || sectionIndex === 5) {
+        //     this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 1 }, 0);
+        //     this._timelineFocus.to(this._components.spinner, 2, { rotationSpeed: 200 }, 0);
+        //     this._timelineFocus.to(this._components.spinner, 2, { sparksSpeed: 2 }, 0);
+        //     this._timelineFocus.to(this._components.spinner, 4, { emissiveIntensity: 0.8 }, 0);
+        //     this._timelineFocus.to(this._cameraAnimation.wiggle, 2, { progress: 1 }, 0);
 
-            this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.015, ease: 'power1.inOut' }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.93 }, 0);
-        }
+        //     this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.03, ease: 'power1.inOut' }, 0);
+        //     this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.86 }, 0);
 
-        if (sectionIndex === 4 || sectionIndex === 5) {
-            this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 1 }, 0);
-            this._timelineFocus.to(this._components.spinner, 2, { rotationSpeed: 200 }, 0);
-            this._timelineFocus.to(this._components.spinner, 2, { sparksSpeed: 2 }, 0);
-            this._timelineFocus.to(this._components.spinner, 4, { emissiveIntensity: 0.8 }, 0);
-            this._timelineFocus.to(this._cameraAnimation.wiggle, 2, { progress: 1 }, 0);
+        //     AudioManager.playEffect('energy');
+        // }
 
-            this._timelineFocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.03, ease: 'power1.inOut' }, 0);
-            this._timelineFocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0.86 }, 0);
+        // if (sectionIndex === 6) {
+        //     this.isHideLandscapeComplete = false;
+        //     this._forceLandscapeTransition = false;
+        //     this._timelineFocus.call(
+        //         () => {
+        //             this._forceLandscapeTransition = true;
+        //         },
+        //         null,
+        //         0.4
+        //     );
+        //     this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 1.5, { z: 75, ease: 'power2.out' }, 0);
+        //     this._timelineFocus.call(
+        //         () => {
+        //             this.hideLandscape(() => {
+        //                 this.isHideLandscapeComplete = true;
+        //                 this.gotoNextLandscape();
+        //             });
+        //         },
+        //         null,
+        //         0
+        //     );
+        //     this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 0, ease: 'power2.out' }, 0.77);
+        // }
 
-            AudioManager.playEffect('energy');
-        }
-
-        if (sectionIndex === 6) {
-            this.isHideLandscapeComplete = false;
-            this._forceLandscapeTransition = false;
-            this._timelineFocus.call(
-                () => {
-                    this._forceLandscapeTransition = true;
-                },
-                null,
-                0.4
-            );
-            this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 1.5, { z: 75, ease: 'power2.out' }, 0);
-            this._timelineFocus.call(
-                () => {
-                    this.hideLandscape(() => {
-                        this.isHideLandscapeComplete = true;
-                        this.gotoNextLandscape();
-                    });
-                },
-                null,
-                0
-            );
-            this._timelineFocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 0, ease: 'power2.out' }, 0.77);
-        }
-
-        // Analytics
-        // if (this._clickedAndHoldSectionsId.includes(sectionIndex)) return;
-        // this._clickedAndHoldSectionsId.push(sectionIndex);
-        // this._nuxtRoot.$ga.event({
-        //     eventCategory: 'click and hold',
-        //     eventAction: `Click and hold on section : ${sectionIndex}`,
-        // });
+        // // Analytics
+        // // if (this._clickedAndHoldSectionsId.includes(sectionIndex)) return;
+        // // this._clickedAndHoldSectionsId.push(sectionIndex);
+        // // this._nuxtRoot.$ga.event({
+        // //     eventCategory: 'click and hold',
+        // //     eventAction: `Click and hold on section : ${sectionIndex}`,
+        // // });
     }
 
     unfocus() {
-        if (this._isCameraAnimation) return;
+        // if (this._isCameraAnimation) return;
 
-        if (!this._forceLandscapeTransition) {
-            if (this._timelineFocus) this._timelineFocus.kill();
-        }
-
-        this._timelineUnfocus = new gsap.timeline();
-
-        // if (this._currentFocusIndex <= 6) {
-        //     if (this._nuxtRoot.customCursor) {
-        //         this._nuxtRoot.customCursor.stopClickAndHold();
-        //     }
+        // if (!this._forceLandscapeTransition) {
+        //     if (this._timelineFocus) this._timelineFocus.kill();
         // }
 
-        this._timelineUnfocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uStrengthMinAmplitude, 2, { value: 0.07 }, 0);
-        this._timelineUnfocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uLineOffsetMaxAmplitude, 2, { value: 3.8 }, 0);
+        // this._timelineUnfocus = new gsap.timeline();
 
-        if (this._currentFocusIndex === 0) {
-            this._timelineUnfocus.to(this._reflectiveMaterial, 1.3, { envMapIntensity: 0.22, ease: 'sine.inOut' }, 0);
-            // this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 5, { value: 0, ease: 'power4.in' }, 0);
-            this._timelineUnfocus.to(this._reflectiveMaterial, 2.2, { envMapRotationZSpeed: 0.0024, ease: 'power3.out' }, 0);
-        }
+        // // if (this._currentFocusIndex <= 6) {
+        // //     if (this._nuxtRoot.customCursor) {
+        // //         this._nuxtRoot.customCursor.stopClickAndHold();
+        // //     }
+        // // }
 
-        if (this._currentFocusIndex === 1) {
-            this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
-            this._timelineUnfocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.0024 }, 0);
-        }
+        // this._timelineUnfocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uStrengthMinAmplitude, 2, { value: 0.07 }, 0);
+        // this._timelineUnfocus.to(this._postProcessing.passes.hologramPass.material.uniforms.uLineOffsetMaxAmplitude, 2, { value: 3.8 }, 0);
 
-        if (this._currentFocusIndex === 1 || this._currentFocusIndex === 0) {
-            this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 1.5, { z: 0, ease: 'power2.out' }, 0);
-            this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
-            this._timelineUnfocus.to(this._components.shapes, 1, { opacity: 1 }, 0);
-            this._timelineUnfocus.to(this._tweenParams, 0.5, { bloomStrengthIntensity: 1 }, 0);
-            this._timelineUnfocus.to(this._postProcessing.passes.bloomPass, 2, { strength: 0.42 }, 0);
-        }
+        // if (this._currentFocusIndex === 0) {
+        //     this._timelineUnfocus.to(this._reflectiveMaterial, 1.3, { envMapIntensity: 0.22, ease: 'sine.inOut' }, 0);
+        //     // this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 5, { value: 0, ease: 'power4.in' }, 0);
+        //     this._timelineUnfocus.to(this._reflectiveMaterial, 2.2, { envMapRotationZSpeed: 0.0024, ease: 'power3.out' }, 0);
+        // }
 
-        if (this._currentFocusIndex === 2) {
-            this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 1, { z: 0 }, 0);
-            this._timelineUnfocus.to(this._tweenHeartBeat, 0.5, { timeScale: 1 }, 0);
-            this._timelineUnfocus.to(this._tweenParams, 0.5, { bloomStrengthIntensity: 1 }, 0);
-            this._timelineUnfocus.to(this._renderer, 0.5, { toneMappingExposure: 0.4 }, 0);
+        // if (this._currentFocusIndex === 1) {
+        //     this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
+        //     this._timelineUnfocus.to(this._reflectiveMaterial, 1.5, { envMapRotationZSpeed: 0.0024 }, 0);
+        // }
 
-            this._timelineUnfocus.to(this._reflectiveMaterial, 2.2, { envMapRotationZSpeed: 0.0024, ease: 'power3.out' }, 0);
-            this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
-        } else if (this._currentFocusIndex === 6) {
-            if (!this._forceLandscapeTransition) {
-                this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 0 }, 0);
-                this._timelineUnfocus.call(
-                    () => {
-                        if (!this.isHideLandscapeComplete) {
-                            this.cancelHideLandscape();
-                        }
-                    },
-                    null,
-                    0
-                );
-            }
-        } else {
-            this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 1, { z: 0 }, 0);
-            this._timelineUnfocus.to(this._components.spinner, 1, { rotationSpeed: 1 }, 0);
-            this._timelineUnfocus.to(this._components.spinner, 1, { sparksSpeed: 0.5 }, 0);
-            this._timelineUnfocus.to(this._components.spinner, 2.5, { emissiveIntensity: 0, ease: 'power4.out' }, 0);
-            this._timelineUnfocus.to(this._cameraAnimation.wiggle, 2, { progress: 0 }, 0);
+        // if (this._currentFocusIndex === 1 || this._currentFocusIndex === 0) {
+        //     this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 1.5, { z: 0, ease: 'power2.out' }, 0);
+        //     this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
+        //     this._timelineUnfocus.to(this._components.shapes, 1, { opacity: 1 }, 0);
+        //     this._timelineUnfocus.to(this._tweenParams, 0.5, { bloomStrengthIntensity: 1 }, 0);
+        //     this._timelineUnfocus.to(this._postProcessing.passes.bloomPass, 2, { strength: 0.42 }, 0);
+        // }
 
-            this._timelineUnfocus.to(this._reflectiveMaterial, 2.2, { envMapRotationZSpeed: 0.0024, ease: 'power3.out' }, 0);
-            this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
-            AudioManager.stopEffect('energy');
-        }
+        // if (this._currentFocusIndex === 2) {
+        //     this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 1, { z: 0 }, 0);
+        //     this._timelineUnfocus.to(this._tweenHeartBeat, 0.5, { timeScale: 1 }, 0);
+        //     this._timelineUnfocus.to(this._tweenParams, 0.5, { bloomStrengthIntensity: 1 }, 0);
+        //     this._timelineUnfocus.to(this._renderer, 0.5, { toneMappingExposure: 0.4 }, 0);
+
+        //     this._timelineUnfocus.to(this._reflectiveMaterial, 2.2, { envMapRotationZSpeed: 0.0024, ease: 'power3.out' }, 0);
+        //     this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
+        // } else if (this._currentFocusIndex === 6) {
+        //     if (!this._forceLandscapeTransition) {
+        //         this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 2, { z: 0 }, 0);
+        //         this._timelineUnfocus.call(
+        //             () => {
+        //                 if (!this.isHideLandscapeComplete) {
+        //                     this.cancelHideLandscape();
+        //                 }
+        //             },
+        //             null,
+        //             0
+        //         );
+        //     }
+        // } else {
+        //     this._timelineUnfocus.to(this._cameraAnimation.zoomContainer.position, 1, { z: 0 }, 0);
+        //     this._timelineUnfocus.to(this._components.spinner, 1, { rotationSpeed: 1 }, 0);
+        //     this._timelineUnfocus.to(this._components.spinner, 1, { sparksSpeed: 0.5 }, 0);
+        //     this._timelineUnfocus.to(this._components.spinner, 2.5, { emissiveIntensity: 0, ease: 'power4.out' }, 0);
+        //     this._timelineUnfocus.to(this._cameraAnimation.wiggle, 2, { progress: 0 }, 0);
+
+        //     this._timelineUnfocus.to(this._reflectiveMaterial, 2.2, { envMapRotationZSpeed: 0.0024, ease: 'power3.out' }, 0);
+        //     this._timelineUnfocus.to(this._postProcessing.passes.afterImage.uniforms.damp, 1, { value: 0 }, 0);
+        //     AudioManager.stopEffect('energy');
+        // }
     }
 
     showLandscape(index) {

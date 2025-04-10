@@ -434,11 +434,11 @@ export default class Portfolio extends component(Scene) {
      * Handlers
      */
     _mouseDownHandler() {
-        this.focus();
+        // this.focus();
     }
 
     _mouseUpHandler() {
-        this.unfocus();
+        // this.unfocus();
     }
 
     _mousemoveHandler(e) {

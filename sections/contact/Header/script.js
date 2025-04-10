@@ -4,6 +4,7 @@ import gsap from 'gsap';
 // Components
 import Section from '@/components/Section';
 import Heading from '@/components/Heading';
+import ContactForm from '@/components/ContactForm';
 import Body from '@/components/Body';
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
 
@@ -13,6 +14,7 @@ export default {
     components: {
         Heading,
         Body,
+        ContactForm
     },
 
     mounted() {

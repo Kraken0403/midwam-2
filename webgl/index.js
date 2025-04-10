@@ -97,11 +97,11 @@ export default class Main extends component() {
     }
 
     focus(sectionIndex) {
-        this._sceneManager.focus(sectionIndex);
+        // this._sceneManager.focus(sectionIndex);
     }
 
     unfocus() {
-        this._sceneManager.unfocus();
+        // this._sceneManager.unfocus();
     }
 
     goto(index, direction, done) {

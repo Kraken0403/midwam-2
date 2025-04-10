@@ -1,0 +1,83 @@
+.contact-form {
+  font-family: 'Akkurat Pro', sans-serif;
+  max-width: 600px;
+  width: 100%;
+  margin: 2rem auto; // left margin ensures left alignment
+  padding: 2rem;
+  background-color: transparent;
+  // border-radius: 8px;
+  // box-shadow: 0 0 10px rgba(242, 175, 113, 0.5);
+
+  .form-title {
+    text-align: left;
+    font-size: 2rem;
+    color: #f2af71;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      text-align: left;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.8rem;
+    // border: 1px solid #444;
+    border-top: 0px;
+    border-bottom: 1px solid #444;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: #f2af71;
+    outline: none;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  .form-actions {
+    margin-top: 1rem;
+    text-align: left; // left-aligned actions
+  }
+
+  .form-actions .button-cta {
+    text-align: center;
+  }
+
+  /* We assume that the global styles for .btn and .btn-primary exist.
+     Therefore, we are not redefining them here. */
+
+  .success-message,
+  .error-message {
+    margin-top: 1rem;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .success-message {
+    color: #00ff00;
+  }
+
+  .error-message {
+    color: #ff0000;
+  }
+}

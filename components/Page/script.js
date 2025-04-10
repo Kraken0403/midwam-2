@@ -5,7 +5,7 @@ import Breakpoints from '@/utils/Breakpoints';
 import device from '@/utils/device';
 
 // Store
-import { FOCUS_ENDED, FOCUS_STARTED, PRELOADER_COMPLETED, LANGUAGE_SWITCH_FINISHED } from '@/store';
+import { PRELOADER_COMPLETED, LANGUAGE_SWITCH_FINISHED } from '@/store';
 
 // Constants
 const TYPE_PAGE = 'page';
@@ -141,25 +141,25 @@ export default {
             this.$store.watch((state) => state.preloader, this.__preloaderChangeHandler);
             WindowResizeObserver.addEventListener('resize', this.__resizeHandler);
 
-            if (process.client) {
-                window.addEventListener('mousedown', this.__mouseDownHandler);
-                window.addEventListener('mouseup', this.__mouseUpHandler);
-                window.addEventListener('touchstart', this.__touchStartHandler);
-                window.addEventListener('touchmove', this.__touchMoveHandler);
-                window.addEventListener('touchend', this.__touchEndHandler);
-            }
+            // if (process.client) {
+            //     window.addEventListener('mousedown', this.__mouseDownHandler);
+            //     window.addEventListener('mouseup', this.__mouseUpHandler);
+            //     window.addEventListener('touchstart', this.__touchStartHandler);
+            //     window.addEventListener('touchmove', this.__touchMoveHandler);
+            //     window.addEventListener('touchend', this.__touchEndHandler);
+            // }
         },
 
         __removeEventListeners() {
             WindowResizeObserver.removeEventListener('resize', this.__resizeHandler);
 
-            if (process.client) {
-                window.removeEventListener('mousedown', this.__mouseDownHandler);
-                window.removeEventListener('mouseup', this.__mouseUpHandler);
-                window.removeEventListener('touchstart', this.__touchStartHandler);
-                window.removeEventListener('touchmove', this.__touchMoveHandler);
-                window.removeEventListener('touchend', this.__touchEndHandler);
-            }
+            // if (process.client) {
+            //     window.removeEventListener('mousedown', this.__mouseDownHandler);
+            //     window.removeEventListener('mouseup', this.__mouseUpHandler);
+            //     window.removeEventListener('touchstart', this.__touchStartHandler);
+            //     window.removeEventListener('touchmove', this.__touchMoveHandler);
+            //     window.removeEventListener('touchend', this.__touchEndHandler);
+            // }
         },
 
         __setupScrollEventListener() {
@@ -231,55 +231,55 @@ export default {
             return baseName;
         },
 
-        __focusActiveSection(target) {
-            if (this.$store.state.router.current !== 'index') return;
+        // __focusActiveSection(target) {
+        //     if (this.$store.state.router.current !== 'index') return;
 
-            const isButton = target.closest('a, button, .dg');
-            if (isButton) return;
+        //     const isButton = target.closest('a, button, .dg');
+        //     if (isButton) return;
 
-            this._isFocusActive = true;
-            this.$store.commit('focus', FOCUS_STARTED);
+        //     this._isFocusActive = true;
+        //     this.$store.commit('focus', FOCUS_STARTED);
 
-            if (this.$root.webglApp) {
-                this.$root.webglApp.focus(this.__activeSectionIndex);
-            }
+        //     if (this.$root.webglApp) {
+        //         this.$root.webglApp.focus(this.__activeSectionIndex);
+        //     }
 
-            if (this.__activeSection && typeof this.__activeSection.focus === 'function') {
-                this.__activeSection.focus();
+        //     if (this.__activeSection && typeof this.__activeSection.focus === 'function') {
+        //         this.__activeSection.focus();
 
-                if (this.$root.theNavigation) {
-                    this.$root.theNavigation.focusFadeOut();
-                }
-                //Button Muting
-                // if (this.$root.buttonMute) {
-                //     this.$root.buttonMute.fadeOut();
-                // }
-            }
-        },
+        //         if (this.$root.theNavigation) {
+        //             this.$root.theNavigation.focusFadeOut();
+        //         }
+        //         //Button Muting
+        //         // if (this.$root.buttonMute) {
+        //         //     this.$root.buttonMute.fadeOut();
+        //         // }
+        //     }
+        // },
 
-        __unfocusActiveSection() {
-            if (this.$store.state.router.current !== 'index') return;
+        // __unfocusActiveSection() {
+        //     if (this.$store.state.router.current !== 'index') return;
 
-            if (!this._isFocusActive) return;
-            this._isFocusActive = false;
-            this.$store.commit('focus', FOCUS_ENDED);
+        //     if (!this._isFocusActive) return;
+        //     this._isFocusActive = false;
+        //     this.$store.commit('focus', FOCUS_ENDED);
 
-            if (this.$root.webglApp) {
-                this.$root.webglApp.unfocus();
-            }
+        //     if (this.$root.webglApp) {
+        //         this.$root.webglApp.unfocus();
+        //     }
 
-            if (this.__activeSection && typeof this.__activeSection.unfocus === 'function') {
-                this.__activeSection.unfocus();
+        //     if (this.__activeSection && typeof this.__activeSection.unfocus === 'function') {
+        //         this.__activeSection.unfocus();
 
-                if (this.$root.theNavigation) {
-                    this.$root.theNavigation.focusFadeIn();
-                }
-                // Button Muting
-                // if (this.$root.buttonMute) {
-                //     this.$root.buttonMute.fadeIn();
-                // }
-            }
-        },
+        //         if (this.$root.theNavigation) {
+        //             this.$root.theNavigation.focusFadeIn();
+        //         }
+        //         // Button Muting
+        //         // if (this.$root.buttonMute) {
+        //         //     this.$root.buttonMute.fadeIn();
+        //         // }
+        //     }
+        // },
 
         /**
          * Resize
@@ -343,35 +343,35 @@ export default {
             this.__resize();
         },
 
-        __mouseDownHandler(e) {
-            this.__focusActiveSection(e.target);
-        },
+        // __mouseDownHandler(e) {
+        //     this.__focusActiveSection(e.target);
+        // },
 
-        __mouseUpHandler() {
-            this.__unfocusActiveSection();
-        },
+        // __mouseUpHandler() {
+        //     this.__unfocusActiveSection();
+        // },
 
-        __touchStartHandler(e) {
-            this.__touchStartPosition.x = e.touches[0].clientX;
-            this.__touchStartPosition.y = e.touches[0].clientY;
+        // __touchStartHandler(e) {
+        //     this.__touchStartPosition.x = e.touches[0].clientX;
+        //     this.__touchStartPosition.y = e.touches[0].clientY;
 
-            this.__focusTimeout = setTimeout(() => {
-                this.__focusActiveSection(e.target);
-            }, 150);
-        },
+        //     this.__focusTimeout = setTimeout(() => {
+        //         this.__focusActiveSection(e.target);
+        //     }, 150);
+        // },
 
-        __touchMoveHandler(e) {
-            const deltaX = Math.abs(this.__touchStartPosition.x - e.touches[0].clientX);
-            const deltaY = Math.abs(this.__touchStartPosition.y - e.touches[0].clientY);
-            const maxDelta = 10;
-            if (deltaX > maxDelta || deltaY > maxDelta) {
-                clearTimeout(this.__focusTimeout);
-            }
-        },
+        // __touchMoveHandler(e) {
+        //     const deltaX = Math.abs(this.__touchStartPosition.x - e.touches[0].clientX);
+        //     const deltaY = Math.abs(this.__touchStartPosition.y - e.touches[0].clientY);
+        //     const maxDelta = 10;
+        //     if (deltaX > maxDelta || deltaY > maxDelta) {
+        //         clearTimeout(this.__focusTimeout);
+        //     }
+        // },
 
-        __touchEndHandler() {
-            this.__unfocusActiveSection();
-        },
+        // __touchEndHandler() {
+        //     this.__unfocusActiveSection();
+        // },
 
         __scrollHandler(position) {
             this.__updateParallax(position);

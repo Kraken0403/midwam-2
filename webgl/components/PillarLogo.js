@@ -114,9 +114,11 @@ export default class PillarLogo extends component(Object3D) {
             dashed: false,
             worldUnits: false,
             vertexColors: false,
-            emissive: new Color(0x513c03),
+            // emissive: new Color(0x513c03),
+            emissive: new Color(0xffd700),
         });
-        material.color = new Color(0x896619);
+        // material.color = new Color(0x896619);
+        material.color = new Color(0xffa500);
 
         const lines = new Line2(geometry, material);
         this.add(lines);

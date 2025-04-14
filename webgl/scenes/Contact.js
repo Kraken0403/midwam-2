@@ -276,7 +276,8 @@ export default class Contact extends component(Scene) {
 
     _updateScrollOffset() {
         // this._camera.position.y += this._scrollPosition.deltaY * 0.7;
-        const offset = (this._scrollPosition.deltaY / WindowResizeObserver.height) * 620;
+        // const offset = (this._scrollPosition.deltaY / WindowResizeObserver.height) * 620;
+        const offset = (this._scrollPosition.deltaY / WindowResizeObserver.height) * 200;
         this._camera.position.y += offset;
         this._camera.lookAt(this._cameraTarget);
     }

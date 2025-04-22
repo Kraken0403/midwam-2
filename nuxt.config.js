@@ -132,6 +132,8 @@ export default {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {
+        indicator: false,
+        
         extend(config, ctx) {
             /**
              * GLSL loader

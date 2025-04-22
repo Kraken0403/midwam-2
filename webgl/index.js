@@ -2,6 +2,7 @@
 import gsap from 'gsap';
 import { WebGLRenderer, ACESFilmicToneMapping, sRGBEncoding, Clock, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping } from 'three';
 import { WEBGL } from 'three/examples/jsm/WebGL';
+import scenes from '@/webgl/configs/scenes'
 
 import bidello, { component } from '@/vendor/bidello';
 
@@ -111,6 +112,13 @@ export default class Main extends component() {
 
         if (this._sceneManager.active.name === 'about') {
             this._sceneManager.active.goto(index, direction, done);
+            console.log('about')
+        }
+
+        if (this._sceneManager.active.name === 'services') {
+            this._sceneManager.active.goto(index, direction, done);
+            console.log('services')
+
         }
     }
 
@@ -154,6 +162,7 @@ export default class Main extends component() {
             renderer: this._renderer,
             postProcessing: this._postProcessing,
             debug: this._debug,
+            // scenes
         });
         return sceneManager;
     }

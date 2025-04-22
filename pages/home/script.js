@@ -8,6 +8,9 @@ import axios from '@/plugins/axios';
 import Page from '@/components/Page';
 import ScrollControl from '@/components/ScrollControlHome';
 
+
+// import SmoothScroll from '@/components/SmoothScroll';
+
 // Sections
 import SectionHeader from '@/sections/home/Header';
 import SectionDesign from '@/sections/home/Design';

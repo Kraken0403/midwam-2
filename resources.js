@@ -77,6 +77,11 @@ const webgl = [
     },
     {
         type: 'gltf',
+        name: 'spinner-services',
+        path: '/assets/models/spinner-services.glb',
+    },
+    {
+        type: 'gltf',
         name: 'spinner-home',
         path: '/assets/models/spinner-home.glb',
     },

@@ -7,6 +7,7 @@ import Heading from '@/components/Heading';
 import ContactForm from '@/components/ContactForm';
 import Body from '@/components/Body';
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
+import ButtonUnderlined from '@/components/ButtonUnderlined';
 
 export default {
     extends: Section,
@@ -14,7 +15,7 @@ export default {
     components: {
         Heading,
         Body,
-        ContactForm
+        ButtonUnderlined,
     },
 
     mounted() {
@@ -33,6 +34,9 @@ export default {
         transitionIn() {
             const timelineIn = new gsap.timeline();
             timelineIn.set([this.$refs.sectionContent, this.$refs.buttonVisit], { alpha: 1 }, 0);
+
+            timelineIn.fromTo(this.$refs.cForm,1,{ alpha: 0 },{ alpha: 1, ease: 'sine.inOut' },0.7);
+
             timelineIn.add(this.$refs.heading.show(), 0);
             timelineIn.fromTo(this.$refs.line, 1, { alpha: 0 }, { alpha: 1, ease: 'sine.inOut' }, 0);
             timelineIn.fromTo(this.$refs.addressTitle1, 1, { alpha: 0 }, { alpha: 1, ease: 'sine.inOut' }, 0.5);

@@ -443,7 +443,7 @@ export default class Home extends component(Scene) {
             material: this._reflectiveMaterial,
         });
         human.position.x = -0.2;
-        this.add(human);
+        // this.add(human);
         return human;
     }
 
@@ -464,7 +464,7 @@ export default class Home extends component(Scene) {
             orbitControls: this._controls,
             renderer: this._renderer,
         });
-        this.add(shapes);
+        // this.add(shapes);
         return shapes;
     }
 

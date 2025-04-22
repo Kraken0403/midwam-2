@@ -25,7 +25,7 @@
         width: 100%;
         position: relative;
         overflow: hidden;
-        height: 85vh;
+        height: 75vh;
         // background-image: url('../../assets/images/about/video.png');
         background-size: cover;
         background-position: center center;
@@ -73,7 +73,7 @@
     }
 
     .left-content {
-        width: 40%;
+        width: 80%;
     }
 
     .description p {
@@ -86,5 +86,9 @@
         // letter-spacing: 0.2em;
         color: $color-white;
 
+    }
+
+    .right-content{
+        width: 20%;
     }
 }

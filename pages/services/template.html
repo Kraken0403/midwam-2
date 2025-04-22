@@ -1,13 +1,15 @@
 <!-- Page -->
-<div class="page">
+<ScrollControl ref="scrollControl">
+    <div class="page">
 
-    <SmoothScroll ref="smoothScroll">
+        <!-- <SmoothScroll ref="smoothScroll"> -->
 
-        
-        <SectionHeader  ref="header" scroll-type="step"></SectionHeader>
-        <ServiceItemSection />
-        <SectionFooter class="section-footer"></SectionFooter>
+            
+            <!-- <SectionHeader  ref="header" scroll-type="step"></SectionHeader> -->
+            <ServiceItemSection scroll-type="free" />
+            <SectionFooter class="section-footer" scroll-type="free"></SectionFooter>
 
-    </SmoothScroll>
+        <!-- </SmoothScroll> -->
 
-</div>
+    </div>
+</ScrollControl>

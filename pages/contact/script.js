@@ -13,9 +13,10 @@ import axios from '@/plugins/axios';
 
 // Sections
 import SectionHeader from '@/sections/contact/Header';
-import SectionVisit from '@/sections/contact/Visit';
-import ContactFormSection from '@/sections/contact/ContactFormSection';
-import SectionFooter from '@/sections/shared/Footer';
+import ButtonUnderlined from '@/components/ButtonUnderlined';
+// import SectionVisit from '@/sections/contact/Visit';
+// import ContactFormSection from '@/sections/contact/ContactFormSection';
+// import SectionFooter from '@/sections/shared/Footer';
 
 
 export default {
@@ -23,9 +24,8 @@ export default {
 
     components: {
         SectionHeader,
-        SectionVisit,
-        SectionFooter,
-        ContactFormSection,
+        // SectionFooter,
+        ButtonUnderlined,
         SmoothScroll,
     },
 
@@ -49,9 +49,6 @@ export default {
             timeline.add(this.$root.theNavigation.show(), 1);
             // timeline.add(this.$root.buttonMute.show(), 1.1);
 
-            AudioManager.play('background-loop-1', {
-                loop: true,
-            });
         },
 
         transitionOut(done) {

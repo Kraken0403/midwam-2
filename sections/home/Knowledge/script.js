@@ -18,6 +18,7 @@ export default {
 
     mounted() {
         this.setupEventListeners();
+        this._setupIntersectionObserver();
     },
 
     beforeDestroy() {
@@ -25,6 +26,19 @@ export default {
     },
 
     methods: {
+        _setupIntersectionObserver() {
+            this._io = new IntersectionObserver(
+              (entries) => {
+                if (entries[0].isIntersecting) {
+                  this._io.disconnect()
+                  // direction = 1 to mimic “forward” scroll
+                  this.backgroundShow(/* done */ () => {}, /* direction */ 1)
+                }
+              },
+              { threshold: 0.25 }
+            )
+            this._io.observe(this.$el)
+          },
         /**
          * Public
          */

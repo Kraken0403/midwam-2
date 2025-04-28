@@ -2,6 +2,8 @@
 import gsap from 'gsap';
 import CustomEase from '@/vendor/gsap/CustomEase';
 import { Scene, Fog, AxesHelper } from 'three';
+import * as THREE from 'three';
+
 import { component } from '@/vendor/bidello';
 
 // Utils
@@ -86,48 +88,91 @@ export default class Home extends component(Scene) {
     /**
      * Triggers
      */
+    // onUpdate({ time, delta }) {
+    //     if (this._isActive) this._updateComponents({ time, delta });
+    // }
+
     onUpdate({ time, delta }) {
-        if (this._isActive) this._updateComponents({ time, delta });
-    }
+        if (!this._isActive) return;
+      
+        this._updateComponents({ time, delta });
+      
+        const scrollY = this._nuxtRoot.scrollManager ? this._nuxtRoot.scrollManager.position.y : 0;
+        const totalHeight = this._nuxtRoot.scrollManager ? this._nuxtRoot.scrollManager.limit : 1;
+        const scrollProgress = scrollY / totalHeight;
+      
+        if (this._scrollTimeline) {
+          this._scrollTimeline.progress(scrollProgress);
+        }
+      }
+      
+      
+    
 
     goto(index, direction, done) {
         this._isCameraAnimation = true;
         // if (this._timelineFocus) this._timelineFocus.kill();
         // if (this._timelineUnfocus) this._timelineUnfocus.kill();
-        this._goto(index, direction);
-        this._cameraAnimation.goto(index, direction, () => {
-            this._isCameraAnimation = false;
-            if (done) done();
-        });
+        // this._goto(index, direction);
+        // this._cameraAnimation.goto(index, direction, () => {
+        //     this._isCameraAnimation = false;
+        //     if (done) done();
+        // });
         this._trackScrollEvent(index);
     }
 
     /**
      * Public
      */
+    // show() {
+    //     this._isActive = true;
+    //     this._reset();
+    //     this._updatePostProcessing();
+
+    //     this.showLandscape(0);
+
+    //     this._timelineShow = new gsap.timeline();
+    //     this._timelineShow.set(this._reflectiveMaterial, { envMapIntensity: 0.22 }, 0);
+    //     this._timelineShow.fromTo(this._postProcessing.passes.hidePass.material, 3, { progress: 0 }, { progress: 1, ease: 'power1.inOut' }, 0);
+    //     this._timelineShow.to(this._postProcessing.passes.bloomPass, 0, { strength: 0.83, ease: 'power1.inOut' }, 0);
+    //     this._timelineShow.to(this._postProcessing.passes.bloomPass, 0, { radius: 1.37, ease: 'power1.inOut' }, 0);
+    //     // this._timelineShow.fromTo(this._reflectiveMaterial, 5, { envMapIntensity: 0 }, { envMapIntensity: 0.22, ease: 'sine.inOut' }, 0);
+    //     return this._timelineShow;
+    // }
+
     show() {
         this._isActive = true;
         this._reset();
         this._updatePostProcessing();
-
-        this._timelineShow = new gsap.timeline();
-        this._timelineShow.set(this._reflectiveMaterial, { envMapIntensity: 0.22 }, 0);
-        this._timelineShow.fromTo(this._postProcessing.passes.hidePass.material, 3, { progress: 0 }, { progress: 1, ease: 'power1.inOut' }, 0);
-        this._timelineShow.to(this._postProcessing.passes.bloomPass, 0, { strength: 0.83, ease: 'power1.inOut' }, 0);
-        this._timelineShow.to(this._postProcessing.passes.bloomPass, 0, { radius: 1.37, ease: 'power1.inOut' }, 0);
-        // this._timelineShow.fromTo(this._reflectiveMaterial, 5, { envMapIntensity: 0 }, { envMapIntensity: 0.22, ease: 'sine.inOut' }, 0);
+      
+        if (this._nuxtRoot.scrollManager) {
+          this._nuxtRoot.scrollManager.addEventListener('scroll', this._scrollHandler);
+        }
+      
+        this._scrollTimeline = gsap.timeline({ paused: true });
+      
+        this._scrollTimeline.to(this._camera.position, {
+          y: 1.2, // lower camera
+          z: 8,   // push camera back
+          ease: "power2.inOut",
+          duration: 1,
+          onUpdate: () => {
+            this._camera.lookAt(0, 0, 0);
+          },
+        }, 0);
+      
         return this._timelineShow;
-    }
+      }      
 
     hide(onCompleteCallback) {
         if (this._timelineShow) this._timelineShow.kill();
 
-        this._timelineHide = new gsap.timeline({ onComplete: this._timelineHideCompleteHandler, onCompleteParams: [onCompleteCallback] });
-        this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0, ease: 'sine.inOut' }, 0);
-        this._timelineHide.to(this._postProcessing.passes.bloomPass, 0.7, { strength: 0, ease: 'sine.inOut' }, 0);
-        this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0, ease: 'sine.inOut' }, 0);
-        this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0, ease: 'sine.inOut' }, 0);
-        this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uBottomGradientStrength, 1, { value: 0, ease: 'sine.inOut' }, 0);
+        // this._timelineHide = new gsap.timeline({ onComplete: this._timelineHideCompleteHandler, onCompleteParams: [onCompleteCallback] });
+        // this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0, ease: 'sine.inOut' }, 0);
+        // this._timelineHide.to(this._postProcessing.passes.bloomPass, 0.7, { strength: 0, ease: 'sine.inOut' }, 0);
+        // this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0, ease: 'sine.inOut' }, 0);
+        // this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0, ease: 'sine.inOut' }, 0);
+        // this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uBottomGradientStrength, 1, { value: 0, ease: 'sine.inOut' }, 0);
         return this._timelineHide;
     }
 
@@ -399,6 +444,7 @@ export default class Home extends component(Scene) {
     }
 
     _reset() {
+ 
         this._resetSectionTimelines();
         this._currentSectionIndex = 0;
         this._cameraAnimation.reset();
@@ -412,13 +458,13 @@ export default class Home extends component(Scene) {
         this._postProcessing.passes.finalPass.material.uniforms.uGradientsAlpha.value = 1;
         this._postProcessing.passes.finalPass.material.uniforms.uBottomGradientStrength.value = 0;
         // this._components.floor._mesh.material.uniforms.uMipStrength.value = 0.58;
-        // this._components.landscapes.scanDistance = 0;
+        this._components.landscapes.scanDistance = 0;
         this._components.spinner.reset();
         // this._components.human.scale.set(1, 1, 1);
         this._components.spinner.scale.set(1, 1, 1);
         this._components.shapes.visible = true;
         this._components.landscapes.visible = false;
-        // this._components.floor.visible = false;
+        this._components.floor.visible = false;
         this._renderer.setClearColor(0x0f0d10);
         if (this._tweenHeartBeat) this._tweenHeartBeat.pause();
     }
@@ -454,7 +500,18 @@ export default class Home extends component(Scene) {
             material: this._reflectiveMaterial,
         });
         this.add(spinner);
+        console.log(spinner)
         return spinner;
+
+        // const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+        // const material = new THREE.MeshBasicMaterial({ color: 0xff00ff }); // bright pink
+        // const spinner = new THREE.Mesh(geometry, material);
+    
+        // spinner.position.set(0, 0, 0);
+        // spinner.visible = true;
+        // this.add(spinner);
+    
+        // return spinner;
     }
 
     _createComponentShapes() {
@@ -486,7 +543,7 @@ export default class Home extends component(Scene) {
             cameras: this._cameras,
         });
         this.add(landscapes);
-        // this._postProcessing.addLayer('landscapes', landscapes);
+        this._postProcessing.addLayer('landscapes', landscapes);
         return landscapes;
     }
 

@@ -1,0 +1,21 @@
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    overflow: hidden;
+}
+
+.debug {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+
+    width: 100px;
+    height: 100px;
+
+    background: red;
+}

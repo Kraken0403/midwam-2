@@ -115,11 +115,10 @@ export default class Main extends component() {
             console.log('about')
         }
 
-        if (this._sceneManager.active.name === 'services') {
-            this._sceneManager.active.goto(index, direction, done);
-            console.log('services')
-
-        }
+        // if (this._sceneManager.active.name === 'services') {
+        //     this._sceneManager.active.goto(index, direction, done);
+        //     console.log('services')
+        // }
     }
 
     /**
@@ -202,11 +201,25 @@ export default class Main extends component() {
         this._render();
     }
 
+    // _render() {
+    //     const scene = this._sceneManager.active;
+    //     // if (scene) this._renderer.render(scene, scene.camera);
+    //     if (scene) this._postProcessing.render(scene, scene.camera);
+    // }
+
     _render() {
         const scene = this._sceneManager.active;
-        // if (scene) this._renderer.render(scene, scene.camera);
-        if (scene) this._postProcessing.render(scene, scene.camera);
-    }
+      
+        if (scene && scene.camera) {
+          // ✅ For 'services', skip postprocessing and render directly
+          if (scene.name === 'service') {
+            this._renderer.render(scene, scene.camera);
+          } else {
+            this._postProcessing.render(scene, scene.camera);
+          }
+        }
+      }
+  
 
     /**
      * Resize

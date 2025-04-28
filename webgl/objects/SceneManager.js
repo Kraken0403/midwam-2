@@ -49,20 +49,30 @@ export default class SceneManager extends component() {
         return this._scenes[scene];
     }
 
-    show(scene) {
-        // this.hide();
+    // show(scene) {
+    //     // this.hide();
 
+    //     const timeline = new gsap.timeline();
+    //     timeline.add(this._scenes[scene].show(), 0);
+    //     timeline.call(
+    //         () => {
+    //             this._active = this._scenes[scene];
+    //         },
+    //         null,
+    //         0
+    //     );
+    //     return timeline;
+    // }
+    
+    show(scene) {
+        // ✅ Immediately set active before any animations
+        this._active = this._scenes[scene];
+      
         const timeline = new gsap.timeline();
-        timeline.add(this._scenes[scene].show(), 0);
-        timeline.call(
-            () => {
-                this._active = this._scenes[scene];
-            },
-            null,
-            0
-        );
+        timeline.add(this._active.show(), 0); // Show animation still works
+      
         return timeline;
-    }
+      }
 
     hide(scene) {
         if (scene) {

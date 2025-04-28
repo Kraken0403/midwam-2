@@ -72,6 +72,10 @@ export default class PostProcessing extends component() {
         //     this._layers.landscapes.render();
         // }
 
+        if (scene.name === 'services' && this._passes.hidePass?.material.uniforms?.progress) {
+            this._passes.hidePass.material.uniforms.progress.value = 0;
+          }
+
         this._composer.render();
         // this._renderer.render(scene, camera);
     }

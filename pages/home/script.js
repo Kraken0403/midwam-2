@@ -6,7 +6,8 @@ import axios from '@/plugins/axios';
 
 // Components
 import Page from '@/components/Page';
-import ScrollControl from '@/components/ScrollControlHome';
+// import ScrollControl from '@/components/ScrollControlHome';
+import ScrollControl from '@/components/ScrollControlHomeNew';
 
 
 // import SmoothScroll from '@/components/SmoothScroll';

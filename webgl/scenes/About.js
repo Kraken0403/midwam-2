@@ -468,7 +468,7 @@ export default class About extends component(Scene) {
             renderer: this._renderer,
         });
         this._container.add(spinner);
-        console.log('spinner:', spinner)
+        // console.log('spinner:', spinner)
         return spinner;
     }
 

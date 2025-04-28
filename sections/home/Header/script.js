@@ -7,7 +7,7 @@ import WindowResizeObserver from '@/utils/WindowResizeObserver';
 // Components
 import SectionHome from '@/components/SectionHome';
 import ScrollIndicator from '@/components/ScrollIndicator';
-import ButtonBlock from '@/components/ButtonBlock';
+// import ButtonBlock from '@/components/ButtonBlock';
 import Heading from '@/components/Heading';
 
 export default {
@@ -15,7 +15,7 @@ export default {
 
     components: {
         ScrollIndicator,
-        ButtonBlock,
+        // ButtonBlock,
         Heading,
     },
 
@@ -40,7 +40,7 @@ export default {
             timelineIn.add(this.$refs.heading.show(), 0);
             timelineIn.fromTo(this.$refs.subtitle, 1.5, { alpha: 0 }, { alpha: 1, ease: 'sine.inOut' }, 0.5);
             timelineIn.add(this.$refs.scrollIndicator.show(), 1);
-            timelineIn.add(this.$refs.buttonBlock.show(), 2);
+            // timelineIn.add(this.$refs.buttonBlock.show(), 2);
             return timelineIn;
         },
 
@@ -53,7 +53,7 @@ export default {
             this.timelineShow.add(this.$refs.heading.show(), 0);
             this.timelineShow.fromTo(this.$refs.subtitle, 1.5, { alpha: 0 }, { alpha: 1, ease: 'sine.inOut' }, 0.5);
             // this.timelineShow.add(this.$refs.scrollIndicator.show(), 1);
-            this.timelineShow.add(this.$refs.buttonBlock.show(), 2);
+            // this.timelineShow.add(this.$refs.buttonBlock.show(), 2);
             return this.timelineShow;
         },
 

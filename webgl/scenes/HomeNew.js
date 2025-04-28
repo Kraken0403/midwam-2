@@ -1,12 +1,10 @@
 // Vendor
-import gsap from 'gsap';
 import { Scene } from 'three';
 import * as THREE from 'three';
 import { component } from '@/vendor/bidello';
 
 // Utils
 import Debugger from '@/utils/Debugger';
-import math from '@/utils/math';
 
 // Materials
 import ReflectiveMaterial from '@/webgl/materials/ReflectiveMaterial';
@@ -17,6 +15,9 @@ import Cameras from '@/webgl/objects/HomeCameras';
 // Components
 import Spinner from '@/webgl/components/SpinnerHome';
 import Floor from '@/webgl/components/Floor';
+
+// Managers
+import HomeNewSectionManager from '@/webgl/objects/HomeNewSectionManager'; // NEW SECTION MANAGER
 
 export default class HomeNew extends component(Scene) {
     init({ renderer, nuxtRoot, postProcessing, debug }) {
@@ -33,7 +34,11 @@ export default class HomeNew extends component(Scene) {
         this._components = this._createComponents();
 
         this._bindHandlers();
-        this._setupScrollTimeline();
+
+        // Section manager!
+        Object.assign(this, HomeNewSectionManager);
+
+        this._currentSectionIndex = 0; // initialize
     }
 
     destroy() {
@@ -43,32 +48,58 @@ export default class HomeNew extends component(Scene) {
     get camera() {
         return this._cameras.active;
     }
+
     onUpdate({ time, delta }) {
         if (!this._isActive) return;
     
         this._updateComponents({ time, delta });
     
-        // Access scroll position directly from ScrollControl
         const scrollY = this._nuxtRoot.scrollControl?.position?.y || 0;
-        const totalHeight = this._nuxtRoot.scrollControl?.$el?.scrollHeight || 1;
-        const scrollProgress = scrollY / totalHeight;
-
-        console.log(scrollProgress)
+        const scrollHeight = this._nuxtRoot.scrollControl?.$el?.scrollHeight || 1;
+        const viewportHeight = window.innerHeight || 1;
+        const progress = scrollY / (scrollHeight - viewportHeight);
     
-        const radius = 4;
-        const angle = scrollProgress * Math.PI * 2;
+        const sectionCount = 3; // 3 sections
+        const sectionProgress = progress * sectionCount;
     
-        this.camera.position.x = radius * Math.cos(angle);
-        this.camera.position.z = radius * Math.sin(angle);
-        this.camera.position.y = 2 + Math.sin(scrollProgress * Math.PI) * 1.5;
+        if (!this._components.spinner) return;
     
-        this.camera.lookAt(0, 0, 0);
+        // Camera default position
+        let cameraX = 0;
+        let cameraY = 5;
+        let cameraZ = 14; // farther back than before
+    
+        let spinnerX = 0;
+    
+        if (sectionProgress < 1) {
+            // SECTION 1: Hero
+            const t = sectionProgress;
+            cameraY = 6 - t * 2; 
+            cameraZ = 14 - t * 4;
+            spinnerX = 0; // centered
+        } 
+        else if (sectionProgress >= 1 && sectionProgress < 2) {
+            // SECTION 2: Content on Right, Spinner moves Left
+            const t = sectionProgress - 1;
+            cameraY = 4;
+            cameraZ = 10;
+            spinnerX = -2.5 * t; // spinner shifts to left gradually
+        } 
+        else if (sectionProgress >= 2) {
+            // SECTION 3: (future sections - optional)
+            cameraY = 4;
+            cameraZ = 10;
+            spinnerX = -2.5; // fixed left
+        }
+    
+        this.camera.position.set(cameraX, cameraY, cameraZ);
+        this._components.spinner.position.x = spinnerX;
+        this.camera.lookAt(this._components.spinner.position);
     }
+    
 
     show() {
         this._isActive = true;
-        // this._renderer.setClearColor(0x000000, 1)
-
         this._updatePostProcessing();
         this._reset();
     }
@@ -78,9 +109,6 @@ export default class HomeNew extends component(Scene) {
         if (onCompleteCallback) onCompleteCallback();
     }
 
-    /**
-     * Private
-     */
     _bindHandlers() {}
 
     _createCameras() {
@@ -101,9 +129,9 @@ export default class HomeNew extends component(Scene) {
                 normalNoiseStrength: 0.8,
             },
             {
-                color: 0x111111, // Darker
+                color: 0x111111,
                 emissive: 0x000000,
-                roughness: 0.1,  // Shinier
+                roughness: 0.1,
                 metalness: 1,
             }
         );
@@ -112,10 +140,8 @@ export default class HomeNew extends component(Scene) {
 
     _createComponents() {
         const components = {};
-
         components.spinner = this._createComponentSpinner();
         components.floor = this._createComponentFloor();
-
         return components;
     }
 
@@ -125,9 +151,8 @@ export default class HomeNew extends component(Scene) {
             renderer: this._renderer,
             material: this._reflectiveMaterial,
         });
-
-        spinner.scale.set(0.8, 0.8, 0.8); 
-        spinner.position.set(0, -0.95, 0); // Moved almost touching floor
+        spinner.scale.set(0.8, 0.8, 0.8);
+        spinner.position.set(0, -0.95, 0);
         this.add(spinner);
         return spinner;
     }
@@ -136,70 +161,27 @@ export default class HomeNew extends component(Scene) {
         const floor = new Floor({
             debugGui: this._debugGui,
             renderer: this._renderer,
-            color: 0x000000,  // Very dark grey, almost black
-            roughness: 0.05,   // Super shiny
-            metalness: 1,  
+            color: 0x000000,
+            roughness: 0.05,
+            metalness: 1,
         });
         floor.position.set(0, -1, 0);
         this.add(floor);
-        console.log(floor)
         return floor;
-    }
-
-    _setupScrollTimeline() {
-        this._scrollTimeline = gsap.timeline({ paused: true });
-
-        // Scroll-based camera movement
-        this.camera.position.set(0, 6, 12); // Pull camera a little further back at start
-        this.camera.lookAt(0, 0, 0);
-
-        // Timeline stages based on scroll
-        this._scrollTimeline.to(this.camera.position, {
-            duration: 1,
-            x: 4,
-            z: 10,
-            y: 4,
-            ease: "power2.inOut",
-            onUpdate: () => {
-                this.camera.lookAt(0, 0, 0);
-            },
-        }, 0);
-
-        this._scrollTimeline.to(this.camera.position, {
-            duration: 1,
-            x: -4,
-            z: 8,
-            y: 2.5,
-            ease: "power2.inOut",
-            onUpdate: () => {
-                this.camera.lookAt(0, 0, 0);
-            },
-        }, 0.5);
-
-        this._scrollTimeline.to(this.camera.position, {
-            duration: 1,
-            x: 0,
-            z: 6,
-            y: 3,
-            ease: "power2.inOut",
-            onUpdate: () => {
-                this.camera.lookAt(0, 0, 0);
-            },
-        }, 1.0);
     }
 
     _updatePostProcessing() {
         if (!this._postProcessing?.passes) return;
-
         this._postProcessing.passes.bloomPass.threshold = 0;
         this._postProcessing.passes.bloomPass.strength = 0.3;
         this._postProcessing.passes.bloomPass.radius = 0.4;
-        this._renderer.toneMappingExposure = 4;
+        this._renderer.toneMappingExposure = 3.5;
     }
 
     _reset() {
         if (this._components.spinner) {
             this._components.spinner.rotation.set(0, 0, 0);
+            this._components.spinner.showSparks();
         }
     }
 
@@ -218,7 +200,7 @@ export default class HomeNew extends component(Scene) {
 
         const folderBackground = gui.getFolder('Background');
         const folder = folderBackground.addFolder('Scene: HomeNew');
-        folder.updateTitleBackgroundColor('#ff0000');
+        folder.updateTitleBackgroundColor('#004d99');
         folder.open();
 
         return folder;

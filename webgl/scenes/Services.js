@@ -47,7 +47,7 @@ export default class Services extends component(Scene) {
 
     this._container.add(this._sparks, this._burst1, this._burst2);
 
-    this._container.position.set(-4.1, -2.8, 0);
+    this._container.position.set(-13.1, -7.8, 0);
   }
 
   get camera() {

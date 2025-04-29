@@ -117,6 +117,12 @@ export default class Spinner extends component(Object3D) {
     _createMesh() {
         const model = this._gltf.scene.getObjectByName('spinner');
         model.material = this._material;
+
+        if (model) {
+            model.position.set(0,0,0) // ✅ this line
+            console.log(model)
+        }
+    
         return model;
     }
 

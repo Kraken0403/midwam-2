@@ -72,6 +72,29 @@ a {
                 display: flex;
                 gap: 15px;
                 margin-bottom: 1.3rem;
+
+                textarea {
+                    outline: none;
+                    width: 100%;
+                    background: transparent;
+                    border-left: 0px;
+                    border-top: 0px;
+                    border-right: 0px;
+                    border-bottom: 1px solid rgba(143,143,143);
+                    font-size: 1.15rem;
+                    padding: 1.1rem 1rem;
+                    line-height: 1.55em;
+                    color: #fff;
+                    font-weight: 400;
+                    transition: border-bottom-color 0.3s ease;
+                    &:focus {
+                        border-bottom-color: #F37037;
+                        transition: border-bottom-color 0.3s ease;
+                    }
+                    &::placeholder {
+                        color: rgb(143, 143, 143);
+                    }
+                }
                
                 input {
                     outline: none;
@@ -81,7 +104,7 @@ a {
                     border-top: 0px;
                     border-right: 0px;
                     border-bottom: 1px solid rgba(143,143,143);
-                    font-size: 1.25rem;
+                    font-size: 1.15rem;
                     padding: 1.1rem 1rem;
                     line-height: 1.55em;
                     color: #fff;
@@ -174,7 +197,7 @@ a {
             width: 70%;
 
             margin-bottom: rem(25px);
-            margin-left: 13%;
+            margin-left: 9.5%;
 
             .ar & {
                 margin-right: 13%;
@@ -185,7 +208,7 @@ a {
                 width: 15%;
 
                 margin-bottom: 0;
-                margin-left: 43%;
+                margin-left: 9.5%;
 
                 .ar & {
                     margin-right: 7%;

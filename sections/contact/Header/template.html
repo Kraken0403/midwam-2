@@ -22,12 +22,16 @@
                 
                 <form action="">
                     <div class="input-group">
-                        <input type="text" placeholder="Full name" required>
-                        <input type="email" placeholder="Email Address" required>
+                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="Last Name" required>
                     </div>
                     <div class="input-group">
+                        <input type="email" placeholder="Email Address" required>
                         <input type="tel" placeholder="Contact Number">
-                        <input type="text" placeholder="Your Message">
+                        <!-- <input type="text" placeholder="Your Message"> -->
+                    </div>
+                    <div class="input-group">
+                        <textarea name="message" id="" cols="30" rows="4" placeholder="Your Message"></textarea>
                     </div>
                     <div class="cf-btn-broup">
                         <ButtonUnderlined ref="button" class="button-cta">Send a message</ButtonUnderlined>  
@@ -46,9 +50,9 @@
             <div class="column">
 
                 <!-- Line -->
-                <div class="line" ref="line">
+                <!-- <div class="line" ref="line">
             
-                </div>
+                </div> -->
 
             </div>
 
@@ -71,18 +75,25 @@
             <!-- Column center -->
             <div class="column center">
 
-                <!-- Address title -->
-                <span class="address-title" ref="addressTitle2">{{ data.address_title_2 }}</span>
 
-                <!-- Address -->
-                <Body v-bind:data="data.address_2" class="body" ref="body2" />
+                <div class="body address-secondary">
+                    <p>
+                        <a @click="emailClickHandler" v-bind:href="`mailto:${data.email}?subject=${data.email_subject}`" ref="email" class="email">{{ data.email }}</a><br />
+                        <a @click="phoneClickHandler" v-bind:href="`tel:${data.phone}`" ref="phone" class="phone">{{ data.phone }}</a>
+                    </p>
+                </div>
+          
+                <!-- <span class="address-title" ref="addressTitle2">{{ data.address_title_2 }}</span>
+
+        
+                <Body v-bind:data="data.address_2" class="body" ref="body2" /> -->
 
             </div>
 
             <!-- Column right -->
-            <div class="column right">
+            <!-- <div class="column right">
 
-                <!-- Address secondary -->
+                
                 <div class="body address-secondary">
                     <p>
                         <a @click="emailClickHandler" v-bind:href="`mailto:${data.email}?subject=${data.email_subject}`" ref="email" class="email">{{ data.email }}</a><br />
@@ -90,7 +101,7 @@
                     </p>
                 </div>
 
-            </div>
+            </div> -->
 
 
         </div>
@@ -100,9 +111,9 @@
     </div>
 
     <!-- Button visit -->
-    <button class="button button-visit" ref="buttonVisit" @click="buttonVisitClickHandler">
+    <!-- <button class="button button-visit" ref="buttonVisit" @click="buttonVisitClickHandler">
         <div class="button-visit__line" ref="buttonVisitLine"></div>
         <span class="button-visit__label" ref="buttonVisitLabel">{{ data.next_section_call_to_action }}</span>
-    </button>
+    </button> -->
 
 </section>

@@ -48,7 +48,7 @@ export default class Main extends component() {
         this._updateDebugGui();
 
         if (this._debug) this._sceneManager.show('home');
-        // this._sceneManager.show('home');
+        this._sceneManager.show('home');
 
         // setTimeout(() => {
         //     this.goto(6, 1, null);
@@ -213,7 +213,9 @@ export default class Main extends component() {
         if (scene && scene.camera) {
           // ✅ For 'services', skip postprocessing and render directly
           if (scene.name === 'service') {
-            this._renderer.render(scene, scene.camera);
+            // this._renderer.render(scene, scene.camera);
+            this._postProcessing.render(scene, scene.camera);
+
           } else {
             this._postProcessing.render(scene, scene.camera);
           }

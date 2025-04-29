@@ -1,23 +1,18 @@
 // Vendor
-import { Scene } from 'three';
-import * as THREE from 'three';
+import gsap from 'gsap';
+import { Scene, PerspectiveCamera, Group, AxesHelper, Vector3 } from 'three';
 import { component } from '@/vendor/bidello';
-
-// Utils
 import Debugger from '@/utils/Debugger';
 
 // Materials
 import ReflectiveMaterial from '@/webgl/materials/ReflectiveMaterial';
 
-// Objects
-import Cameras from '@/webgl/objects/HomeCameras';
-
 // Components
 import Spinner from '@/webgl/components/SpinnerHome';
 import Floor from '@/webgl/components/Floor';
 
-// Managers
-import HomeNewSectionManager from '@/webgl/objects/HomeNewSectionManager'; // NEW SECTION MANAGER
+// Manager
+import HomeNewSectionManager from '@/webgl/objects/HomeNewSectionManager';
 
 export default class HomeNew extends component(Scene) {
     init({ renderer, nuxtRoot, postProcessing, debug }) {
@@ -25,139 +20,113 @@ export default class HomeNew extends component(Scene) {
         this._nuxtRoot = nuxtRoot;
         this._postProcessing = postProcessing;
         this._debug = debug;
-
+    
         this._isActive = false;
-
+    
+        this._cameraTarget = new Vector3(0, 0, 0);
         this._debugGui = this._createDebugGui();
-        this._cameras = this._createCameras();
-        this._reflectiveMaterial = this._createReflectiveMaterial();
+        this._camera = this._createCamera();
+        this._group = new Group();
+        this.add(this._group);
+    
         this._components = this._createComponents();
+    
+        this._setupManagerBindings(); // ✅ First bind everything
+        Object.assign(this, HomeNewSectionManager); // ✅ Then mount manager
+        this._currentSectionIndex = 0;
 
-        this._bindHandlers();
-
-        // Section manager!
-        Object.assign(this, HomeNewSectionManager);
-
-        this._currentSectionIndex = 0; // initialize
+        this.visible = false;
     }
-
-    destroy() {
-        super.destroy();
-    }
+    
 
     get camera() {
-        return this._cameras.active;
+        return this._camera;
+    }
+
+    show() {
+        this.visible = true;
+        this._isActive = true;
+        this._reset();
+    
+       // Fade in
+       this._group.visible = true;
+       this._group.opacity = 0;
+       const fadeTimeline = new gsap.timeline();
+       fadeTimeline.to(this._group, { opacity: 1, duration: 1.2, ease: 'power2.out' });
+    
+        gsap.delayedCall(0.05, () => {
+            const w = this._renderer.domElement.clientWidth;
+            const h = this._renderer.domElement.clientHeight;
+            const dpr = window.devicePixelRatio || 1;
+            this._camera.aspect = w / h;
+            this._postProcessing?.onResize?.({ width: w, height: h, dpr });
+        });
+    
+        this._updatePostProcessing();
+    
+        const timeline = new gsap.timeline();
+        timeline.set(this._postProcessing.passes.hidePass.material, { progress: 1 }, 0.1);
+        timeline.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 2, { value: 0.36 }, 1);
+        timeline.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 2, { value: 0.29 }, 1);
+    
+    // -   return timeline;
+      return fadeTimeline.add(timeline, 0);  // ✅ Combine fade and gradient animations
+    }
+    hide(cb) {
+        this._isActive = false;
+        if (cb) cb();
+
+        // const timeline = new gsap.timeline({ cb });
+        //     timeline.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0 }, 0);
+        //     timeline.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0 }, 0);
+        //     timeline.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0 }, 0);
+
+        // return timeline;
     }
 
     onUpdate({ time, delta }) {
         if (!this._isActive) return;
-    
         this._updateComponents({ time, delta });
-    
-        const scrollY = this._nuxtRoot.scrollControl?.position?.y || 0;
-        const scrollHeight = this._nuxtRoot.scrollControl?.$el?.scrollHeight || 1;
-        const viewportHeight = window.innerHeight || 1;
-        const progress = scrollY / (scrollHeight - viewportHeight);
-    
-        const sectionCount = 3; // 3 sections
-        const sectionProgress = progress * sectionCount;
-    
-        if (!this._components.spinner) return;
-    
-        // Camera default position
-        let cameraX = 0;
-        let cameraY = 5;
-        let cameraZ = 14; // farther back than before
-    
-        let spinnerX = 0;
-    
-        if (sectionProgress < 1) {
-            // SECTION 1: Hero
-            const t = sectionProgress;
-            cameraY = 6 - t * 2; 
-            cameraZ = 14 - t * 4;
-            spinnerX = 0; // centered
-        } 
-        else if (sectionProgress >= 1 && sectionProgress < 2) {
-            // SECTION 2: Content on Right, Spinner moves Left
-            const t = sectionProgress - 1;
-            cameraY = 4;
-            cameraZ = 10;
-            spinnerX = -2.5 * t; // spinner shifts to left gradually
-        } 
-        else if (sectionProgress >= 2) {
-            // SECTION 3: (future sections - optional)
-            cameraY = 4;
-            cameraZ = 10;
-            spinnerX = -2.5; // fixed left
+    }
+
+    _createCamera() {
+        const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+        camera.position.set(0, 10, 3);
+        camera.lookAt(0,0,0);
+
+        if (this._debugGui) {
+            const camFolder = this._debugGui.addFolder('Camera');
+            camFolder.add(camera.position, 'x', -50, 50, 0.01).onChange(() => camera.lookAt(0,0,0));
+            camFolder.add(camera.position, 'y', -50, 50, 0.01).onChange(() => camera.lookAt(0,0,0));
+            camFolder.add(camera.position, 'z', -50, 50, 0.01).onChange(() => camera.lookAt(0,0,0));
         }
-    
-        this.camera.position.set(cameraX, cameraY, cameraZ);
-        this._components.spinner.position.x = spinnerX;
-        this.camera.lookAt(this._components.spinner.position);
-    }
-    
 
-    show() {
-        this._isActive = true;
-        this._updatePostProcessing();
-        this._reset();
-    }
-
-    hide(onCompleteCallback) {
-        this._isActive = false;
-        if (onCompleteCallback) onCompleteCallback();
-    }
-
-    _bindHandlers() {}
-
-    _createCameras() {
-        const cameras = new Cameras({
-            debugGui: this._debugGui,
-            renderer: this._renderer,
-            debug: this._debug,
-            scene: this,
-        });
-        return cameras;
-    }
-
-    _createReflectiveMaterial() {
-        const material = new ReflectiveMaterial(
-            {
-                renderer: this._renderer,
-                debugGui: this._debugGui,
-                normalNoiseStrength: 0.8,
-            },
-            {
-                color: 0x111111,
-                emissive: 0x000000,
-                roughness: 0.1,
-                metalness: 1,
-            }
-        );
-        return material;
+        return camera;
     }
 
     _createComponents() {
         const components = {};
-        components.spinner = this._createComponentSpinner();
-        components.floor = this._createComponentFloor();
-        return components;
-    }
 
-    _createComponentSpinner() {
+        const material = new ReflectiveMaterial(
+            { renderer: this._renderer, debugGui: this._debugGui },
+            {
+                color: 0x111111,
+                emissive: 0x000000,
+                roughness: 0.2,
+                metalness: 1,
+            }
+        );
+
         const spinner = new Spinner({
             debugGui: this._debugGui,
             renderer: this._renderer,
-            material: this._reflectiveMaterial,
+            material,
         });
-        spinner.scale.set(0.8, 0.8, 0.8);
-        spinner.position.set(0, -0.95, 0);
-        this.add(spinner);
-        return spinner;
-    }
+        spinner.scale.set(0.6, 0.6, 0.6);
+        spinner.position.set(0,-0.95,0);
+        console.log(spinner.position)
+        this._group.add(spinner);
 
-    _createComponentFloor() {
         const floor = new Floor({
             debugGui: this._debugGui,
             renderer: this._renderer,
@@ -166,16 +135,38 @@ export default class HomeNew extends component(Scene) {
             metalness: 1,
         });
         floor.position.set(0, -1, 0);
-        this.add(floor);
-        return floor;
+        this._group.add(floor);
+
+
+        // this._group.add(new AxesHelper(3));
+
+        components.spinner = spinner;
+        components.floor = floor;
+
+        return components;
     }
 
     _updatePostProcessing() {
         if (!this._postProcessing?.passes) return;
-        this._postProcessing.passes.bloomPass.threshold = 0;
-        this._postProcessing.passes.bloomPass.strength = 0.3;
-        this._postProcessing.passes.bloomPass.radius = 0.4;
-        this._renderer.toneMappingExposure = 3.5;
+        this._postProcessing.passes.bloomPass.threshold = 0.1;
+        this._postProcessing.passes.bloomPass.strength = 0.65;
+        this._postProcessing.passes.bloomPass.radius = 0.58;
+        this._postProcessing.passes.afterImage.uniforms.damp.value = 0.62;
+
+        this._renderer.toneMappingExposure = 1.6;
+
+        // const g1 = this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value;
+        // g1.setRGB(31 / 255, 22 / 255, 68 / 255);
+        // this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength.value = 0;
+        // this._postProcessing.passes.finalPass.material.uniforms.uGradient1Position.value.set(0.78, 0);
+        // this._postProcessing.passes.finalPass.material.uniforms.uGradient1Scale.value = 1.06;
+
+        // // Gradient 2
+        // const g2 = this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value;
+        // g2.setRGB(47 / 255, 15 / 255, 15 / 255);
+        // this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength.value = 0;
+        // this._postProcessing.passes.finalPass.material.uniforms.uGradient2Position.value.set(0.04, 1);
+        // this._postProcessing.passes.finalPass.material.uniforms.uGradient2Scale.value = 0.81;
     }
 
     _reset() {
@@ -187,22 +178,32 @@ export default class HomeNew extends component(Scene) {
 
     _updateComponents({ time, delta }) {
         for (const key in this._components) {
-            const component = this._components[key];
-            if (typeof component.update === 'function') {
-                component.update({ time, delta });
+            const comp = this._components[key];
+            if (typeof comp.update === 'function') {
+                comp.update({ time, delta });
             }
         }
+    }
+
+    _setupManagerBindings() {
+        this._cameraTarget = new Vector3(0, 0, 0);
+        this._locale = this._nuxtRoot?.$i18n?.locale || 'en';
+        this._camera.lookAt(0,0,0);
+
+        Object.assign(this, {
+            _camera: this._camera,
+            _group: this._group,
+            _components: this._components,
+            _postProcessing: this._postProcessing,
+        });
     }
 
     _createDebugGui() {
         const gui = Debugger.gui;
         if (!gui) return;
-
-        const folderBackground = gui.getFolder('Background');
-        const folder = folderBackground.addFolder('Scene: HomeNew');
+        const folder = gui.getFolder('Background').addFolder('Scene: HomeNew');
         folder.updateTitleBackgroundColor('#004d99');
         folder.open();
-
         return folder;
     }
 }

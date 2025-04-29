@@ -48,7 +48,10 @@ export default class Main extends component() {
         this._updateDebugGui();
 
         if (this._debug) this._sceneManager.show('home');
-        this._sceneManager.show('home');
+        const routeName = this._nuxtRoot?.$route?.name || '';
+            if (routeName.includes('home')) {
+                this._sceneManager.show('home');
+            }
 
         // setTimeout(() => {
         //     this.goto(6, 1, null);

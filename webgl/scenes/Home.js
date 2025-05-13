@@ -1,6 +1,8 @@
 // Vendor
 import gsap from 'gsap';
 import CustomEase from '@/vendor/gsap/CustomEase';
+import ServicesPlanes from '@/webgl/components/ServicesPlanes';
+
 import { Scene, Fog, AxesHelper } from 'three';
 import * as THREE from 'three';
 
@@ -17,7 +19,7 @@ import ReflectiveMaterial from '@/webgl/materials/ReflectiveMaterial';
 // Objects
 import Cameras from '@/webgl/objects/HomeCameras';
 import CameraAnimation, { DEFAULT_CAMERA_FOV, TARGET_CAMERA_FOV } from '@/webgl/objects/HomeCameraAnimation';
-import HomeSectionManager from '@/webgl/objects/HomeSectionManager';
+import HomeSectionManager from '@/webgl/objects/HomeNewSectionManager';
 
 // Components
 // import Human from '@/webgl/components/Human';
@@ -475,6 +477,7 @@ export default class Home extends component(Scene) {
     _createComponents() {
         const components = {};
         // components.human = this._createComponentHuman();
+        components.servicesPlanes = this._createServicesPlanes();
         components.spinner = this._createComponentSpinner();
         components.shapes = this._createComponentShapes();
         components.floor = this._createComponentFloor();
@@ -482,6 +485,22 @@ export default class Home extends component(Scene) {
         // components.lights = this._createComponentLights();
         return components;
     }
+
+    _createServicesPlanes() {
+        const servicesPlanes = new ServicesPlanes({
+          envMap: this._reflectiveMaterial.envMap,
+          images: [
+            require('@/assets/images/portfolio-detail/header.png'),
+            require('@/assets/images/portfolio-detail/header.png'),
+          ],
+        });
+      
+        servicesPlanes.position.set(0, 0, -2); // slightly behind spinner
+        servicesPlanes.visible = false;
+        this.add(servicesPlanes);
+        console.log('services', servicesPlanes)
+        return servicesPlanes;
+      }
 
     _createComponentHuman() {
         const human = new Human({

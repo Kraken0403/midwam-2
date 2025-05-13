@@ -1,0 +1,39 @@
+<section class="section-slider" ref="container">
+  <div class="slider-title">
+    <div class="row row-title">
+
+      <!-- Column -->
+      <div class="column">
+
+          <!-- Heading -->
+          <!-- <Heading tag="h2" ref="heading" isCustomTriggered="false" class="heading-b heading" :data="data.title" :preserve-line-break="true" /> -->
+          <Heading
+            ref="heading"
+            tag="h2"
+            :data="'Experiences'"
+            class="heading-b heading center-heading"
+            :isCustomTriggered="true"
+            :preserve-line-break="true"
+          />
+
+      </div>
+
+  </div>
+  </div>
+  <div class="swiper-container my-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="(slide, i) in slides" :key="i">
+        <div class="slide-wrapper">
+          <img :src="slide.image" />
+          <div class="slide-text">
+            <h2>{{ slide.title }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>

@@ -1,6 +1,17 @@
 <div class="preloader">
 
-    <CirclesLoader ref="circles" />
+    <!-- <CirclesLoader ref="circles" /> -->
+    <video
+    ref="video"
+    class="preloader-video"
+    autoplay
+    muted
+    loop
+    playsinline
+  >
+    <source src="@/assets/images/video4.webm" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
     <ButtonStart ref="buttonStart" :content="$t('preloader.enter')" v-bind:width="180" v-bind:radius="90" />
     <CookiesMessage ref="cookiesMessage" class="cookies-message" @click.native="buttonCookiesClickHandler" />
 

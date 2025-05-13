@@ -1,6 +1,6 @@
 // Vendor
 import gsap from 'gsap';
-import { Scene, PerspectiveCamera, Group, AxesHelper, Vector3 } from 'three';
+import { Scene, PerspectiveCamera, Group, AxesHelper, Vector3, CameraHelper } from 'three';
 import { component } from '@/vendor/bidello';
 import Debugger from '@/utils/Debugger';
 
@@ -10,6 +10,9 @@ import ReflectiveMaterial from '@/webgl/materials/ReflectiveMaterial';
 // Components
 import Spinner from '@/webgl/components/SpinnerHome';
 import Floor from '@/webgl/components/Floor';
+
+import ServicesPlanes from '@/webgl/components/ServicesPlanes';
+
 
 // Manager
 import HomeNewSectionManager from '@/webgl/objects/HomeNewSectionManager';
@@ -25,7 +28,7 @@ export default class HomeNew extends component(Scene) {
     
         this._cameraTarget = new Vector3(0, 0, 0);
         this._debugGui = this._createDebugGui();
-        this._camera = this._createCamera();
+        this._camera = this._createCameras();
         this._group = new Group();
         this.add(this._group);
     
@@ -104,6 +107,51 @@ export default class HomeNew extends component(Scene) {
         return camera;
     }
 
+    _createCameras() {
+        const aspect = window.innerWidth / window.innerHeight;
+      
+        // Live camera
+        const camera = new PerspectiveCamera(45, aspect, 0.1, 10000);
+        camera.position.set(0, 10, 3);
+        camera.lookAt(0, 0, 0);
+      
+        this._camera = camera;
+      
+        // Reference Camera A — looks at origin
+        this._cameraA = new PerspectiveCamera(45, aspect, 0.1, 10000);
+        this._cameraA.position.set(0, 10, 3);
+        this._cameraA.lookAt(0, 0, 0);
+        this._cameraA.updateMatrixWorld();
+
+      
+        // Reference Camera B — looks at spinner & service planes
+        this._cameraB = new PerspectiveCamera(45, aspect, 0.1, 10000);
+        this._cameraB.position.set(0, 2, 0); // adjust if needed
+        this._cameraB.lookAt(new Vector3(-10, 2, 10));
+        this._cameraB.updateMatrixWorld();
+
+        this._cameraC = new PerspectiveCamera(45, aspect, 0.1, 10000);
+        this._cameraC.position.set(-6, 1, 13); // ✅ move closer and slightly right
+        this._cameraC.lookAt(new Vector3(-13, -1, 10)); // ✅ spinner's new position
+        this._cameraC.updateMatrixWorld();
+
+        // Force recalculation
+
+        // const helper = new CameraHelper(this._cameraB);
+        // this.add(helper);
+      
+        if (this._debugGui) {
+          const camFolder = this._debugGui.addFolder('Camera');
+          camFolder.add(camera.position, 'x', -50, 50, 0.01).onChange(() => camera.lookAt(0, 0, 0));
+          camFolder.add(camera.position, 'y', -50, 50, 0.01).onChange(() => camera.lookAt(0, 0, 0));
+          camFolder.add(camera.position, 'z', -50, 50, 0.01).onChange(() => camera.lookAt(0, 0, 0));
+        }
+      
+        return camera;
+      }
+      
+      
+
     _createComponents() {
         const components = {};
 
@@ -140,8 +188,36 @@ export default class HomeNew extends component(Scene) {
 
         // this._group.add(new AxesHelper(3));
 
+        // ✅ NEW — services image planes
+        const servicesPlanes = new ServicesPlanes({
+            envMap: material.envMap,
+            images: [
+                require('@/assets/images/portfolio-detail/image2.png'),
+                require('@/assets/images/portfolio-detail/image4.png')
+            ],
+            camera: this._cameraB,
+        });
+
+        servicesPlanes.position.set(-11, -1, 11);
+        servicesPlanes.rotateY(3 * Math.PI/4);
+        servicesPlanes.userData.opacity = 1; // ✅ Store opacity in userData
+
+        servicesPlanes.children.forEach((child) => {
+        if (child.material) {
+            child.material.transparent = true;
+            child.material.opacity = 0; // ✅ Initially invisible
+        }
+        });
+
+        servicesPlanes.visible = true; // ✅ Hide initially, reveal in animation
+
+        this._group.add(servicesPlanes);
+
+        // console.log('services',servicesPlanes)
+
         components.spinner = spinner;
         components.floor = floor;
+        components.servicesPlanes = servicesPlanes;
 
         return components;
     }

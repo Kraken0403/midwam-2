@@ -1,21 +1,18 @@
 <!-- Scroll control -->
 <ScrollControl ref="scrollControl">
-
-    <!-- Page -->
     <div class="page">
-
-        <!-- Sections -->
-        <SectionHeader v-bind:data="header" class="section-header" ref="header" scroll-type="free"></SectionHeader>
-        <SectionDesign v-bind:data="section_1" class="section-design" scroll-type="free"></SectionDesign>
-        <SectionEmotion v-bind:data="section_2" class="section-emotion" scroll-type="free"></SectionEmotion>
-        <SectionReality v-bind:data="section_3" class="section-reality" scroll-type="free"></SectionReality>
-        <SectionKnowledge v-bind:data="section_4" class="section-knowledge" scroll-type="free"></SectionKnowledge>
-        <SectionDimension v-bind:data="section_5" class="section-dimension" scroll-type="free"></SectionDimension>
-        <SectionImmersion v-bind:data="section_6" class="section-immersion" scroll-type="free"></SectionImmersion>
-        <SectionPortfolio v-bind:data="portfolio" class="section-portfolio" scroll-type="free"></SectionPortfolio>
-        <SectionNews v-bind:data="news.items" class="section-news" scroll-type="free"></SectionNews>
-        <SectionFooter class="section-footer" scroll-type="free"></SectionFooter>
-
+      <SectionHeader v-bind:data="header" class="section-header" ref="header" scroll-type="free" />
+      <SectionKnowledge v-bind:data="section_4" class="section-knowledge" scroll-type="free" />
+      <SectionSlider />
+      
+      <!-- 🔥 New Section for Service Planes -->
+      <SectionServicesPlanes class="section-services" scroll-type="free" />
+  
+      <!-- <SectionImmersion v-bind:data="section_6" class="section-immersion" scroll-type="free" /> -->
+      <!-- <SectionPortfolio v-bind:data="portfolio" class="section-portfolio" scroll-type="free" /> -->
+      
+      <SectionNews v-bind:data="news.items" class="section-news" scroll-type="free" />
+      <SectionFooter class="section-footer" scroll-type="free" />
     </div>
-
-</ScrollControl>
+  </ScrollControl>
+  

@@ -20,22 +20,30 @@ export default {
      ** Headers of the page
      ** See https://nuxtjs.org/api/configuration-head
      */
-    head: {
-        // htmlAttrs: {
-        //     dir: 'rtl',
-        // },
+     head: {
         title: process.env.npm_package_name || '',
         meta: [
-            { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-            {
-                hid: 'description',
-                name: 'description',
-                content: process.env.npm_package_description || '',
-            },
+          { charset: 'utf-8' },
+          { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+          {
+            hid: 'description',
+            name: 'description',
+            content: process.env.npm_package_description || '',
+          },
         ],
-        link: [{ rel: 'icon', type: 'image/png', href: '/favicon.png' }],
-    },
+        link: [
+          // ✅ Swiper CSS
+          { rel: 'stylesheet', type: 'text/css', href: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css' },
+      
+          // ✅ Favicon
+          { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+        ],
+        script: [
+          // ✅ Swiper JS
+          { src: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', body: true }
+        ]
+      }
+      ,
     /*
      ** Global CSS
      */

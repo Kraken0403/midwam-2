@@ -14,15 +14,18 @@ import ScrollControl from '@/components/ScrollControlHomeNew';
 
 // Sections
 import SectionHeader from '@/sections/home/Header';
-import SectionDesign from '@/sections/home/Design';
-import SectionEmotion from '@/sections/home/Emotion';
-import SectionReality from '@/sections/home/Reality';
-import SectionDimension from '@/sections/home/Dimension';
+// import SectionDesign from '@/sections/home/Design';
+// import SectionEmotion from '@/sections/home/Emotion';
+// import SectionReality from '@/sections/home/Reality';
+// import SectionDimension from '@/sections/home/Dimension';
+import SectionServicesPlanes from '@/sections/home/ServicesPlanes';
+
 import SectionKnowledge from '@/sections/home/Knowledge';
 import SectionImmersion from '@/sections/home/Immersion';
 import SectionPortfolio from '@/sections/home/Portfolio';
 import SectionNews from '@/sections/shared/News';
 import SectionFooter from '@/sections/shared/Footer';
+import SectionSlider from '@/sections/home/Slider';
 
 export default {
     extends: Page,
@@ -30,10 +33,12 @@ export default {
     components: {
         ScrollControl,
         SectionHeader,
-        SectionDesign,
-        SectionEmotion,
-        SectionReality,
-        SectionDimension,
+        // SectionDesign,
+        // SectionEmotion,
+        // SectionReality,
+        // SectionDimension,
+        SectionServicesPlanes,
+        SectionSlider,
         SectionKnowledge,
         SectionImmersion,
         SectionPortfolio,

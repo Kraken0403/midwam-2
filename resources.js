@@ -61,6 +61,17 @@ const fonts = [
  */
 const webgl = [
     {
+        type: 'image',
+        name: 'interactive',
+        absolutePath: require('@/assets/images/services/interactive.PNG'),
+      },
+      {
+        type: 'image',
+        name: 'concept-design',
+        absolutePath: require('@/assets/images/services/concept-design.png'),
+      },
+    
+    {
         type: 'gltf',
         name: 'human',
         path: '/assets/models/human.glb',

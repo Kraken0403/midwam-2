@@ -14,7 +14,7 @@ export default {
     about: {
         class: About,
     },
-    services:{ 
+    services: { 
         class: Services, 
     },
     contact: {

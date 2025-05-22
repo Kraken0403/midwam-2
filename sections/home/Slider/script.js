@@ -5,6 +5,8 @@ import Heading from '@/components/Heading';
 import gsap from 'gsap';
 
 export default {
+  name: 'SectionSlider',
+  
   components: {
     Heading,
   },

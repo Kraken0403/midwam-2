@@ -2,7 +2,6 @@
 import gsap from 'gsap';
 
 // Utils
-import AudioManager from '@/utils/AudioManager';
 
 // Components
 import Page from '@/components/Page';

@@ -1,4 +1,20 @@
-<section class="services-planes">
-    <!-- This section is only a scroll trigger — 3D scene handles visuals -->
-  </section>
-  
+<section class="section services-planes ">
+  <div class="section__content services-planes__content">
+    <ul class="services-planes__list">
+      <li
+        v-for="(item, index) in items"
+        :key="index"
+        :class="{ active: index === activeIndex }"
+        class="services-planes__item"
+        @click="goToIndex(index)"
+      >
+        {{ item }}
+      </li>
+    </ul>
+
+    <div class="services-planes__arrows">
+      <button @click="prev" class="arrow arrow--left">←</button>
+      <button @click="next" class="arrow arrow--right">→</button>
+    </div>
+  </div>
+</section>

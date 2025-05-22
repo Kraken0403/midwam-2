@@ -75,7 +75,7 @@ export default {
       if (!this.isEnabled) return;
 
       const deltaRaw = e.deltaY || e.wheelDelta || -e.detail || 0;
-      const delta = Math.max(Math.min(deltaRaw, 60), -60); // ✅ Limit scroll speed
+      const delta = Math.max(Math.min(deltaRaw, 60), -60);
 
       this._scrollYTarget = math.clamp(this._scrollYTarget - delta, 0, this.scrollLimit);
     },
@@ -124,23 +124,32 @@ export default {
       const scene = this.$root?.webglApp?.getScene?.('home');
       const sections = this.$root?.sectionsInfo;
       if (!scene || !sections || typeof scene._goto !== 'function') return;
-
+    
       const triggerPoint = window.innerHeight * 0.7;
-
+    
       for (let i = 0; i < sections.length; i++) {
         const section = sections[i];
         const el = section.component?.$el;
         if (!el) continue;
-
+    
         const rect = el.getBoundingClientRect();
-
+    
         if (rect.top <= triggerPoint && rect.bottom >= triggerPoint) {
+          const scrollType = section.component?.$attrs?.['scroll-type'] || 'free';
+    
+          // ✅ Enforce snap scroll for step sections
+          if (scrollType === 'step' && section.position?.y !== undefined) {
+            this._scrollYTarget = section.position.y;
+          }
+    
+          console.log(`🔥 Triggering section: ${section.component?.$options?.name} [${scrollType}]`);
+    
           if (this.currentSectionIndex !== i) {
             const prev = this.currentSectionIndex;
             const next = i;
             const direction = next > prev ? 1 : -1;
             this.currentSectionIndex = next;
-
+    
             if (prev !== -1 && Math.abs(next - prev) > 1) {
               const range = direction > 0
                 ? [...Array(next - prev).keys()].map(n => prev + n + 1)
@@ -150,10 +159,12 @@ export default {
               scene._goto(i, direction);
             }
           }
+    
           break;
         }
       }
-    },
+    }
+    ,
 
     resize() {
       this.viewportHeight = WindowResizeObserver.viewportHeight;

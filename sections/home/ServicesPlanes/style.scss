@@ -1,4 +1,68 @@
 .services-planes {
-    padding: 15vh 0;
-    min-height: 100vh;
+  position: relative;
+  width: 100%;
+  min-height: 100vh; // ensures it always fills the viewport
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; // allow drag/scroll over WebGL canvas
+
+  &__content {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto; // re-enable interaction for buttons & list
   }
+
+  &__list {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+
+    .services-planes__item {
+      font-size: 2rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s ease;
+      cursor: pointer;
+
+      &.active {
+        color: white;
+      }
+    }
+  }
+
+  &__arrows {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+
+    .arrow {
+      background: none;
+      border: 2px solid white;
+      color: white;
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: white;
+        color: black;
+      }
+
+      &--left,
+      &--right {
+        min-width: 40px;
+      }
+    }
+  }
+}

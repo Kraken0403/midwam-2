@@ -1,0 +1,31 @@
+<section class="section">
+    <div class="section__content">
+        <div class="row row-title">
+            <div class="column">
+
+                <!-- Heading -->
+                <!-- <Heading tag="h2" ref="heading" isCustomTriggered="false" class="heading-b heading" :data="data.title" :preserve-line-break="true" /> -->
+                <Heading
+                  ref="heading"
+                  tag="h2"
+                  :data="'Our Services'"
+                  class="heading-b heading center-heading"
+                  :isCustomTriggered="true"
+                  :preserve-line-break="true"
+                />
+      
+            </div>
+        </div>
+
+        <div class="row-cards">
+            <div
+              class="card"
+              v-for="(slide, index) in slides"
+              :key="index"
+            >
+              <img :src="slide.image" :alt="slide.title" />
+              <p class="card-title">{{ slide.title }}</p>
+            </div>
+          </div>
+    </div>
+</section>

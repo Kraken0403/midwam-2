@@ -3,15 +3,21 @@
     <div class="page">
       <SectionHeader v-bind:data="header" class="section-header" ref="header" scroll-type="free" />
       <SectionKnowledge v-bind:data="section_4" class="section-knowledge" scroll-type="free" />
-      <SectionSlider />
       
+      <SectionSlider scroll-type="free" /> 
+
+      <SectionPartnersCustom class="section-partners" :data="dataSectionPartnersCustom" ref="sectionPartners" scroll-type="free" />
+
+      <SectionServicesCards class="section-services" scroll-type="free" />
       <!-- 🔥 New Section for Service Planes -->
-      <SectionServicesPlanes class="section-services" scroll-type="free" />
-  
-      <!-- <SectionImmersion v-bind:data="section_6" class="section-immersion" scroll-type="free" /> -->
-      <!-- <SectionPortfolio v-bind:data="portfolio" class="section-portfolio" scroll-type="free" /> -->
-      
+      <!-- <SectionPartners v-bind:data="partners" class="section-partners" ref="partners" scroll-type="free"></SectionPartners> -->
+
+
+      <!-- <SectionServicesPlanes class="section-services" scroll-type="step" /> -->
+
+    
       <SectionNews v-bind:data="news.items" class="section-news" scroll-type="free" />
+      <SectionFormCta scroll-type="free" />
       <SectionFooter class="section-footer" scroll-type="free" />
     </div>
   </ScrollControl>

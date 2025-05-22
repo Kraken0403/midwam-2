@@ -14,12 +14,12 @@ import { SparksGeometry } from '@/webgl/geometries/SparksGeometry';
 import { SparksMaterial } from '@/webgl/materials/SparksMaterial';
 
 export default class Sparks extends component(Object3D) {
-    init({ debugGui, alpha, lineWidth }) {
+    init({ debugGui, alpha, lineWidth, amount }) {
         // Params
         this._alpha = alpha === undefined ? 1 : alpha;
 
         // Data
-        this._amount = 150;
+        this._amount = amount !== undefined ? amount : 150;
         this._speed = 0.5;
         this._isStarted = false;
         this._lineWidth = lineWidth;

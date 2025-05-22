@@ -131,6 +131,7 @@ export default class Spinner extends component(Object3D) {
             debugGui: this._debugGui,
             alpha: 0,
             lineWidth: 0.032,
+            amount: 75
         });
         sparks.position.copy(this._mesh.position);
         sparks.start();

@@ -1,0 +1,122 @@
+
+.section {
+    opacity: 1;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    width: 100%;
+
+    padding-bottom: 15vh;
+
+    @include respond-to('large') {
+        padding-bottom: 19vh;
+    }
+
+    .ar & {
+        direction: rtl;
+    }
+}
+
+.row-title {
+    margin-bottom: rem(20px);
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(81px);
+    }
+
+    .column {
+        margin: auto;
+        text-align: center;
+
+        h2 {
+            text-align: center;
+       
+            div {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.heading {
+    > span {
+        display: block;
+    }
+}
+
+.row-body {
+    .column {
+        width: 70%;
+
+        margin-left: 15%;
+
+        @include respond-to('large') {
+            width: 23%;
+
+            margin-left: 12%;
+        }
+
+        .ar & {
+            margin-right: 15%;
+
+            @include respond-to('large') {
+                margin-right: 60%;
+            }
+        }
+    }
+}
+
+.body {
+    margin-bottom: rem(20px);
+
+    @include respond-to('large') {
+        margin-bottom: rem-l(25px);
+    }
+}
+
+.row-cards {
+    width: 100%;
+    padding: 0 10%;
+    display: flex;
+    gap: 60px;
+    justify-content: space-between;
+
+    .card {
+        width: 100%;
+        position: relative;
+        height: 60vh;
+        padding: 55px;
+        display: flex;
+        align-items: end;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) ;
+        &:hover {
+            img {
+                transform: translate(-50%, -50%) scale(1.08);
+                transition: all 0.5s cubic-bezier(0.215, 0.610, 0.355, 1) ;
+
+            }
+        }
+        p {
+            position: relative;
+            color: #fff;
+            z-index: 5;
+            font-size: 32px;
+            font-family: 'Akkurat Pro', sans-serif;
+        }
+        img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 105%;
+            height: 105%;
+            z-index: 0;
+            object-fit: cover;
+            transform: translate(-50%, -50%) scale(1);
+
+            
+        }
+    }
+}

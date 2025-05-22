@@ -157,7 +157,7 @@ export default {
             compact: false,  // Prevents large file warnings
         },
 
-        transpile: ['three'],
+        transpile: ['three', 'gsap']
     },
 
     server: {

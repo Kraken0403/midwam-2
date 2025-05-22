@@ -52,6 +52,11 @@ export default class ResourceLoader extends EventDispatcher {
         }
     }
 
+    static _addToStaticCache(resource) {
+        const existing = cache.find(r => r.name === resource.name);
+        if (!existing) cache.push(resource);
+    }
+
     static _getResourceByName(name) {
         for (let i = 0, len = cache.length; i < len; i++) {
             if (cache[i].name === name) return cache[i];
@@ -59,6 +64,15 @@ export default class ResourceLoader extends EventDispatcher {
         return undefined;
     }
 
+    static add(name, image) {
+        const resource = {
+            name,
+            type: 'image',
+            state: STATE_LOADED,
+            data: image,
+        };
+        cache.push(resource);
+    }
     /**
      * Private
      */

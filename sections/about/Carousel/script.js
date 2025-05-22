@@ -6,6 +6,7 @@ import SectionAbout from '@/components/SectionAbout';
 import CarouselAbout from '@/components/CarouselAbout';
 
 export default {
+    name: 'AboutCarousel',
     extends: SectionAbout,
 
     components: {

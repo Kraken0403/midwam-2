@@ -9,6 +9,7 @@ import Heading from '@/components/Heading';
 import ScrollArrow from '@/assets/images/icons/scroll-arrow.svg?inline';
 
 export default {
+    name: 'AboutHeader',
     extends: SectionAbout,
 
     components: {

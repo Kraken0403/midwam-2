@@ -7,6 +7,7 @@ import ButtonArrow from '@/components/ButtonArrow';
 import Heading from '@/components/Heading';
 
 export default {
+    name: 'AboutContact',
     extends: SectionAbout,
 
     components: {

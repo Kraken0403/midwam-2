@@ -6,6 +6,7 @@ import SectionAbout from '@/components/SectionAbout';
 import Body from '@/components/Body';
 
 export default {
+    name: 'AboutIntro', 
     extends: SectionAbout,
 
     components: {

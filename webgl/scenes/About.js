@@ -108,29 +108,36 @@ export default class About extends component(Scene) {
   
   
   
-
   show() {
-    this._locale = this._nuxtRoot.$i18n.locale;
+    this._locale = this._nuxtRoot?.$i18n?.locale || 'en';
     this._isActive = true;
-
-    this._postProcessing.passes.finalPass.material.uniforms.uGradientsAlpha.value = 1;
-    this._components.spinner._sparks.alpha = 1;
-
-    this._components.spinner.position.x = this._locale === 'en' ? -1.1 : -4.1;
+  
+    this._lastSection = null;
+    this._lastDOMSectionIndex = null;
+    this._hideAllStepTexts();
+  
+    this._resetSceneState(); // 🔁 FULL SCENE RESET
+  
+    const scrollY = this._nuxtRoot?.scrollManager?.scroll?.y || 0;
+    this._scrollHandler({ y: scrollY });
+  
+    // Postprocessing animations
+    if (this._postProcessing?.passes?.finalPass?.material?.uniforms) {
+      this._timelineShow = gsap.timeline();
+      this._timelineShow.set(this._postProcessing.passes.hidePass.material, { progress: 1 }, 0.1);
+      this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 2, { value: 0.36 }, 1);
+      this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 2, { value: 0.19 }, 1);
+    }
+  
     this._components.spinner.play();
-    this._updatePostProcessing();
-
-    this._timelineShow = gsap.timeline();
-    this._timelineShow.set(this._postProcessing.passes.hidePass.material, { progress: 1 }, 0.1);
-    this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 2, { value: 0.36 }, 1);
-    this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 2, { value: 0.19 }, 1);
-
+  
     if (this._nuxtRoot.scrollManager) {
       this._nuxtRoot.scrollManager.addEventListener('scroll', this._scrollHandler);
     }
-
+  
     return this._timelineShow;
   }
+  
 
   hide(onCompleteCallback) {
     if (this._timelineShow) this._timelineShow.kill();
@@ -192,6 +199,42 @@ export default class About extends component(Scene) {
       this.position.set(1.38, -1.01, 0);
     }
   }
+
+  _resetSceneState() {
+    const spinner = this._components?.spinner;
+    const cam = this._camera;
+  
+    if (!spinner || !cam) return;
+  
+    // Reset About scene offset
+    this._position();
+  
+    // Reset spinner
+    spinner.reset();
+  
+    // Reset spinner position
+    spinner.position.set(0, 0, 0); // or sectionPositions.ProcessNew.z
+  
+    // Reset camera
+    cam.position.set(0, 1.24, 9.34);
+    cam.lookAt(this._cameraTarget);
+    cam.updateMatrixWorld(true);
+  
+    // Reset spark alpha
+    if (spinner._sparks) spinner._sparks.alpha = 1;
+  
+    // Reset step texts
+    this._hideAllStepTexts?.();
+  
+    // Reset postprocessing gradients
+    if (this._postProcessing?.passes?.finalPass?.material?.uniforms) {
+      this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength.value = 0.36;
+      this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength.value = 0.19;
+      this._postProcessing.passes.finalPass.material.uniforms.uGradientsAlpha.value = 1;
+      this._postProcessing.passes.hidePass.material.progress = 1;
+    }
+  }
+  
 
   _createCamera() {
     const aspect = window.innerWidth / window.innerHeight;

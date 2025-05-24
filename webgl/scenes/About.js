@@ -1,7 +1,7 @@
 // Vendor
 import * as THREE from 'three';
 import gsap from 'gsap';
-import { FontLoader } from 'three';
+import { Color, FontLoader } from 'three';
 import { TextGeometry } from 'three';
 
 import {
@@ -14,6 +14,7 @@ import {
   Mesh,
   AxesHelper,
   CameraHelper,
+  PlaneGeometry,
   MeshStandardMaterial, Fog} from 'three';
 
 import { component } from '@/vendor/bidello';
@@ -55,6 +56,7 @@ export default class About extends component(Scene) {
     this._cameraTarget = new Vector3(0, 0, 0);
     this._debugGui = this._createDebugGui();
     this._camera = this._createCamera();
+
     this._createFog();
 
 
@@ -392,7 +394,7 @@ export default class About extends component(Scene) {
     const spinner = this._createComponentSpinner();
     const floor = this._createComponentFloor();
     // const backgroundLines = this._createComponentBackgroundLines();
-
+    this._createFloorFogOverlay();
     const waves = this._createComponentWaves()
   
     return { spinner, floor, waves};
@@ -421,10 +423,34 @@ export default class About extends component(Scene) {
     return wave;
   }
 
+  _createFloorFogOverlay() {
+    const geometry = new PlaneGeometry(100, 50);
+    const material = new MeshBasicMaterial({
+      transparent: false,
+      depthWrite: false,
+      fog: true,
+      opacity: 1,
+      side: THREE.DoubleSide,
+      color: 0x000000,
+    });
+  
+    const fogPlane = new Mesh(geometry, material);
+    fogPlane.position.set(0, -1, 30); // Slightly above the floor
+    fogPlane.rotation.x = -Math.PI / 2;
+  
+    // Add a black-to-transparent gradient texture if you want more realism
+    // OR manually fade using a custom shader later
+  
+    // this._container.add(fogPlane);
+  }
+  
+
   _createFog() {
-    const fog = new Fog('#000000', 55, 117); // Near & far distances
+    const col = new Color('#000000')
+    const fog = new Fog(col, 15, 35); // Near & far distances
     this.fog = fog; // ✅ Apply directly to the scene
-    this.background = fog.color; // ✅ Optional: match background
+    // this.background = fog.color; 
+    console.log('fog:', fog)
   }
   
   _createComponentSpinner() {

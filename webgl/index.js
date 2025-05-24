@@ -86,6 +86,7 @@ export default class Main extends component() {
         const timeline = new gsap.timeline();
         timeline.call(
             () => {
+                this._postProcessing.resetDefaults();
                 this._sceneManager.show(scene);
             },
             null,
@@ -94,11 +95,23 @@ export default class Main extends component() {
         return timeline;
     }
 
-    hideScene(scene) {
-        const timeline = new gsap.timeline();
-        timeline.add(this._sceneManager.hide(scene), 0);
+    hideScene(sceneName) {
+        const scene = sceneName ? this._sceneManager.get(sceneName) : this._sceneManager.active;
+        const timeline = gsap.timeline();
+      
+        if (scene && scene.hide) {
+          timeline.add(scene.hide(() => {
+            // 🧼 Clean postprocessing right after fade
+            this._postProcessing.resetDefaults();
+            this._renderer.setClearColor(0x000000, 0);
+            this._renderer.clear(true, true, true);
+            this._renderer.autoClearColor = true;
+          }), 0);
+        }
+      
         return timeline;
-    }
+      }
+      
 
     focus(sectionIndex) {
         // this._sceneManager.focus(sectionIndex);

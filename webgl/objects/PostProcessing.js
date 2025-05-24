@@ -72,9 +72,9 @@ export default class PostProcessing extends component() {
         //     this._layers.landscapes.render();
         // }
 
-        if (scene.name === 'services' && this._passes.hidePass?.material.uniforms?.progress) {
-            this._passes.hidePass.material.uniforms.progress.value = 0;
-          }
+        // if (scene.name === 'services' && this._passes.hidePass?.material.uniforms?.progress) {
+        //     this._passes.hidePass.material.uniforms.progress.value = 0;
+        //   }
 
         this._composer.render();
         // this._renderer.render(scene, camera);
@@ -239,6 +239,26 @@ export default class PostProcessing extends component() {
 
         return passes;
     }
+
+    // Reset Defaults 
+
+    resetDefaults() {
+        const p = this._passes;
+        if (!p?.finalPass?.material?.uniforms) return;
+      
+        const u = p.finalPass.material.uniforms;
+      
+        u.uGradient1Strength.value = 0;
+        u.uGradient2Strength.value = 0;
+        u.uGradientsAlpha.value = 1;
+      
+        p.bloomPass.strength = 0;
+        p.afterImage.uniforms.damp.value = 0;
+        p.hidePass.material.progress = 0;
+      
+        this._renderer.toneMappingExposure = 1.6;
+      }
+      
 
     /**
      * Resize

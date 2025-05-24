@@ -14,7 +14,7 @@ import {
   Mesh,
   AxesHelper,
   CameraHelper,
-  MeshStandardMaterial} from 'three';
+  MeshStandardMaterial, Fog} from 'three';
 
 import { component } from '@/vendor/bidello';
 
@@ -28,7 +28,12 @@ import WindowResizeObserver from '@/utils/WindowResizeObserver';
 import ReflectiveMaterial from '@/webgl/materials/ReflectiveMaterial';
 
 // Objects
-import AboutSectionManager from '@/webgl/objects/AboutNewSectionManager';
+import AboutSectionManager from '@/webgl/objects/AboutNewSectionManagerTwo';
+
+import WaveBundle from '@/webgl/components/WaveBundle';
+
+// import BackgroundLines from '@/webgl/components/BackgroundLines';
+
 
 // Components
 import Spinner from '@/webgl/components/SpinnerAbout';
@@ -50,6 +55,8 @@ export default class About extends component(Scene) {
     this._cameraTarget = new Vector3(0, 0, 0);
     this._debugGui = this._createDebugGui();
     this._camera = this._createCamera();
+    this._createFog();
+
 
     this.add(this._container);
     this._components = this._createComponents();
@@ -120,12 +127,12 @@ export default class About extends component(Scene) {
   
     const scrollY = this._nuxtRoot?.scrollManager?.scroll?.y || 0;
     this._scrollHandler({ y: scrollY });
-  
+    this._updatePostProcessing();
     // Postprocessing animations
     if (this._postProcessing?.passes?.finalPass?.material?.uniforms) {
       this._timelineShow = gsap.timeline();
       this._timelineShow.set(this._postProcessing.passes.hidePass.material, { progress: 1 }, 0.1);
-      this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 2, { value: 0.36 }, 1);
+      this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 2, { value: 0.16 }, 1);
       this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 2, { value: 0.19 }, 1);
     }
   
@@ -141,25 +148,28 @@ export default class About extends component(Scene) {
 
   hide(onCompleteCallback) {
     if (this._timelineShow) this._timelineShow.kill();
-
+  
     this._timelineHide = gsap.timeline({
-      onComplete: this._timelineHideCompleteHandler,
-      onCompleteParams: [onCompleteCallback],
+      onComplete: () => {
+        this._isActive = false;
+        this._renderer.setClearColor(0x000000, 0);
+        this._renderer.clear(true, true, true);
+        this._renderer.autoClearColor = true;
+        onCompleteCallback?.();
+      }
     });
-
+  
     this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0 }, 0);
     this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0 }, 0);
     this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0 }, 0);
-
-    this._timelineHide.call(() => this._reset(), null, 1);
-    this._timelineHide.call(() => { this._isActive = false }, null, 1.1);
-
-    if (this._nuxtRoot.scrollManager) {
-      this._nuxtRoot.scrollManager.removeEventListener('scroll', this._scrollHandler);
-    }
-
+    this._timelineHide.call(() => {
+      this._postProcessing.passes.hidePass.material.progress = 0;
+      this._reset();
+    }, null, 1);
+  
     return this._timelineHide;
   }
+  
 
   goto(index, direction, done) {
     this._goto(index, direction);
@@ -213,7 +223,7 @@ export default class About extends component(Scene) {
     spinner.reset();
   
     // Reset spinner position
-    spinner.position.set(0, 0, 0); // or sectionPositions.ProcessNew.z
+    spinner.position.set(0, 0, 0);
   
     // Reset camera
     cam.position.set(0, 1.24, 9.34);
@@ -225,15 +235,11 @@ export default class About extends component(Scene) {
   
     // Reset step texts
     this._hideAllStepTexts?.();
-  
-    // Reset postprocessing gradients
-    if (this._postProcessing?.passes?.finalPass?.material?.uniforms) {
-      this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength.value = 0.36;
-      this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength.value = 0.19;
-      this._postProcessing.passes.finalPass.material.uniforms.uGradientsAlpha.value = 1;
-      this._postProcessing.passes.hidePass.material.progress = 1;
-    }
+
+
+    this._updatePostProcessing(); 
   }
+  
   
 
   _createCamera() {
@@ -385,9 +391,40 @@ export default class About extends component(Scene) {
   _createComponents() {
     const spinner = this._createComponentSpinner();
     const floor = this._createComponentFloor();
+    // const backgroundLines = this._createComponentBackgroundLines();
 
+    const waves = this._createComponentWaves()
   
-    return { spinner, floor };
+    return { spinner, floor, waves};
+  }
+  _createComponentWaves() {
+    const wave = new WaveBundle({
+      strands: 1, // ✅ Fewer lines
+      points: 3000,
+      waveLength: 20,
+      amplitude: 0.3,
+      frequency: 1.2,
+      speed: 1.0,
+      strandSpacing: 1,
+      colorFrom: '#ffffff',
+      colorTo: '#ffffff',
+      lineWidth: 2,
+      texturePath: '/assets/stroke-v.png'
+    });
+    
+    // wave.rotation.z = - Math.PI / 4;
+    wave.position.set(0, 3.2, -10);
+    wave.scale.set(3.5, 3.5, 3.5);
+    wave.setOpacity(0)
+    this._container.add(wave);
+
+    return wave;
+  }
+
+  _createFog() {
+    const fog = new Fog('#000000', 55, 117); // Near & far distances
+    this.fog = fog; // ✅ Apply directly to the scene
+    this.background = fog.color; // ✅ Optional: match background
   }
   
   _createComponentSpinner() {
@@ -413,8 +450,8 @@ export default class About extends component(Scene) {
   _createComponentFloor() {
     const floor = new FloorAbout({
       debugGui: this._debugGui,
-      width: 200,
-      height: 200,
+      width: 50,
+      height: 50,
       renderer: this._renderer,
     });
     this._container.add(floor);
@@ -470,4 +507,33 @@ export default class About extends component(Scene) {
     this._isActive = false;
     this._components.spinner.reset();
   }
+
+ 
+  _updatePostProcessing() {
+    this._postProcessing.passes.bloomPass.threshold = 0.1;
+    this._postProcessing.passes.bloomPass.strength = 0.65;
+    this._postProcessing.passes.bloomPass.radius = 0.58;
+    this._postProcessing.passes.afterImage.uniforms.damp.value = 0.62;
+    this._renderer.toneMappingExposure = 1.6;
+
+    // Gradient 1
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value.r = 31 / 255;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value.g = 22 / 255;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value.b = 68 / 255;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength.value = 0;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Position.value.x = 0.78;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Position.value.y = 0;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient1Scale.value = 1.06;
+
+    // Gradient 2
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value.r = 47 / 255;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value.g = 15 / 255;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value.b = 15 / 255;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength.value = 0;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Position.value.x = 0.04;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Position.value.y = 1;
+    this._postProcessing.passes.finalPass.material.uniforms.uGradient2Scale.value = 0.81;
+}
+
+  
 }

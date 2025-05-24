@@ -40,6 +40,7 @@
         "simplex-noise": "^2.4.0",
         "swiper": "^8.4.7",
         "three": "^0.120.1",
+        "three.meshline": "^1.4.0",
         "virtual-scroll": "^1.5.2"
     },
     "devDependencies": {

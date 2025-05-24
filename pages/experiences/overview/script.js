@@ -100,10 +100,25 @@ export default {
         },
 
         transitionOut(done) {
-            const timeline = new gsap.timeline({ onComplete: done });
-            if (this.$root.webglApp) timeline.add(this.$root.webglApp.hideScene('portfolio'), 0);
+            const timeline = gsap.timeline({
+              onComplete: () => {
+                // ✅ Delay route switch to let cleared frame settle
+                requestAnimationFrame(() => {
+                  setTimeout(done, 16); // 1 frame @ 60fps
+                });
+              }
+            });
+          
+            if (this.$root.webglApp) {
+              timeline.add(this.$root.webglApp.hideScene('portfolio'), 0);
+            }
+          
             timeline.to(this.$el, 1, { alpha: 0, ease: 'sine.inOut' }, 0);
-        },
+          
+            return timeline;
+          }
+          ,
+          
 
         buttonSliderIn() {
             const promise = new Promise((resolve) => {

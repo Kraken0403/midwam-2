@@ -103,6 +103,22 @@ export default class Services extends component(Scene) {
         this._camera.rotation.z = this._cameraAnimationPosition.current.x * this.cameraAnimationRotationFactor.z;
     }
 
+    _reset() {
+        this._camera.position.set(0, 2, 38);
+        this._camera.lookAt(new THREE.Vector3(0, 0, 0));
+        this._camera.updateMatrixWorld();
+        
+        this._mousePosition = { x: 0, y: 0 };
+        this._cameraAnimationPosition = {
+          current: { x: 0, y: 0 },
+          target: { x: 0, y: 0 },
+        };
+      
+        if (this._components.spinner) {
+          this._components.spinner.rotation.set(0, 0, 0);
+        }
+      }
+
     /**
      * Getters
      */
@@ -144,17 +160,33 @@ export default class Services extends component(Scene) {
         this._timelineShow.to(this._postProcessing.passes.bloomPass, 3, { strength: 0.22, ease: 'sine.inOut' }, 0);
         return this._timelineShow;
     }
-
+    
     hide(onCompleteCallback) {
         if (this._timelineShow) this._timelineShow.kill();
-
-        this._timelineHide = new gsap.timeline({ onComplete: this._timelineHideCompleteHandler, onCompleteParams: [onCompleteCallback] });
+      
+        this._timelineHide = gsap.timeline({
+          onComplete: () => {
+            this._isActive = false;
+            this._renderer.setClearColor(0x000000, 0);
+            this._renderer.clear(true, true, true);
+            this._renderer.autoClearColor = true;
+            onCompleteCallback?.();
+          }
+        });
+      
         this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0 }, 0);
-        this._timelineHide.to(this._postProcessing.passes.bloomPass, 1, { strength: 0, ease: 'sine.inOut' }, 0);
+        this._timelineHide.to(this._postProcessing.passes.bloomPass, 1, { strength: 0 }, 0);
         this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0 }, 0);
         this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0 }, 0);
+        this._timelineHide.call(() => {
+          this._postProcessing.passes.hidePass.material.progress = 0;
+          this._postProcessing.passes.afterImage.uniforms.damp.value = 0;
+        }, null, 1);
+      
         return this._timelineHide;
-    }
+      }
+      
+    
 
     focus() {}
 

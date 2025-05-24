@@ -1,0 +1,96 @@
+
+.section {
+    display: flex;
+
+    align-items: center;
+
+    .ar & {
+        direction: rtl;
+    }
+}
+
+.section__content {
+    @include respond-to('large') {
+        margin-top: rem-l(75px);
+    }
+}
+
+.row-body {
+    .column {
+        width: 100%;
+
+        padding-right: $padding-mobile;
+        padding-left: $padding-mobile;
+
+        @include respond-to('large') {
+            width: 26%;
+
+            margin-left: 14%;
+            margin-right: 52%;
+
+            padding: 0;
+
+            .ar & {
+                margin-left: 52%;
+            }
+        }
+    }
+}
+
+.row-title {
+    .column {
+        width: 100%;
+
+        padding-right: $padding-mobile;
+        padding-left: $padding-mobile;
+
+        @include respond-to('medium') {
+            width: 65%;
+        }
+
+        @include respond-to('large') {
+            width: 45%;
+
+            margin-left: 14%;
+            padding-right: 0;
+            padding-left: 0;
+
+            font-weight: normal;
+
+            .ar & {
+                margin-right: 52%;
+            }
+        }
+    }
+}
+
+.heading {
+    font-weight: 300;
+    font-size: rem(70px);
+    line-height: 1.03em;
+    letter-spacing: 0.05em;
+
+    @include respond-to('large') {
+        font-weight: 250;
+        font-size: rem-l(140px);
+        line-height: 1.05em;
+        letter-spacing: 0.05em;
+    }
+
+    ::v-deep > .gsap-lines,
+    ::v-deep > .lines {
+        &:nth-child(3),
+        &:nth-child(4) {
+            color: $color-orange;
+        }
+    }
+
+    .ar & {
+        font-size: rem(60px);
+        letter-spacing: inherit;
+
+        @include respond-to('large') {
+            font-size: rem-l(120px);
+        }
+    }
+}

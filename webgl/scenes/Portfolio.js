@@ -1,6 +1,6 @@
 // Vendor
 import gsap from 'gsap';
-import { Scene, PerspectiveCamera, Vector3, WebGLCubeRenderTarget, LinearMipmapLinearFilter, CubeCamera, RGBAFormat } from 'three';
+import { Scene, Group, PerspectiveCamera, Vector3, WebGLCubeRenderTarget, LinearMipmapLinearFilter, CubeCamera, RGBAFormat } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { component } from '@/vendor/bidello';
 
@@ -20,7 +20,8 @@ export default class Portfolio extends component(Scene) {
         this._nuxtRoot = nuxtRoot;
         this._postProcessing = postProcessing;
         this._debug = debug;
-
+        this._group = new Group();
+        this.add(this._group);
         // Settings
         this.position.x = 0;
         this.position.y = 0; // 1.2;
@@ -147,14 +148,35 @@ export default class Portfolio extends component(Scene) {
 
     hide(onCompleteCallback) {
         if (this._timelineShow) this._timelineShow.kill();
-
-        this._timelineHide = new gsap.timeline({ onComplete: this._timelineHideCompleteHandler, onCompleteParams: [onCompleteCallback] });
+      
+        this._timelineHide = gsap.timeline({
+          onComplete: () => {
+            this._isActive = false;
+            this._postProcessing.resetDefaults?.();
+      
+            this._renderer.setClearColor(0x000000, 0); // transparent black
+            this._renderer.clear(true, true, true);
+            this._renderer.autoClearColor = true;
+      
+            onCompleteCallback?.();
+          }
+        });
+      
         this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0 }, 0);
-        this._timelineHide.to(this._postProcessing.passes.bloomPass, 1, { strength: 0, ease: 'sine.inOut' }, 0);
+        this._timelineHide.to(this._postProcessing.passes.bloomPass, 1, { strength: 0 }, 0);
         this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0 }, 0);
         this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0 }, 0);
+        this._timelineHide.to(this._group, { opacity: 0, duration: 1, ease: 'sine.inOut' }, 0.1);
+        this._timelineHide.call(() => {
+          this._postProcessing.passes.hidePass.material.progress = 0;
+
+        }, null, 1);
+      
         return this._timelineHide;
-    }
+      }
+      
+      
+    
 
     focus() {}
 
@@ -315,6 +337,11 @@ export default class Portfolio extends component(Scene) {
         components.spinner = this._createComponentSpinner();
         components.floor = this._createComponentFloor();
         components.carousel = this._createCarousel();
+
+        this._group.add(components.spinner);
+        this._group.add(components.floor);
+        this._group.add(components.carousel);
+
         return components;
     }
 

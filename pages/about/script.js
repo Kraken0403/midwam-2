@@ -26,21 +26,29 @@ import SectionProcessPart1 from '@/sections/about/ProcessPart1';
 import SectionProcessPart2 from '@/sections/about/ProcessPart2';
 import SectionContact from '@/sections/about/Contact';
 import SectionFooter from '@/sections/shared/Footer';
-import ProcessNew from '@/sections/about/ProcessNew';
-import SectionProcessStep1 from '@/sections/about/ProcessStep1';
-import SectionProcessStep2 from '@/sections/about/ProcessStep2';
-import SectionProcessStep3 from '@/sections/about/ProcessStep3';
-import SectionProcessStep4 from '@/sections/about/ProcessStep4';
+// import ProcessNew from '@/sections/about/ProcessNew';
+// import SectionProcessStep1 from '@/sections/about/ProcessStep1';
+// import SectionProcessStep2 from '@/sections/about/ProcessStep2';
+// import SectionProcessStep3 from '@/sections/about/ProcessStep3';
+// import SectionProcessStep4 from '@/sections/about/ProcessStep4';
+import ProOne from '@/sections/about/ProOne';
+import ProTwo from '@/sections/about/ProTwo';
+import ProThree from '@/sections/about/ProThree';
+import ProFour from '@/sections/about/ProFour';
 
 export default {
     extends: Page,
 
     components: {
-        SectionProcessStep1,
-        SectionProcessStep2,
-        SectionProcessStep3,
-        SectionProcessStep4,
-        ProcessNew,
+        // SectionProcessStep1,
+        // SectionProcessStep2,
+        // SectionProcessStep3,
+        // SectionProcessStep4,
+        // ProcessNew,
+        ProOne,
+        ProTwo,
+        ProThree,
+        ProFour,
         SectionHeader,
         SectionIntro,
         SectionVideo,

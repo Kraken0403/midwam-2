@@ -24,7 +24,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(slide, i) in slides" :key="i">
         <div class="slide-wrapper">
-          <img :src="slide.image" />
+          <img :src="slide.image" draggable="false"/>
           <div class="slide-text">
             <h2>{{ slide.title }}</h2>
           </div>

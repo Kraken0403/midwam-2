@@ -117,6 +117,8 @@ export default {
     tl.to(this._components.spinner._sparks, { alpha: 1, duration: 1.5 }, 0);
   },
 
+
+
   
 
  _showSectionProcessNew(direction = 1) {

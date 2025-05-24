@@ -84,16 +84,28 @@ export default class Contact extends component(Scene) {
 
     hide(onCompleteCallback) {
         if (this._timelineShow) this._timelineShow.kill();
-
-        this._timelineHide = new gsap.timeline({ onComplete: this._timelineHideCompleteHandler, onCompleteParams: [onCompleteCallback] });
+      
+        this._timelineHide = gsap.timeline({
+          onComplete: () => {
+            this._isActive = false;
+            this._renderer.setClearColor(0x000000, 0);
+            this._renderer.clear(true, true, true);
+            this._renderer.autoClearColor = true;
+            onCompleteCallback?.();
+          }
+        });
+      
         this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0 }, 0);
         this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0 }, 0);
-
-        if (this._nuxtRoot.scrollManager) {
-            this._nuxtRoot.scrollManager.removeEventListener('scroll', this._scrollHandler);
-        }
+        this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0 }, 0);
+        this._timelineHide.call(() => {
+          this._postProcessing.passes.hidePass.material.progress = 0;
+        }, null, 1);
+      
         return this._timelineHide;
-    }
+      }
+      
+    
 
     focus() {}
 

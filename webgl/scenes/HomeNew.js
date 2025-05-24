@@ -66,11 +66,35 @@ export default class HomeNew extends component(Scene) {
 
     return fadeTimeline.add(timeline, 0);
   }
-
-  hide(cb) {
-    this._isActive = false;
-    if (cb) cb();
+  
+  hide(onCompleteCallback) {
+    if (this._timelineShow) this._timelineShow.kill();
+  
+    this._timelineHide = gsap.timeline({
+      onComplete: () => {
+        this._isActive = false;
+        this._renderer.setClearColor(0x000000, 0);
+        this._renderer.clear(true, true, true);
+        this._renderer.autoClearColor = true;
+        onCompleteCallback?.();
+      }
+    });
+  
+    this._timelineHide.to(this._postProcessing.passes.hidePass.material, 1, { progress: 0 }, 0);
+    this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 1, { value: 0 }, 0);
+    this._timelineHide.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength, 1, { value: 0 }, 0);
+    this._timelineHide.to(this._group, { opacity: 0, duration: 1, ease: 'sine.inOut' }, 0.1);
+    this._timelineHide.call(() => {
+      this._postProcessing.passes.hidePass.material.progress = 0;
+      this._reset();
+    }, null, 1);
+  
+    return this._timelineHide;
   }
+  
+  
+  
+  
 
   onUpdate({ time, delta }) {
     if (!this._isActive) return;
@@ -142,14 +166,14 @@ export default class HomeNew extends component(Scene) {
     return components;
   }
 
-  _updatePostProcessing() {
-    if (!this._postProcessing?.passes) return;
-    this._postProcessing.passes.bloomPass.threshold = 0.1;
-    this._postProcessing.passes.bloomPass.strength = 0.65;
-    this._postProcessing.passes.bloomPass.radius = 0.58;
-    this._postProcessing.passes.afterImage.uniforms.damp.value = 0.62;
-    this._renderer.toneMappingExposure = 1.6;
-  }
+  // _updatePostProcessing() {
+  //   if (!this._postProcessing?.passes) return;
+  //   this._postProcessing.passes.bloomPass.threshold = 0.1;
+  //   this._postProcessing.passes.bloomPass.strength = 0.65;
+  //   this._postProcessing.passes.bloomPass.radius = 0.58;
+  //   this._postProcessing.passes.afterImage.uniforms.damp.value = 0.62;
+  //   this._renderer.toneMappingExposure = 1.6;
+  // }
 
   _reset() {
     if (this._components.spinner) {
@@ -195,4 +219,35 @@ export default class HomeNew extends component(Scene) {
     folder.open();
     return folder;
   }
+
+  _updatePostProcessing() {
+    this._renderer.toneMappingExposure = 1.6;
+  
+    const passes = this._postProcessing?.passes;
+    if (!passes || !passes.finalPass?.material?.uniforms) return;
+  
+    const uniforms = passes.finalPass.material.uniforms;
+  
+    // Gradient 1 (light violet tint)
+    uniforms.uGradient1Color.value.setRGB(31 / 255, 29 / 255, 62 / 255);
+    uniforms.uGradient1Strength.value = 0;
+    uniforms.uGradient1Position.value.set(0.45, 0);
+    uniforms.uGradient1Scale.value = 1.1;
+  
+    // Gradient 2 (black)
+    uniforms.uGradient2Color.value.setRGB(0, 0, 0);
+    uniforms.uGradient2Strength.value = 0;
+    uniforms.uGradient2Position.value.set(0.1, 1);
+    uniforms.uGradient2Scale.value = 1.2;
+  
+    uniforms.uGradientsAlpha.value = 1;
+  
+    passes.bloomPass.threshold = 0.09;
+    passes.bloomPass.strength = 0.65;
+    passes.bloomPass.radius = 0.4;
+  
+    passes.afterImage.uniforms.damp.value = 0.4;
+    passes.hidePass.material.progress = 1;
+  }
+  
 }

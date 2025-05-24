@@ -6,6 +6,7 @@ import SectionAbout from '@/components/SectionAbout';
 import Heading from '@/components/Heading';
 
 export default {
+    name:'SectionAboutPartners',
     extends: SectionAbout,
 
     components: {

@@ -135,7 +135,7 @@ export default {
         onUpdate: () => this._camera.lookAt(this._cameraTarget)
       }, 0);
 
-      wave.setOpacity(1)
+      wave.setOpacity(0.25)
 
   },
 

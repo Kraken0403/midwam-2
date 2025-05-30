@@ -3,9 +3,9 @@
 
     <!-- Sections -->
     <SectionProjectSlider :class="`${projectSliderState} ${lang}`" ref="slider" v-if="isReady" :data="activeProjects" :state="projectSliderState" />
-    <SectionProjectList :class="projectListState" ref="list" v-if="isReady" :data="activeProjects" :state="projectListState" />
+    <!-- <SectionProjectList :class="projectListState" ref="list" v-if="isReady" :data="activeProjects" :state="projectListState" /> -->
 
-    <!-- categories -->
+    <!-- categories
     <div class="nav">
 
         <form>
@@ -30,6 +30,6 @@
             {{ $t('global.misc.back') }}
         </button>
 
-    </div>
+    </div> -->
 
 </div>

@@ -10,6 +10,7 @@ import ReflectiveMaterial from '@/webgl/materials/ReflectiveMaterial';
 // Components
 import Spinner from '@/webgl/components/SpinnerHome';
 import Floor from '@/webgl/components/Floor';
+import FloorAbout from '../components/FloorAbout';
 
 // Manager
 import HomeNewSectionManager from '@/webgl/objects/HomeNewSectionManager';
@@ -150,15 +151,29 @@ export default class HomeNew extends component(Scene) {
     spinner.position.set(0, -0.95, 0);
     this._group.add(spinner);
 
-    const floor = new Floor({
+    const floor = new FloorAbout({
       debugGui: this._debugGui,
-      renderer: this._renderer,
-      color: 0x000000,
-      roughness: 0.05,
-      metalness: 1,
-    });
+      width: 100,
+      height: 100,
+      renderer: this._renderer
+    })
+
     floor.position.set(0, -1, 0);
+
     this._group.add(floor);
+    // components.floor = floor;
+
+
+
+    // const floor = new Floor({
+    //   debugGui: this._debugGui,
+    //   renderer: this._renderer,
+    //   color: 0x000000,
+    //   roughness: 0.05,
+    //   metalness: 1,
+    // });
+    // floor.position.set(0, -1, 0);
+    // this._group.add(floor);
 
     components.spinner = spinner;
     components.floor = floor;

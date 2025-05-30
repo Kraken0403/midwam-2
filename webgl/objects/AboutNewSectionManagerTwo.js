@@ -50,10 +50,20 @@ export default {
     }
   },
 
+  _showAboutHeader() {
+    if (this._lastSection === 'AboutHeader') return;
+    this._lastSection = 'AboutHeader';
+  
+    const tl = gsap.timeline();
+    tl.to(this.position, 
+      { x: this._locale === 'en' ? 1.38 : 4.5, duration: 1.5, ease: 'power2.inOut' });
+
+  },
+
   _showAboutIntro() {
     if (this._lastSection === 'section0') return;
     this._lastSection = 'section0';
-  
+
     const spinner = this._components?.spinner;
     if (spinner) {
       gsap.to(spinner.position, {

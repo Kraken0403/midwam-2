@@ -1,9 +1,5 @@
 // Vendor
 import gsap from 'gsap';
-
-// Utils
-import AudioManager from '@/utils/AudioManager';
-
 // Plugins
 import axios from '@/plugins/axios';
 
@@ -82,7 +78,7 @@ export default {
         // Analytics
         this.hasUsedListDisplay = false;
 
-        this.setActiveCheckbox();
+        // this.setActiveCheckbox();
     },
 
     methods: {
@@ -94,9 +90,6 @@ export default {
             // timeline.add(this.$root.buttonMute.show(), 1.1);
             this.isReady = true;
 
-            AudioManager.play('background-loop-1', {
-                loop: true,
-            });
         },
 
         transitionOut(done) {
@@ -169,14 +162,14 @@ export default {
             this.activeProjects = filteredItems.length > 0 ? filteredItems : this.items;
         },
 
-        setActiveCheckbox() {
-            for (let i = 0; i < this.$refs.checkbox.length; i++) {
-                const checkbox = this.$refs.checkbox[i];
-                if (parseInt(checkbox.value) === this.activeCategory) {
-                    checkbox.checked = true;
-                }
-            }
-        },
+        // setActiveCheckbox() {
+        //     for (let i = 0; i < this.$refs.checkbox.length; i++) {
+        //         const checkbox = this.$refs.checkbox[i];
+        //         if (parseInt(checkbox.value) === this.activeCategory) {
+        //             checkbox.checked = true;
+        //         }
+        //     }
+        // },
 
         setRouteQuery(activeCategory) {
             if (isNaN(activeCategory)) {

@@ -1,20 +1,45 @@
 .section-form-cta {
     .row-title {
       display: flex;
-      justify-content: flex-end; // form to the right
+      justify-content: center; // form to the right
+      flex-direction: column;
+      text-align: center;
+
+      h2 {
+        text-align: center!important;
+
+        div {
+          text-align: center!important;
+        }
+      }
     }
   
     .column-form {
       width: 100%;
   
       @include respond-to('medium') {
-        width: 50%;
+        width: 100%;
       }
   
       @include respond-to('large') {
-        width: 50%;
-        margin-right: 5%;
+        width: 100%;
+        // margin-right: 5%;
       }
+    }
+
+    .contact-home {
+      max-width: 800px;
+
+      h2.form-title {
+        text-align: center!important;
+      }
+
+   
+    }
+
+    .form-custom-title {
+      text-align: center!important;
+      color: #fff;
     }
   
     .contact-form {
@@ -40,7 +65,8 @@
     //   .form-actions {
     //     text-align: right;
     //   }
-  
+      
+    
       .success-message,
       .error-message {
         margin-top: 1rem;

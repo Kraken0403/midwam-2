@@ -1,0 +1,12 @@
+.scroll-root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.scroll-content {
+  will-change: transform;
+  min-height: 200vh; // enough height to scroll
+  position: relative;
+}

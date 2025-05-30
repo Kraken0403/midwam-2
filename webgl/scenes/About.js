@@ -394,7 +394,6 @@ export default class About extends component(Scene) {
     const spinner = this._createComponentSpinner();
     const floor = this._createComponentFloor();
     // const backgroundLines = this._createComponentBackgroundLines();
-    this._createFloorFogOverlay();
     const waves = this._createComponentWaves()
   
     return { spinner, floor, waves};
@@ -423,27 +422,6 @@ export default class About extends component(Scene) {
     return wave;
   }
 
-  _createFloorFogOverlay() {
-    const geometry = new PlaneGeometry(100, 50);
-    const material = new MeshBasicMaterial({
-      transparent: false,
-      depthWrite: false,
-      fog: true,
-      opacity: 1,
-      side: THREE.DoubleSide,
-      color: 0x000000,
-    });
-  
-    const fogPlane = new Mesh(geometry, material);
-    fogPlane.position.set(0, -1, 30); // Slightly above the floor
-    fogPlane.rotation.x = -Math.PI / 2;
-  
-    // Add a black-to-transparent gradient texture if you want more realism
-    // OR manually fade using a custom shader later
-  
-    // this._container.add(fogPlane);
-  }
-  
 
   _createFog() {
     const col = new Color('#000000')

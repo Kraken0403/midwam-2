@@ -20,6 +20,7 @@ import SectionServicesCards from '@/sections/home/ServicesCards';
 import SectionNews from '@/sections/shared/News';
 import SectionFooter from '@/sections/shared/Footer';
 import SectionFormCta from '@/sections/home/FormCta';
+// import SectionShaderCarousel from '@/sections/home/SectionShaderCarousel'
 
 import logo1 from '@/assets/images/logos/1.png'
 import logo2 from '@/assets/images/logos/2.png'
@@ -34,6 +35,7 @@ export default {
     ScrollControl,
     SectionHeader,
     SectionPartnersCustom,
+    // SectionShaderCarousel,
     // SectionServicesPlanes,
     SectionSlider,
     SectionFormCta,

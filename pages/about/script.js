@@ -68,7 +68,9 @@ export default {
     asyncData({ app }) {
         const locale = app.i18n.locale;
         return axios.get(`page/about?lang=${locale}`).then((res) => {
+            // console.log('data', res.data.sections)
             return { metadata: res.data.seo, ...res.data.sections };
+            
         });
     },
 

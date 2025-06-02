@@ -12,8 +12,8 @@ import WindowResizeObserver from '@/utils/WindowResizeObserver';
 import Section from '@/components/Section';
 import Arrow from '@/assets/images/icons/arrow-right.svg?inline';
 
-import img1 from '@/assets/images/services/interactive.PNG';
-import img2 from '@/assets/images/services/concept-design.png';
+import img1 from '@/assets/images/services/interactive-2.png';
+import img2 from '@/assets/images/services/concept-2.png';
 
 const MAX_OVERDRAG_DISTANCE = 300;
 const MAX_OVERDRAG_DISTANCETOUCH = 100;
@@ -31,7 +31,7 @@ export default {
           slides: [
             {
               slug: 'interactive',
-              title: 'Interactive Experiences',
+              title: 'Interactive   Experiences',
               image: img1,
             },
             {
@@ -51,36 +51,45 @@ export default {
     },
 
     mounted() {
-        this.positionX = {
-          current: 0,
-          target: 0,
-        };
-      
+        this.positionX = { current: 0, target: 0 };
         this.dragMousePositionX = 0;
         this.deltaX = 0;
         this.activeIndex = null;
         this.touchStartMousePosition = { x: 0, y: 0 };
-      
         this.allowDrag = true;
         this.direction = this.$i18n.locale === 'en' ? 1 : -1;
       
-        if (this.$root.webglApp) {
-          this.scene = this.$root.webglApp.getScene('services');
-        }
+        const waitForSceneAndDOM = () => {
+          const scene = this.$root.webglApp?.getScene?.('services');
+          const list = this.$refs.list;
       
-        this.setupEventListeners();
-        this.resize();
-        this.track();
+          if (scene && list) {
+            this.scene = scene;
+            this.getBounds(); // ✅ safe now
+            this.resize();
+            this.track();
+            this.setupEventListeners(); // ✅ ticker starts now
       
-        // 👇 Wait until DOM refs are ready
+            this.$nextTick(() => {
+              this.titles = this.splitTitles();
+              this.setActiveItem(0);
+              this.setupSlides();
+              this.checkIfDragAllowed();
+              this.checkIfSlideAllowed();
+            });
+          } else {
+            requestAnimationFrame(waitForSceneAndDOM);
+          }
+        };
+      
+        // ⏳ wait until both DOM and scene are ready
         this.$nextTick(() => {
-          this.titles = this.splitTitles();
-          this.setActiveItem(0);
-          this.setupSlides();
-          this.checkIfDragAllowed();
-          this.checkIfSlideAllowed();
+          requestAnimationFrame(waitForSceneAndDOM);
         });
-      },
+      }
+      
+      
+      ,
       
 
     beforeDestroy() {
@@ -469,25 +478,34 @@ export default {
             if (this.$i18n.locale === 'ar') return [];
           
             const refs = this.$refs.title;
-          
-            // Guard against undefined or empty refs
-            if (!refs || !Array.isArray(refs) || refs.length === 0) {
-              console.warn('⚠️ $refs.title is not ready yet');
+            if (!refs || !refs.length) {
+              console.warn('⚠️ No title refs found');
               return [];
             }
           
             return refs
-              .map((el) => {
-                if (!el) return null;
+              .map((ref, index) => {
+                const el = ref?.$el || ref; // ✅ fallback for DOM or Vue
+          
+                if (!(el instanceof Element)) {
+                  console.warn(`❌ Skip index ${index}: not a DOM element`, el);
+                  return null;
+                }
+          
                 try {
-                  return new SplitText(el, { type: 'chars', charsClass: 'item-chars' });
+                  return new SplitText(el, {
+                    type: 'chars',
+                    charsClass: 'item-chars',
+                  });
                 } catch (e) {
-                  console.warn('❌ SplitText failed on element:', el, e);
+                  console.warn(`❌ SplitText failed on index ${index}`, el, e);
                   return null;
                 }
               })
               .filter(Boolean);
           }
+          
+                  
           ,
 
         /**

@@ -63,12 +63,12 @@ const webgl = [
     {
         type: 'image',
         name: 'interactive',
-        absolutePath: require('@/assets/images/services/interactive.PNG'),
+        absolutePath: require('@/assets/images/services/interactive-2.png'),
       },
       {
         type: 'image',
         name: 'concept-design',
-        absolutePath: require('@/assets/images/services/concept-design.png'),
+        absolutePath: require('@/assets/images/services/concept-2.png'),
       },
     
     {

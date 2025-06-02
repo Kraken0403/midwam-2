@@ -394,9 +394,9 @@ export default class About extends component(Scene) {
     const spinner = this._createComponentSpinner();
     const floor = this._createComponentFloor();
     // const backgroundLines = this._createComponentBackgroundLines();
-    const waves = this._createComponentWaves()
+    // const waves = this._createComponentWaves()
   
-    return { spinner, floor, waves};
+    return { spinner, floor};
   }
   _createComponentWaves() {
     const wave = new WaveBundle({

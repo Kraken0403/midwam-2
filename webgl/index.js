@@ -2,7 +2,6 @@
 import gsap from 'gsap';
 import { WebGLRenderer, ACESFilmicToneMapping, sRGBEncoding, Clock, NoToneMapping, LinearToneMapping, ReinhardToneMapping, CineonToneMapping } from 'three';
 import { WEBGL } from 'three/examples/jsm/WebGL';
-import scenes from '@/webgl/configs/scenes'
 
 import bidello, { component } from '@/vendor/bidello';
 

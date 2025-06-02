@@ -1,43 +1,42 @@
 <section class="section">
-    <div class="section__content">
-      <div class="content">
-        <div class="row">
-          <ul class="list" ref="list">
-            <li
-              v-for="(item, index) in slides"
-              :key="item.slug"
-              class="list-item"
-              ref="item"
+  <div class="section__content">
+    <div class="content">
+      <div class="row">
+        <ul class="list" ref="list">
+          <li
+            v-for="(item, index) in slides"
+            :key="item.slug"
+            class="list-item"
+            ref="item"
+            :data-index="index"
+            :data-link="`services/${item.slug}`"
+            @click="projectClickHandler"
+          >
+            <div
+              class="hover-container"
+              @mouseenter="mouseenterHandler"
+              @mouseleave="mouseleaveHandler"
               :data-index="index"
-              :data-link="`services/${item.slug}`"
-              @click="projectClickHandler"
+              ref="hoverContainer"
             >
-              <div
-                class="hover-container"
-                @mouseenter="mouseenterHandler"
-                @mouseleave="mouseleaveHandler"
-                :data-index="index"
-                ref="hoverContainer"
+              <nuxt-link
+                :to="`services/${item.slug}`"
+                :class="allowHover ? 'is-hover-allowed' : ''"
               >
-                <nuxt-link
-                  :to="`services/${item.slug}`"
-                  :class="allowHover ? 'is-hover-allowed' : ''"
-                >
-                  <span ref="title">{{ item.title }}</span>
-                </nuxt-link>
-              </div>
-            </li>
-          </ul>
-  
-          <button ref="buttonLeft" class="button-arrow button-arrow--left" @click="clickPreviousHandler">
-            <Arrow class="arrow" />
-          </button>
-  
-          <button ref="buttonRight" class="button-arrow button-arrow--right" @click="clickNextHandler">
-            <Arrow class="arrow" />
-          </button>
-        </div>
+                <span ref="title">{{ item.title }}</span>
+              </nuxt-link>
+            </div>
+          </li>
+        </ul>
+
+        <button ref="buttonLeft" class="button-arrow button-arrow--left" @click="clickPreviousHandler">
+          <Arrow class="arrow" />
+        </button>
+
+        <button ref="buttonRight" class="button-arrow button-arrow--right" @click="clickNextHandler">
+          <Arrow class="arrow" />
+        </button>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>

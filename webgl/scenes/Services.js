@@ -157,6 +157,7 @@ export default class Services extends component(Scene) {
         this._timelineShow = new gsap.timeline();
         this._timelineShow.to(this._postProcessing.passes.hidePass.material, 2, { progress: 1, ease: 'sine.inOut' }, 0);
         this._timelineShow.to(this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength, 2.5, { value: 0.49 }, 0.5);
+
         this._timelineShow.to(this._postProcessing.passes.bloomPass, 3, { strength: 0.22, ease: 'sine.inOut' }, 0);
         return this._timelineShow;
     }
@@ -313,31 +314,34 @@ export default class Services extends component(Scene) {
 
     _updatePostProcessing() {
         this._postProcessing.passes.bloomPass.threshold = 0;
-        this._postProcessing.passes.bloomPass.strength = 0;
+        this._postProcessing.passes.bloomPass.strength = 0.22;
         this._postProcessing.passes.bloomPass.radius = 1.09;
         this._renderer.toneMappingExposure = 0.55;
-
+    
         this._postProcessing.passes.finalPass.material.uniforms.uGradientsAlpha.value = 1;
         this._postProcessing.passes.afterImage.uniforms.damp.value = 0;
-
-        // Gradient 1
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value.r = 22 / 255;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value.g = 18 / 255;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Color.value.b = 93 / 255;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Strength.value = 0;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Position.value.x = 0.49;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Position.value.y = 0;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient1Scale.value = 1.16;
-
-        // Gradient 2
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value.r = 0;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value.g = 0;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Color.value.b = 0;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Strength.value = 0;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Position.value.x = 0.04;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Position.value.y = 1;
-        this._postProcessing.passes.finalPass.material.uniforms.uGradient2Scale.value = 0.81;
+    
+        // Gradient 1 (sienna/brown look)
+        const grad1 = this._postProcessing.passes.finalPass.material.uniforms;
+        grad1.uGradient1Color.value.r = 22 / 255;
+        grad1.uGradient1Color.value.g = 18 / 255;
+        grad1.uGradient1Color.value.b = 93 / 255;
+        grad1.uGradient1Strength.value = 0;
+        grad1.uGradient1Position.value.x = 0.49;
+        grad1.uGradient1Position.value.y = 0;
+        grad1.uGradient1Scale.value = 1.16;
+    
+        // Gradient 2 (disabled)
+        grad1.uGradient2Color.value.r = 0;
+        grad1.uGradient2Color.value.g = 0;
+        grad1.uGradient2Color.value.b = 0;
+        grad1.uGradient2Strength.value = 0;
+        grad1.uGradient2Position.value.x = 0.04;
+        grad1.uGradient2Position.value.y = 1;
+        grad1.uGradient2Scale.value = 0.81;
     }
+    
+    
 
     /**
      * Components
@@ -356,7 +360,7 @@ export default class Services extends component(Scene) {
             envMap: this._cubeRenderTarget.texture,
         });
         spinner.scale.multiplyScalar(0.5);
-        spinner.position.x = 1.5;
+        spinner.position.x = 0;
         spinner.position.y = -3.26;
         spinner.position.z = 5;
 

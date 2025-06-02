@@ -139,6 +139,8 @@ export default class Spinner extends component(Object3D) {
             debugGui: this._debugGui,
             lineWidth: 0.039,
             alpha: 0,
+            amount: 60,
+
         });
         this._sparksGroup.add(sparks);
         return sparks;

@@ -13,7 +13,7 @@ import WindowResizeObserver from '@/utils/WindowResizeObserver';
 
 export default {
     props: ['data', 'scrollType'],
-
+    name:'SectionPortfolio',
     components: {
         ButtonArrow,
         ButtonPortfolio,

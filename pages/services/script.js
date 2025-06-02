@@ -11,6 +11,13 @@ import axios from '@/plugins/axios';
 export default {
   extends: Page,
 
+  data() {
+    return {
+      isReady: false,
+    };
+  },
+  
+
   components: {
     ScrollControl,
     ServicesSlider,
@@ -29,15 +36,43 @@ created() {
 },
 
 methods: {
-    transitionIn(done, routInfo) {
-        const delay = routInfo.previous === null ? 1 : 0;
-        const timeline = new gsap.timeline({ onComplete: done, delay });
-        if (this.$root.webglApp) timeline.add(this.$root.webglApp.showScene('services'), 0);
-        // timeline.add(this.$refs.header.transitionIn(), 0);
+  transitionIn(done, routeInfo) {
+    const delay = routeInfo.previous === null ? 1 : 0;
+  
+    const waitForScene = () => {
+      const webgl = this.$root.webglApp;
+      const sceneExists = webgl?.getScene?.('services');
+  
+      if (sceneExists) {
+        const timeline = gsap.timeline({ onComplete: done, delay });
+  
+        // ⏳ Reveal WebGL scene first
+        timeline.add(webgl.showScene('services'), 0);
+        console.log('el: ',this.$el)
+        // ✅ Fade in the page container (".page")
+        timeline.to(this.$el, {
+          opacity: 1,
+          autoAlpha: 1,
+          duration: 1.3,
+          ease: 'sine.inOut',
+        }, 0.5); // delay a bit to match scene load
+  
         timeline.add(this.$root.theNavigation.show(), 1);
-        // timeline.add(this.$root.buttonMute.show(), 1.1);
-
-    },
+        this.isReady = true;
+      } else {
+        requestAnimationFrame(waitForScene);
+      }
+    };
+  
+    // Ensure DOM and scene are ready
+    this.$nextTick(() => {
+      requestAnimationFrame(waitForScene);
+    });
+  }
+  
+  ,
+      
+    
 
     transitionOut(done) {
         const timeline = new gsap.timeline({ onComplete: done });

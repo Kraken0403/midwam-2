@@ -78,7 +78,7 @@ export default {
         // Analytics
         this.hasUsedListDisplay = false;
 
-        // this.setActiveCheckbox();
+        this.setActiveCheckbox();
     },
 
     methods: {
@@ -88,30 +88,14 @@ export default {
             timeline.to(this.$el, 1.3, { alpha: 1, ease: 'sine.inOut' }, 0.5);
             timeline.add(this.$root.theNavigation.show(), 1);
             // timeline.add(this.$root.buttonMute.show(), 1.1);
-            this.isReady = true;
-
+            this.isReady = true;           
         },
 
         transitionOut(done) {
-            const timeline = gsap.timeline({
-              onComplete: () => {
-                // ✅ Delay route switch to let cleared frame settle
-                requestAnimationFrame(() => {
-                  setTimeout(done, 16); // 1 frame @ 60fps
-                });
-              }
-            });
-          
-            if (this.$root.webglApp) {
-              timeline.add(this.$root.webglApp.hideScene('portfolio'), 0);
-            }
-          
+            const timeline = new gsap.timeline({ onComplete: done });
+            if (this.$root.webglApp) timeline.add(this.$root.webglApp.hideScene('portfolio'), 0);
             timeline.to(this.$el, 1, { alpha: 0, ease: 'sine.inOut' }, 0);
-          
-            return timeline;
-          }
-          ,
-          
+        },
 
         buttonSliderIn() {
             const promise = new Promise((resolve) => {
@@ -162,14 +146,14 @@ export default {
             this.activeProjects = filteredItems.length > 0 ? filteredItems : this.items;
         },
 
-        // setActiveCheckbox() {
-        //     for (let i = 0; i < this.$refs.checkbox.length; i++) {
-        //         const checkbox = this.$refs.checkbox[i];
-        //         if (parseInt(checkbox.value) === this.activeCategory) {
-        //             checkbox.checked = true;
-        //         }
-        //     }
-        // },
+        setActiveCheckbox() {
+            // for (let i = 0; i < this.$refs.checkbox.length; i++) {
+            //     const checkbox = this.$refs.checkbox[i];
+            //     if (parseInt(checkbox.value) === this.activeCategory) {
+            //         checkbox.checked = true;
+            //     }
+            // }
+        },
 
         setRouteQuery(activeCategory) {
             if (isNaN(activeCategory)) {

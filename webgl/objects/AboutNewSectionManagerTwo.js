@@ -112,7 +112,7 @@ export default {
   _showAboutInfo2() {
     if (this._lastSection === 'section3') return;
     this._lastSection = 'section3';
-    const wave = this._components?.waves;
+    // const wave = this._components?.waves;
 
     this._hideAllStepTexts?.();
 
@@ -127,13 +127,13 @@ export default {
 
     tl.to(this._components.spinner._sparks, { alpha: 1, duration: 1.5 }, 0);
 
-    wave.setOpacity(0)
+    // wave.setOpacity(0)
 
   },
 
   _showProOne() {
       this._lastSection = 'ProOne'
-      const wave = this._components?.waves;
+      // const wave = this._components?.waves;
       const tl = gsap.timeline();
 
       tl.to(this.position, 
@@ -145,7 +145,7 @@ export default {
         onUpdate: () => this._camera.lookAt(this._cameraTarget)
       }, 0);
 
-      wave.setOpacity(0.25)
+      // wave.setOpacity(0.25)
 
   },
 

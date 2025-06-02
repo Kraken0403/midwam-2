@@ -65,7 +65,7 @@
 
     .swiper-slide {
       flex: 0 0 auto;
-      width: 77vw; // ✅ key fix
+      width: 40vw; // ✅ key fix
       margin-right: 20px;
       transform: scale(1);
       opacity: 0.4;
@@ -74,13 +74,13 @@
 
       &.active {
         transform: scale(1);
-        opacity: 0.8;
+        opacity: 0.88;
         transition: all 0.5 ease;
       }
 
       .slide-wrapper {
         width: 100%;
-        height: 85vh;
+        height: 75vh;
         display: flex;
         justify-content: center;
         align-items: center;

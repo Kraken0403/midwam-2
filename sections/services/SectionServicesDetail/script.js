@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       activeIndex: 0,
+      isStickyPinned: false,
       slides: [
         {
           title: 'Art-direction & Consulting',
@@ -49,13 +50,19 @@ export default {
   mounted() {
     this.initStickyImageState();
     EventBus.$on('virtual-scroll', this.handleScrollEffect);
+    EventBus.$on('sticky-pin-state', this.setStickyState);
   },
 
   beforeDestroy() {
     EventBus.$off('virtual-scroll', this.handleScrollEffect);
+    EventBus.$off('sticky-pin-state', this.setStickyState);
   },
 
   methods: {
+    setStickyState(state) {
+      this.isStickyPinned = state;
+    },
+
     initStickyImageState() {
       const images = this.$el.querySelectorAll('.sticky-imagediv img');
       if (!images.length) return;
@@ -69,43 +76,56 @@ export default {
     },
 
     handleScrollEffect({ y }) {
+      if (!this.isStickyPinned) return;
+    
       const blocks = this.$el.querySelectorAll('.service-block');
       const images = this.$el.querySelectorAll('.sticky-imagediv img');
       const viewportHeight = window.innerHeight;
     
-      blocks.forEach((block, index) => {
+      const scrollBottom = y + viewportHeight;
+      let newIndex = this.activeIndex;
+    
+      for (let i = 0; i < blocks.length; i++) {
+        const block = blocks[i];
         const blockTop = block.offsetTop;
         const blockHeight = block.offsetHeight;
     
-        const scrollInBlock = y + viewportHeight * 0.5 - blockTop;
-        const progress = scrollInBlock / blockHeight;
-    
-        const clampedProgress = Math.max(0, Math.min(progress, 1));
-        const scale = 1 + clampedProgress * 0.2; // 1 → 1.2 scaling
-    
-        gsap.to(images[index], {
-          scale,
-          duration: 0.3,
+        // 🔁 Smooth scaling for all images
+        const blockProgress = (y + viewportHeight - blockTop) / (viewportHeight + blockHeight);
+
+        const clampedProgress = Math.min(Math.max(blockProgress, 0), 1);
+        const scale = 1 + clampedProgress * 0.4; // scale from 1 → 1.4
+  
+        gsap.to(images[i], {
+          scale: scale,
+          duration: 0.4,
           ease: 'power2.out',
         });
     
-        const isActive =
-          y + viewportHeight * 0.5 >= blockTop &&
-          y + viewportHeight * 0.5 <= blockTop + blockHeight;
+        // ✅ Fade logic
+        const visibleHeight = scrollBottom - blockTop;
+        const scrollRatio = visibleHeight / blockHeight;
     
-        if (isActive && this.activeIndex !== index) {
-          this.activeIndex = index;
-    
-          images.forEach((img, imgIndex) => {
-            gsap.to(img, {
-              opacity: imgIndex === index ? 1 : 0,
-              duration: 0.3,
-              ease: 'power2.out',
-            });
-          });
+        if (scrollRatio >= 1.4) {
+          newIndex = i;
         }
-      });
-    }    
+      }
+    
+      // 🔁 Fade transition for active image
+      if (this.activeIndex !== newIndex) {
+        this.activeIndex = newIndex;
+    
+        images.forEach((img, i) => {
+          gsap.to(img, {
+            opacity: i === newIndex ? 1 : 0,
+            duration: 0.4,
+            ease: 'power2.out',
+          });
+        });
+      }
+    }
+    
+     
 ,    
   },
 };

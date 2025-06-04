@@ -22,13 +22,13 @@
   </div>
   <div class="swiper-container my-swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(slide, i) in slides" :key="i">
-        <div class="slide-wrapper">
-          <img :src="slide.image" draggable="false"/>
+      <div class="swiper-slide" v-for="(slide, i) in slides || []" :key="i">
+        <NuxtLink :to="localePath({ name: 'experiences-slug', params: { slug: slide.slug } })" class="slide-wrapper">
+          <img :src="slide.image" draggable="false" />
           <div class="slide-text">
             <h2>{{ slide.title }}</h2>
           </div>
-        </div>
+        </NuxtLink>
       </div>
     </div>
 

@@ -1,0 +1,35 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Section content -->
+    <div class="section__content">
+
+        <!-- Row items -->
+        <div class="row row-items">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Items -->
+                <GridNews ref="grid" v-bind:items="data" v-bind:highlight="false" v-bind:related="data.length < 3" />
+
+            </div>
+
+        </div>
+
+        <!-- Row list -->
+        <div class="row row-footer">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- See more -->
+                <ButtonArrow to="news">{{ $t('news.see-more') }}</ButtonArrow>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

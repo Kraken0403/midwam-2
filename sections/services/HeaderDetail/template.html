@@ -1,0 +1,75 @@
+<!-- Section -->
+<section class="section">
+
+    <!-- Top -->
+    <div class="top">
+
+        <!-- Background -->
+        <div class="background" ref="background">
+
+            <!-- Image -->
+            <ResponsiveImage
+                class="image"
+                :sizes="staticData.background_image.sizes"
+                :alt="staticData.background_image.alt"
+                type="cover"
+                ref="image"
+                />
+          
+
+        </div>
+
+        <!-- Row title -->
+        <div class="row row-title">
+
+            <!-- Column -->
+            <div class="column">
+
+                <!-- Heading -->
+                <Heading
+                    tag="h1"
+                    ref="heading"
+                    isCustomTriggered="false"
+                    class="heading-b"
+                    :data="staticData.title"
+                />
+
+            </div>
+
+        </div>
+
+        <!-- Line -->
+        <div class="line" ref="line"></div>
+
+    </div>
+
+    <!-- Intro -->
+    <div class="intro" ref="intro">
+
+        <!-- Section content -->
+        <div class="section__content">
+
+            <!-- Row title -->
+            <div class="row row-intro">
+
+                <!-- Column -->
+                <div class="column">
+
+                    <!-- Intro title -->
+                    <h2 ref="introTitle" class="intro__title">{{ staticData.subtitle }}</h2>
+
+                    <Body
+                      :data="staticData.description"
+                      large="true"
+                      :trigger-on-scroll="true"
+                    />
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

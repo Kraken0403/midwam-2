@@ -7,10 +7,13 @@ import ResponsiveImage from '@/components/ResponsiveImage';
 import Body from '@/components/Body';
 import Heading from '@/components/Heading';
 
+import sample from '@/assets/images/services/concept-2.png'
+
 // Utils
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
 
 export default {
+    name: 'SectionHeaderDetail',
     extends: Section,
 
     components: {
@@ -22,8 +25,29 @@ export default {
     mounted() {
         this.setupTween();
         this.setupIntersectionObserver();
-        console.log('Header background image:', this.data.background_image);
+        // console.log('Header background image:', this.data.background_image);
     },
+
+    data() {
+        return {
+          staticData: {
+            title: 'Static Title',
+            subtitle: 'Static Subtitle',
+            description: 'Static description text goes here...',
+            background_image: {
+              alt: 'Alt text',
+              sizes: {
+                '1920x0': {
+                  url: require('@/assets/images/services/concept-2.png'),
+                  width: 1920,
+                  height: 1080,
+                },
+              },
+            },
+          }
+        };
+      }
+      ,
 
     methods: {
         /**

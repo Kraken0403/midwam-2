@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import SectionHome from '@/components/SectionHome';
 import Heading from '@/components/Heading';
 import Body from '@/components/Body';
+import axios from '@/plugins/axios';
 // import ButtonUnderlined from '@/components/ButtonUnderlined';
 
 export default {
@@ -15,6 +16,8 @@ export default {
         Body,
         // ButtonUnderlined,
     },
+
+    
 
     mounted() {
         // this.setupEventListeners();

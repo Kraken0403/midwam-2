@@ -48,10 +48,26 @@ export default {
   async asyncData({ app }) {
     const locale = app.i18n.locale;
     const res = await axios.get(`page/home?lang=${locale}`);
+
+    console.log('res data: ', res.data.sections.news)
+
+    const resPortfolio = await axios.get(`page/portfolio?lang=${locale}`);
+    const portfolioItems = resPortfolio.data.items;
+  
+    const slides = portfolioItems.map(project => ({
+      title: project.title,
+      image: project.image?.sizes?.['1920x0']?.url || '', // fallback can be added if needed
+      slug: project.slug
+    }));
+
+
     return {
       metadata: res.data.seo,
       ...res.data.sections,
+      slides
     };
+
+    
   },
 
   data() {

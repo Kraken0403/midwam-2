@@ -14,7 +14,9 @@ export default {
     return {
       position: { current: 0, target: 0 },
       maxScroll: 0,
+      isStickyPinned: false,
       isEnabled: true,
+      firstBlockIsAtTop: false,
     };
   },
 
@@ -70,30 +72,44 @@ export default {
       if (scroller) {
         scroller.style.transform = `translate3d(0, ${-y}px, 0)`;
       }
-
-      EventBus.$emit('virtual-scroll', {y: this.position.current});
-      // console.log('emitted', y)
-
-      // Manual sticky logic
+    
+      const section = document.querySelector('.section--services-detail');
       const sticky = document.querySelector('.sticky-imagediv');
-      const container = document.querySelector('.services-detail');
-      const blocks = document.querySelectorAll('.service-block');
-      const endBlock = blocks[blocks.length - 1];
-
-      if (sticky && container && endBlock) {
-        const stickyStart = container.offsetTop;
-        const stickyEnd = endBlock.offsetTop + endBlock.offsetHeight;
-
-        if (y >= stickyStart && y <= stickyEnd) {
-          sticky.style.position = 'absolute';
-          sticky.style.top = `${y - stickyStart}px`;
-        } else if (y < stickyStart) {
-          sticky.style.top = `0px`;
-        } else {
-          sticky.style.top = `${stickyEnd - stickyStart}px`;
-        }
+      const wrapper = document.querySelector('.sticky-wrapper');
+    
+      if (!section || !sticky || !wrapper) return;
+    
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionBottom = sectionTop + sectionHeight;
+    
+      const stickyHeight = sticky.offsetHeight;
+    
+      // The amount scrolled inside the section
+      const scrollInside = y - sectionTop;
+    
+      if (y < sectionTop) {
+        // Before section starts
+        sticky.style.position = 'absolute';
+        sticky.style.top = '0px';
+        this.isStickyPinned = false;
+      } else if (y >= sectionTop && y <= sectionBottom - stickyHeight) {
+        // While section is scrolling and sticky should be pinned
+        sticky.style.position = 'absolute';
+        sticky.style.top = `${scrollInside}px`;
+        this.isStickyPinned = true;
+      } else {
+        // After the section ends
+        sticky.style.position = 'absolute';
+        sticky.style.top = `${sectionHeight - stickyHeight}px`;
+        this.isStickyPinned = false;
       }
-    },
+    
+      EventBus.$emit('virtual-scroll', { y });
+      EventBus.$emit('sticky-pin-state', this.isStickyPinned);
+    }
+    
+    ,
 
     resize() {
       this.$nextTick(() => {

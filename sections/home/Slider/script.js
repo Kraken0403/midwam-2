@@ -1,10 +1,3 @@
-import mdl from '@/assets/images/portfolio-detail/MDL.jpg';
-import albont from '@/assets/images/portfolio-detail/albont.jpg';
-import ithra from '@/assets/images/portfolio-detail/ithra.jpg';
-import masar from '@/assets/images/portfolio-detail/Masar_XP.jpg';
-import mayadeen from '@/assets/images/portfolio-detail/Mayadeen.jpg';
-import music from '@/assets/images/portfolio-detail/Music_XP.jpg';
-
 import Heading from '@/components/Heading';
 import gsap from 'gsap';
 
@@ -15,16 +8,16 @@ export default {
     Heading,
   },
 
+  props: {
+    slides: {
+      type: Array,
+      required: true,
+      default: () => [],
+    }
+  },
+  
   data() {
     return {
-      slides: [
-        { title: 'MDL', image: mdl },
-        { title: 'Albont', image: albont },
-        { title: 'Ithra', image: ithra },
-        { title: 'Masar XP', image: masar },
-        { title: 'Mayadeen', image: mayadeen },
-        { title: 'Music', image: music },
-      ],
       state: {
         current: 0,
         target: 0,
@@ -38,13 +31,25 @@ export default {
       }
     };
   },
+  
 
   mounted() {
     this._setupIntersectionObserver();
+  
     this.$nextTick(() => {
-      this._initCenteredSlider();
+      // Use a mutation observer or polling until swiper-wrapper exists
+      const checkWrapper = () => {
+        const wrapper = this.$el.querySelector('.swiper-wrapper');
+        if (wrapper && this.slides.length > 0) {
+          this._initCenteredSlider();
+        } else {
+          requestAnimationFrame(checkWrapper);
+        }
+      };
+      checkWrapper();
     });
-  },
+  }
+  ,
 
   methods: {
     _setupIntersectionObserver() {

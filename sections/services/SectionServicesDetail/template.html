@@ -22,7 +22,7 @@
             </div>
 
             <div class="row row-body">
-              <div class="column">
+              <div class="column" >
                 <Body
                   class="body"
                   :data="item.description"
@@ -40,8 +40,8 @@
         </div>
 
         <!-- Right: Sticky Image -->
-        <div class="column sticky-wrapper">
-          <div class="sticky-imagediv">
+        <div class="column sticky-wrapper" ref="stickyWrapper">
+          <div class="sticky-imagediv" ref="stickyImageDev">
             <img
               v-for="(item, index) in slides"
               :key="index"

@@ -36,7 +36,7 @@ export default {
 
             const items = res.data.items;
 
-            console.log('portfolio:' , items[0].image)
+            // console.log('portfolio:' , items[0].image)
 
 
             const filteredItems = items.filter((project) => {

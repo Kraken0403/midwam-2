@@ -14,8 +14,8 @@ export default {
   data() {
     return {
       slides: [
-        { title: 'Interactive', image: sample },
-        { title: 'Concept Design', image: sample2 },
+        { title: 'Interactive', image: sample, slug: 'human-interaction' },
+        { title: 'Concept Design', image: sample2, slug: 'concept-design-experiential-content' },
       ]
     };
   },

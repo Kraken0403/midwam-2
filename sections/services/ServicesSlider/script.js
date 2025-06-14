@@ -19,7 +19,7 @@ const CLICK_TRESHOLD = 3;
 
 export default {
     extends: Section,
-
+    
     props: {
         slides: {
           type: Array,
@@ -46,7 +46,11 @@ export default {
         this.touchStartMousePosition = { x: 0, y: 0 };
         this.allowDrag = true;
         this.direction = this.$i18n.locale === 'en' ? 1 : -1;
-      
+        
+        // if (this.$root.webglApp) {
+        //     this.scene = this.$root.webglApp.getScene('portfolio');
+        // }
+        
         const waitForSceneAndDOM = () => {
           const scene = this.$root.webglApp?.getScene?.('services');
           const list = this.$refs.list;

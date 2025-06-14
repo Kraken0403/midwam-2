@@ -18,14 +18,15 @@
         </div>
 
         <div class="row-cards">
-            <div
-              class="card"
+          <nuxt-link
               v-for="(slide, index) in slides"
               :key="index"
+              :to="localePath({ name: 'services-slug', params: { slug: slide.slug } })"
+              class="card"
             >
-              <img :src="slide.image" :alt="slide.title" />
-              <p class="card-title">{{ slide.title }}</p>
-            </div>
+          <img :src="slide.image" :alt="slide.title" />
+          <p class="card-title">{{ slide.title }}</p>
+        </nuxt-link>
           </div>
     </div>
 </section>

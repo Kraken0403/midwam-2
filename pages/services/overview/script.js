@@ -6,7 +6,7 @@ import RegisterServicesImages from '@/utils/RegisterServicesImages';
 // Sections
 import ServicesSlider from '@/sections/services/ServicesSlider';
 import SectionFooter from '@/sections/shared/Footer';
-
+import ResourceLoader from '@/utils/ResourceLoader';
 // Plugins
 import axios from '@/plugins/axios';
 
@@ -33,68 +33,38 @@ export default {
   data() {
     return {
       isReady: false,
+      texturesReady: false,
     };
   },
 
-  created() {
+  async created() {
     this.scrollTriggers = true;
+
+    await RegisterServicesImages(this.servicesData)
+    this.texturesReady = true;
   },
 
   mounted() {
     this.isReady = true; // allow rendering of slider when scene is ready
-    if (this.servicesData?.length) {
-      RegisterServicesImages(this.servicesData);
-    }
+    // if (this.servicesData?.length) {
+    //   RegisterServicesImages(this.servicesData);
+    // }
   },
 
   methods: {
-    transitionIn(done, routeInfo) {
-      const delay = routeInfo.previous === null ? 1 : 0;
+    transitionIn() {
+      const timeline = new gsap.timeline();
+      if (this.$root.webglApp) timeline.add(this.$root.webglApp.showScene('services'), 0);
+      timeline.to(this.$el, 1.3, { alpha: 1, ease: 'sine.inOut' }, 0.5);
+      timeline.add(this.$root.theNavigation.show(), 1);
+      // timeline.add(this.$root.buttonMute.show(), 1.1);
+      this.isReady = true;           
+  },
 
-      const waitForScene = () => {
-        const webgl = this.$root.webglApp;
-        const sceneExists = webgl?.getScene?.('services');
-
-        if (sceneExists) {
-          const timeline = gsap.timeline({ onComplete: done, delay });
-
-          // ✅ Show WebGL scene
-          timeline.add(webgl.showScene('services'), 0);
-
-          // ✅ Fade in the page
-          timeline.to(this.$el, {
-            opacity: 1,
-            autoAlpha: 1,
-            duration: 1.3,
-            ease: 'sine.inOut',
-          }, 0.5);
-
-          // ✅ Show nav
-          timeline.add(this.$root.theNavigation.show(), 1);
-
-          this.isReady = true;
-        } else {
-          requestAnimationFrame(waitForScene);
-        }
-      };
-
-      this.$nextTick(() => {
-        requestAnimationFrame(waitForScene);
-      });
-    },
-
-    transitionOut(done) {
-      const timeline = gsap.timeline({ onComplete: done });
-
-      if (this.$root.webglApp) {
-        timeline.add(this.$root.webglApp.hideScene(), 0);
-      }
-
-      timeline.to(this.$el, {
-        duration: 0.8,
-        alpha: 0,
-        ease: 'sine.inOut',
-      }, 0);
-    },
+  transitionOut(done) {
+      const timeline = new gsap.timeline({ onComplete: done });
+      if (this.$root.webglApp) timeline.add(this.$root.webglApp.hideScene('services'), 0);
+      timeline.to(this.$el, 1, { alpha: 0, ease: 'sine.inOut' }, 0);
+  },
   },
 };

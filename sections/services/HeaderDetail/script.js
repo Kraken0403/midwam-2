@@ -7,14 +7,14 @@ import ResponsiveImage from '@/components/ResponsiveImage';
 import Body from '@/components/Body';
 import Heading from '@/components/Heading';
 
-import sample from '@/assets/images/services/concept-2.png'
-
 // Utils
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
 
 export default {
     name: 'SectionHeaderDetail',
     extends: Section,
+
+    props: ['data'],
 
     components: {
         ResponsiveImage,
@@ -23,36 +23,36 @@ export default {
     },
 
     mounted() {
+        this.normalizeSizes();
         this.setupTween();
         this.setupIntersectionObserver();
-        // console.log('Header background image:', this.data.background_image);
+        console.log('Normalized background image:', this.data.background_image);
     },
-
-    data() {
-        return {
-          staticData: {
-            title: 'Static Title',
-            subtitle: 'Static Subtitle',
-            description: 'Static description text goes here...',
-            background_image: {
-              alt: 'Alt text',
-              sizes: {
-                '1920x0': {
-                  url: require('@/assets/images/services/concept-2.png'),
-                  width: 1920,
-                  height: 1080,
-                },
-              },
-            },
-          }
-        };
-      }
-      ,
 
     methods: {
         /**
-         * Public
+         * Normalize image sizes (since API returns flat format)
          */
+        normalizeSizes() {
+            const bg = this.data?.background_image;
+            if (!bg || !bg.sizes) return;
+
+            const rawSizes = bg.sizes;
+            const normalized = {};
+
+            for (const key in rawSizes) {
+                if (!key.includes('-width') && !key.includes('-height')) {
+                    normalized[key] = {
+                        url: rawSizes[key],
+                        width: rawSizes[`${key}-width`] || 0,
+                        height: rawSizes[`${key}-height`] || 0,
+                    };
+                }
+            }
+
+            this.data.background_image.sizes = normalized;
+        },
+
         transitionIn() {
             const timelineIn = new gsap.timeline();
             timelineIn.set(this.$el, { alpha: 1 }, 0);
@@ -70,27 +70,32 @@ export default {
             const offsetImage = (offsetTop - position.y) * -0.2;
             const progress = position.y / sectionInfo.dimensions.height;
 
-            if (position.y + WindowResizeObserver.height - offsetImage > offsetTop && position.y < offsetTop + sectionInfo.dimensions.height + offsetImage) {
-                this.$refs.image.$el.style.transform = `translate3d(0, ${offsetImage}px, 0)`;
-                this.$refs.image.$el.style['-webkit-transform'] = `translate3d(0, ${offsetImage}px, 0)`;
-                this.$refs.image.$el.style['-moz-transform'] = `translate3d(0, ${offsetImage}px, 0)`;
+            if (
+                position.y + WindowResizeObserver.height - offsetImage > offsetTop &&
+                position.y < offsetTop + sectionInfo.dimensions.height + offsetImage
+            ) {
+                const el = this.$refs.image?.$el;
+                if (!el) return;
 
-                if (!this.timeline) return;
-                this.timeline.progress(progress);
+                el.style.transform = `translate3d(0, ${offsetImage}px, 0)`;
+                el.style['-webkit-transform'] = el.style.transform;
+                el.style['-moz-transform'] = el.style.transform;
+
+                if (this.timeline) {
+                    this.timeline.progress(progress);
+                }
             }
         },
 
         setupTween() {
             this.timeline = new gsap.timeline({ paused: true });
-            this.timeline.fromTo(this.$refs.image.$el, 1, { opacity: 0.75 }, { opacity: 0, ease: 'power3.In' });
+            if (this.$refs.image?.$el) {
+                this.timeline.fromTo(this.$refs.image.$el, 1, { opacity: 0.75 }, { opacity: 0, ease: 'power3.in' });
+            }
         },
 
-        /**
-         * Private
-         */
         setupIntersectionObserver() {
             const options = { threshold: 1 };
-
             this.intersectionObserver = new IntersectionObserver(this.observerHandler, options);
             this.intersectionObserver.observe(this.$refs.introTitle);
         },

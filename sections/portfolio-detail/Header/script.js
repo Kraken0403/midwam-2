@@ -22,7 +22,7 @@ export default {
     mounted() {
         this.setupTween();
         this.setupIntersectionObserver();
-        console.log('Header background image:', this.data.background_image);
+        console.log('Header background image:', this.data.background_image.sizes);
     },
 
     methods: {

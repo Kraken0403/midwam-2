@@ -42,6 +42,7 @@ export default {
         const slug = params.slug;
         const locale = app.i18n.locale;
 
+        
         return axios.get(`page/portfolio?slug=${slug}&lang=${locale}`).then((res) => {
             return {
                 metadata: res.data.seo,

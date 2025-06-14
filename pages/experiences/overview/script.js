@@ -26,6 +26,7 @@ export default {
             const categories = res.data.categories;
             let activeCategory = null;
 
+
             for (let i = 0; i < categories.length; i++) {
                 const category = categories[i];
                 if (activeQuery === category.title.toLowerCase()) {
@@ -34,6 +35,9 @@ export default {
             }
 
             const items = res.data.items;
+
+            console.log('portfolio:' , items[0].image)
+
 
             const filteredItems = items.filter((project) => {
                 if (!project.categories) return false;

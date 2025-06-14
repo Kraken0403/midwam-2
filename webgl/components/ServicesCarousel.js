@@ -6,7 +6,7 @@ import { component } from '@/vendor/bidello';
 // Utils
 import lerp from '@/utils/math/lerp';
 import getViewSizeAtZDepth from '@/utils/helpers/getViewSizeAtZDepth';
-// import ResourceLoader from '@/utils/ResourceLoader';
+import ResourceLoader from '@/utils/ResourceLoader';
 import WindowResizeObserver from '@/utils/WindowResizeObserver';
 import Breakpoints from '@/utils/Breakpoints';
 
@@ -45,16 +45,26 @@ export default class ServicesCarousel extends component(Object3D) {
 
     setupSlides(projects) {
         this._textures = [];
-
+      
         for (let i = 0; i < projects.length; i++) {
-            const project = projects[i];
-            const texture = new Texture(project.image);
-            this._textures.push(texture);
+          const slug = projects[i].slug;
+          const img = ResourceLoader.get(slug);
+      
+          if (!img) {
+            console.warn(`[ServicesCarousel] No image loaded for ${slug}`);
+            continue;
+          }
+      
+          const texture = new Texture(img);
+          texture.needsUpdate = true;
+          this._textures.push(texture);
         }
+        console.log('✅ Available textures:', this._textures.map(t => t.image?.src));
 
         this._createSlides();
         this._transitionInSlides();
-    }
+      }
+      
 
     destroySlides() {
         if (!this.sliderObject) return;
@@ -127,8 +137,7 @@ export default class ServicesCarousel extends component(Object3D) {
     _createSlidesDebug() {
         this.sliderObject = new Group();
 
-        const image = new Texture();
-        
+        const image = new Texture(ResourceLoader.get('test-image'));
         if (!image) return;
 
         image.encoding = sRGBEncoding;

@@ -11,7 +11,7 @@ import lerp from '@/utils/math/lerp';
 // Components
 import Spinner from '@/webgl/components/SpinnerServices';
 import Floor from '@/webgl/components/FloorServices';
-import PortfolioCarousel from '@/webgl/components/PortfolioCarousel';
+import ServicesCarousel from '@/webgl/components/ServicesCarousel';
 
 export default class Services extends component(Scene) {
     init({ renderer, nuxtRoot, postProcessing, debug }) {
@@ -382,7 +382,7 @@ export default class Services extends component(Scene) {
     }
 
     _createCarousel() {
-        const carousel = new PortfolioCarousel({
+        const carousel = new ServicesCarousel({
             debugGui: this._debugGui,
             camera: this._camera,
         });
@@ -434,7 +434,7 @@ export default class Services extends component(Scene) {
         if (!gui) return;
 
         const folderBackground = gui.getFolder('Background');
-        const folder = folderBackground.addFolder('Scene: Portfolio');
+        const folder = folderBackground.addFolder('Scene: Services');
         folder.updateTitleBackgroundColor('#778da9');
 
         const folderPosition = folder.addFolder('Position');

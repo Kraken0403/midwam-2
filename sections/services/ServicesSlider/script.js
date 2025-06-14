@@ -12,9 +12,6 @@ import WindowResizeObserver from '@/utils/WindowResizeObserver';
 import Section from '@/components/Section';
 import Arrow from '@/assets/images/icons/arrow-right.svg?inline';
 
-import img1 from '@/assets/images/services/interactive-2.png';
-import img2 from '@/assets/images/services/concept-2.png';
-
 const MAX_OVERDRAG_DISTANCE = 300;
 const MAX_OVERDRAG_DISTANCETOUCH = 100;
 
@@ -23,28 +20,19 @@ const CLICK_TRESHOLD = 3;
 export default {
     extends: Section,
 
-    props: ['state'],
+    props: {
+        slides: {
+          type: Array,
+          required: true,
+          default: () => []
+        }
+      },
 
     data() {
         return {
           allowHover: true,
-          slides: [
-            {
-              slug: 'interactive',
-              title: 'Interactive   Experiences',
-              image: img1,
-            },
-            {
-              slug: 'concept-design',
-              title: 'Concept Design',
-              image: img2,
-            },
-          ],
-          titles: [],
         };
-      }
-      
-      ,
+      },
 
     components: {
         Arrow,
@@ -348,15 +336,17 @@ export default {
         },
 
         transform(elements, x) {
+            if (!elements || !elements.length) return; // ✅ prevent crash
+          
             const transform = `matrix3d(1,0,0.00,0,0.00,1,0.00,0,0,0,1,0,${x},0,0,1)`;
-
+          
             for (let i = 0; i < elements.length; i++) {
-                const element = elements[i];
-                element.style.transform = transform;
-                element.style.webkitTransform = transform;
-                element.style.mozTransform = transform;
+              const element = elements[i];
+              if (!element) continue;
+              element.style.transform = transform;
             }
-        },
+          }
+          ,
 
         throw() {
             this.tween = gsap.to(this.positionX, {

@@ -2,56 +2,57 @@
   <div class="section__content">
     <div class="services-detail">
       
-        <!-- Left: Scrollable Content -->
-        <div class="column content">
-          <div
-            class="service-block"
+      <!-- Left: Scrollable Content -->
+      <div class="column content">
+        <div
+          class="service-block"
+          v-for="(item, index) in slides"
+          :key="index"
+        >
+          <div class="row row-title">
+            <div class="column">
+              <Heading
+                tag="h2"
+                :ref="`heading_${index}`"
+                isCustomTriggered="false"
+                class="heading-b heading"
+                :preserve-line-break="true"
+                :data="item.title"
+              />
+            </div>
+          </div>
+
+          <div class="row row-body">
+            <div class="column">
+              <div
+                class="body"
+                v-html="item.description"
+              />
+
+              <!-- <ButtonUnderlined
+                v-if="item.call_to_action_label"
+                :link="item.call_to_action_link"
+              > -->
+                <!-- {{ item.call_to_action_label }} -->
+              <!-- </ButtonUnderlined> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Sticky Image -->
+      <div class="column sticky-wrapper" ref="stickyWrapper">
+        <div class="sticky-imagediv" ref="stickyImageDev">
+          <img
             v-for="(item, index) in slides"
             :key="index"
-          >
-            <div class="row row-title">
-              <div class="column">
-                <Heading
-                  tag="h2"
-                  class="heading-b heading"
-                  :data="item.title"
-                  :preserve-line-break="true"
-                  isCustomTriggered="false"
-                />
-              </div>
-            </div>
-
-            <div class="row row-body">
-              <div class="column" >
-                <Body
-                  class="body"
-                  :data="item.description"
-                  :trigger-on-scroll="false"
-                />
-                <ButtonUnderlined
-                  v-if="item.call_to_action_label"
-                  :link="item.call_to_action_link"
-                >
-                  {{ item.call_to_action_label }}
-                </ButtonUnderlined>
-              </div>
-            </div>
-          </div>
+            :src="item.image"
+            :class="{ 'is-active': index === activeIndex }"
+            :ref="`stickyImage_${index}`"
+            :alt="item.title"
+          />
         </div>
-
-        <!-- Right: Sticky Image -->
-        <div class="column sticky-wrapper" ref="stickyWrapper">
-          <div class="sticky-imagediv" ref="stickyImageDev">
-            <img
-              v-for="(item, index) in slides"
-              :key="index"
-              :src="item.image"
-              :class="{ 'is-active': index === activeIndex }"
-              :ref="`stickyImage_${index}`"
-              :alt="item.title"
-            />
-          </div>
-        </div>
+      </div>
       
     </div>
   </div>

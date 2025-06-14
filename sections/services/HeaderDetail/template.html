@@ -3,73 +3,51 @@
 
     <!-- Top -->
     <div class="top">
-
-        <!-- Background -->
-        <div class="background" ref="background">
-
-            <!-- Image -->
-            <ResponsiveImage
-                class="image"
-                :sizes="staticData.background_image.sizes"
-                :alt="staticData.background_image.alt"
-                type="cover"
-                ref="image"
-                />
-          
-
-        </div>
-
-        <!-- Row title -->
-        <div class="row row-title">
-
-            <!-- Column -->
-            <div class="column">
-
-                <!-- Heading -->
-                <Heading
-                    tag="h1"
-                    ref="heading"
-                    isCustomTriggered="false"
-                    class="heading-b"
-                    :data="staticData.title"
-                />
-
-            </div>
+  
+      <!-- Background -->
+      <div class="background" ref="background">
+  
+        <!-- Image -->
+        <ResponsiveImage
+            v-if="data?.background_image?.sizes"
+            class="image"
+            :sizes="data.background_image.sizes"
+            :alt="data.background_image.alt || ''"
+            type="cover"
+            ref="image"
+            />
+      </div>
+  
+      <!-- Row title -->
+      <div class="row row-title">
+        <div class="column">
+          <!-- Heading -->
+          <Heading tag="h1" ref="heading" isCustomTriggered="false" class="heading-b" :data="data.title" />
 
         </div>
-
-        <!-- Line -->
-        <div class="line" ref="line"></div>
-
+      </div>
+  
+      <!-- Line -->
+      <div class="line" ref="line"></div>
+  
     </div>
-
+  
     <!-- Intro -->
     <div class="intro" ref="intro">
+      <div class="section__content">
+        <div class="row row-intro">
+          <div class="column">
+  
+            <!-- Intro title -->
+            <h2 ref="introTitle" class="intro__title">{{ data.subtitle }}</h2>
+  
+            <!-- Body -->
+            <Body v-bind:data="data.description" large="true" v-bind:trigger-on-scroll="true" />
 
-        <!-- Section content -->
-        <div class="section__content">
-
-            <!-- Row title -->
-            <div class="row row-intro">
-
-                <!-- Column -->
-                <div class="column">
-
-                    <!-- Intro title -->
-                    <h2 ref="introTitle" class="intro__title">{{ staticData.subtitle }}</h2>
-
-                    <Body
-                      :data="staticData.description"
-                      large="true"
-                      :trigger-on-scroll="true"
-                    />
-
-                </div>
-
-            </div>
-
+          </div>
         </div>
-
+      </div>
     </div>
-
-</section>
+  
+  </section>
+  

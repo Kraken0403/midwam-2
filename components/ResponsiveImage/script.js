@@ -23,10 +23,15 @@ export default {
     },
 
     mounted() {
-        if (this.sizes.length === 0) return;
-        this.setupEventListeners();
-        this.resize();
-    },
+        this.$nextTick(() => {
+            if (!this.src || !this.$el || !this.$refs.image) return;
+    
+            this.setupEventListeners();
+            this.resize();
+        });
+    }
+    
+,    
 
     beforeDestroy() {
         this.removeEventListeners();
@@ -56,27 +61,30 @@ export default {
         },
 
         updateImageCoverSize() {
+            if (!this.$el || !this.$refs.image || !this.sizes['1920x0']) return;
+        
             this.$el.style.height = '100%';
-
+        
             const image = this.sizes['1920x0'];
             const imageWidth = image.width;
             const imageHeight = image.height;
-
+        
             const container = this.$el;
             const containerWidth = container.offsetWidth;
             const containerHeight = container.offsetHeight;
-
+        
             const scale = Math.max(containerWidth / imageWidth, containerHeight / imageHeight);
             const width = Math.ceil(imageWidth * scale);
             const height = Math.ceil(imageHeight * scale);
             const x = Math.round((containerWidth - width) * 0.5);
             const y = Math.round((containerHeight - height) * 0.5);
-
+        
             this.$refs.image.style.width = `${width}px`;
             this.$refs.image.style.height = `${height}px`;
             this.$refs.image.style.top = `${y}px`;
             this.$refs.image.style.left = `${x}px`;
-        },
+        }
+        ,
 
         updateImageAspectRatio() {
             const image = this.sizes['1920x0'];
